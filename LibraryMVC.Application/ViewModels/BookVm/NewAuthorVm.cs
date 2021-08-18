@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibraryMVC.Application.ViewModels.BookVm
+namespace LibraryMVC.Application
 {
     public class NewAuthorVm : IMapFrom<Author>
     {

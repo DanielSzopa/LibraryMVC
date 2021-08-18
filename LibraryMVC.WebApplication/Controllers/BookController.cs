@@ -34,16 +34,9 @@ namespace LibraryMVC.WebApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddNewBook(NewBookVm newBookVm)
-        {
-            if(ModelState.IsValid)
-            {           
+        {                  
                 var addedBookId =  _bookService.AddBook(newBookVm);
-                var newBookId = _bookService.GetBookById(addedBookId);
-
-                return RedirectToAction("Details", newBookId);
-            }
-
-            return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = addedBookId});           
         }
 
         public IActionResult Delete(int id)
@@ -56,17 +49,9 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult Details(int id)
         {
             var book = _bookService.GetBookDetails(id);
-
-
             return View(book);
         }
-
-        public IActionResult DisplayAuthorDetails(int id)
-        {
-            var author = _bookService.GetAuthorDetailsByBookId(id);
-            return View(author);
-        }   
-        
+      
         [HttpGet]
         public IActionResult EditBook(int id)
         {
@@ -77,13 +62,8 @@ namespace LibraryMVC.WebApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditBook(NewBookVm model)
-        {
-            if(ModelState.IsValid)
-            { 
+        {            
             _bookService.UpdateBook(model);
-            return RedirectToAction("Details", new { model.Id });
-            }
-          
             return RedirectToAction("Details", new { model.Id });
         }
 
@@ -92,10 +72,24 @@ namespace LibraryMVC.WebApplication.Controllers
             var authors = _bookService.GetAllAuthorToList();
             return View(authors);
         }
+        public IActionResult DisplayAuthorDetails(int id)
+        {
+            var author = _bookService.GetAuthorDetailsByBookId(id);
+            return View(author);
+        }
+
         [HttpGet]
         public IActionResult AddAuthor()
         {
+            return View(new NewAuthorVm());
+        }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult AddAuthor(NewAuthorVm newAuthorVm)
+        {           
+             // var newAuthor = _bookService.AddAuthor(newAuthorVm);
+             return RedirectToAction("DisplayAuthorDetails", new { newAuthorVm.Id });            
         }
     }
 }
