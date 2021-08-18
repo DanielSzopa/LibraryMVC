@@ -109,5 +109,12 @@ namespace LibraryMVC.Infrastructure.Repositories
 
             return countBooks;
         }
+
+        public int AddAuthor(Author author)
+        {
+            _context.Authors.Add(author);
+            _context.SaveChanges();
+            return author.Id;
+        }
     }
 }

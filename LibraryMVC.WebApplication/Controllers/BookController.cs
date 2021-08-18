@@ -88,7 +88,7 @@ namespace LibraryMVC.WebApplication.Controllers
         [HttpPost]
         public IActionResult AddAuthor(NewAuthorVm newAuthorVm)
         {           
-             // var newAuthor = _bookService.AddAuthor(newAuthorVm);
+             var newAuthor = _bookService.AddAuthor(newAuthorVm);
              return RedirectToAction("DisplayAuthorDetails", new { newAuthorVm.Id });            
         }
     }

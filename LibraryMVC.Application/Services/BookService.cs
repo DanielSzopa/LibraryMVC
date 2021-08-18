@@ -151,5 +151,11 @@ namespace LibraryMVC.Application
 
          return result;
         }
+
+        public int AddAuthor(NewAuthorVm model)
+        {
+            var authorVm = _mapper.Map<Author>(model);
+            return _bookRepository.AddAuthor(authorVm);
+        }
     }
 }

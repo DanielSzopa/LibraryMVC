@@ -23,6 +23,7 @@ namespace LibraryMVC.Application
         IQueryable<Author> GetAllAuthors();
         IQueryable<AuthorVm> GetAuthorsToSelectList();
         AuthorListVm GetAllAuthorToList();
+        int AddAuthor(NewAuthorVm model);
 
     }
 }
