@@ -92,6 +92,10 @@ namespace LibraryMVC.WebApplication.Controllers
             var authors = _bookService.GetAllAuthorToList();
             return View(authors);
         }
-      
+        [HttpGet]
+        public IActionResult AddAuthor()
+        {
+
+        }
     }
 }
