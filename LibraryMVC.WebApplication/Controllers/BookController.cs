@@ -32,12 +32,18 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddNewBook(NewBookVm newBookVm)
         {
-          var addedBookId =  _bookService.AddBook(newBookVm);
-          var newBookId = _bookService.GetBookById(addedBookId);        
+            if(ModelState.IsValid)
+            {           
+                var addedBookId =  _bookService.AddBook(newBookVm);
+                var newBookId = _bookService.GetBookById(addedBookId);
 
-            return RedirectToAction("Details", newBookId);
+                return RedirectToAction("Details", newBookId);
+            }
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
@@ -72,9 +78,12 @@ namespace LibraryMVC.WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EditBook(NewBookVm model)
         {
+            if(ModelState.IsValid)
+            { 
             _bookService.UpdateBook(model);
-
-
+            return RedirectToAction("Details", new { model.Id });
+            }
+          
             return RedirectToAction("Details", new { model.Id });
         }
 
@@ -83,6 +92,6 @@ namespace LibraryMVC.WebApplication.Controllers
             var authors = _bookService.GetAllAuthorToList();
             return View(authors);
         }
-
+      
     }
 }

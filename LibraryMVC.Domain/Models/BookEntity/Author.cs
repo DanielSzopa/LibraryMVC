@@ -9,6 +9,5 @@ namespace LibraryMVC.Domain.Models
         public string LastName { get; set; }
         public string Biography { get; set; }
         public virtual List<Book> Books { get; set; }
-
     }
 }
