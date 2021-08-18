@@ -1,0 +1,66 @@
+﻿@model LibraryMVC.Application.BookListVm
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["Controller"] = "Book";
+    ViewData["Action"] = "Index";
+}
+
+<h1>Books</h1>
+
+<p>
+    <a asp-controller="Book" asp-action="AddNewBook">Create New</a> 
+    | 
+    <a asp-controller="Book" asp-action="DisplayListOfAuthors">Authors</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                TypeOfBook
+            </th>
+            <th>          
+                Publisher
+            </th>        
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListOfBookForList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeOfBook)
+                </td>             
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditBook", new { item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<partial name="_PaginationPartial" view-data="ViewData" model="Model" />
+
