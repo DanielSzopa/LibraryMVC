@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
 using LibraryMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,12 @@ namespace LibraryMVC.Application
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Description { get; set; }
+        public string Biography { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<NewAuthorVm, Author>();
+        }
     }
 
     public class NewAuthorVmValidation : AbstractValidator<NewAuthorVm>

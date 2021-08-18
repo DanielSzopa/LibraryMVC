@@ -46,6 +46,7 @@ namespace LibraryMVC.WebApplication
             services.AddApplication();
             services.AddTransient<IBookRepository, BookRepository>();
             services.AddTransient<IValidator<NewBookVm>,NewBookVmValidation>();
+            services.AddTransient<IValidator<NewAuthorVm>, NewAuthorVmValidation>();
 
 
 
