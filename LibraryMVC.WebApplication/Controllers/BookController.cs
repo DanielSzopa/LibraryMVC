@@ -67,9 +67,9 @@ namespace LibraryMVC.WebApplication.Controllers
             return RedirectToAction("Details", new { model.Id });
         }
 
-        public IActionResult DisplayListOfAuthors()
+        public IActionResult DisplayListOfAuthors(int pageNumber = 1, int pageSize = 6)
         {
-            var authors = _bookService.GetAllAuthorToList();
+            var authors = _bookService.GetAllAuthorToList(pageNumber, pageSize);
             return View(authors);
         }
         public IActionResult DisplayAuthorDetails(int id)

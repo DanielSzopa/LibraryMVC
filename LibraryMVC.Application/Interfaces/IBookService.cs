@@ -22,7 +22,7 @@ namespace LibraryMVC.Application
         AuthorDetailsVm GetAuthorDetailsByBookId(int id);
         IQueryable<Author> GetAllAuthors();
         IQueryable<AuthorVm> GetAuthorsToSelectList();
-        AuthorListVm GetAllAuthorToList();
+        AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize);
         int AddAuthor(NewAuthorVm model);
 
     }

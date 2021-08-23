@@ -75,7 +75,7 @@ namespace LibraryMVC.Application
                 ListOfBookForList = booksToShow,
                 Count = books.Count,
                 PageSize = pageSize,
-                CurrentPage = pageNumber,
+                PageNumber = pageNumber,
 
             };
             return result;
@@ -132,20 +132,29 @@ namespace LibraryMVC.Application
             return authorsVm;
         }
 
-        public AuthorListVm GetAllAuthorToList()
+        public AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize)
         {
-            var authorsForList = _bookRepository.GetAllAuthors()
+            int excludeRecords = (pageSize * pageNumber) - pageSize;
+            var authors = GetAllAuthors()
                 .ProjectTo<AuthorForListVm>(_mapper.ConfigurationProvider)
                 .ToList();
 
-            foreach(var authorVm in authorsForList)
+            var authorsToShow = authors
+                .Skip(excludeRecords)
+                .Take(pageSize)
+                .ToList();
+
+            foreach(var authorVm in authorsToShow)
             {              
                 authorVm.NumberOfBooks = _bookRepository.CountAuthorsBooks(authorVm.Id);
             }
             var result = new AuthorListVm
             {
-                Authors = authorsForList,
-                Count = authorsForList.Count
+                Authors = authorsToShow,
+                Count = authors.Count,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+                
             };
 
          return result;
