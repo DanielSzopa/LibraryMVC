@@ -57,7 +57,6 @@ namespace LibraryMVC.Application
             var book = _bookRepository.GetBookById(bookId);
             var bookDetailVm = _mapper.Map<BookDetailsVm>(book);
 
-
             return bookDetailVm;
         }
         public BookListVm GetAllBooksToList(int pageNumber, int pageSize)

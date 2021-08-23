@@ -39,14 +39,14 @@ namespace LibraryMVC.WebApplication.Controllers
                 return RedirectToAction("Details", new { id = addedBookId});           
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult DeleteBook(int id)
         {
             _bookService.DeleteBook(id);
             return RedirectToAction("Index");
         }
 
 
-        public IActionResult Details(int id)
+        public IActionResult DetailsBook(int id)
         {
             var book = _bookService.GetBookDetails(id);
             return View(book);

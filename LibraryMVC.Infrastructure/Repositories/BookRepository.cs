@@ -54,7 +54,7 @@ namespace LibraryMVC.Infrastructure.Repositories
                 .Include(c => c.Category)
                 .Include(t => t.TypeOfBook)
                 //  .Include(s=>s.Status)
-                .FirstOrDefault(b => b.Id == bookId);
+                .FirstOrDefault(b => b.Id == bookId);      
 
             return book;
         }
