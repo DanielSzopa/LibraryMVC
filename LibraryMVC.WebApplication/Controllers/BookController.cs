@@ -91,5 +91,11 @@ namespace LibraryMVC.WebApplication.Controllers
             var newAuthor = _bookService.AddAuthor(newAuthorVm);
             return RedirectToAction("DisplayListOfAuthors");
         }
+
+        public IActionResult DeleteAuthor(int id)
+        {
+            _bookService.DeleteAuthor(id);
+            return RedirectToAction("DisplayListOfAuthors");
+        }
     }
 }

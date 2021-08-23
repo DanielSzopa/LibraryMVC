@@ -24,6 +24,7 @@ namespace LibraryMVC.Application
         IQueryable<AuthorVm> GetAuthorsToSelectList();
         AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize);
         int AddAuthor(NewAuthorVm model);
+        void DeleteAuthor(int id);
 
     }
 }

@@ -9,7 +9,8 @@
 <h1>Authors</h1>
 
 <p>
-    <a asp-action="AddAuthor">Create New</a>
+    <a asp-action="AddAuthor">Create Author</a> |
+    <a asp-action="Index">Books</a>
 </p>
 <table class="table">
     <thead>
@@ -47,8 +48,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Details", "DisplayAuthorDetails", new { item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteAuthor", new { item.Id })
                 </td>
             </tr>
 

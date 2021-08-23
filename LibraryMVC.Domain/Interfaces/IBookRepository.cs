@@ -21,6 +21,7 @@ namespace LibraryMVC.Domain.Interfaces
         Author GetAuthorByBookId(int bookId);
         int CountAuthorsBooks(int id);
         int AddAuthor(Author author);
+        void DeleteAuthor(int id);
 
 
 

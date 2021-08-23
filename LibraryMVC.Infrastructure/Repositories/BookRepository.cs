@@ -116,5 +116,15 @@ namespace LibraryMVC.Infrastructure.Repositories
             _context.SaveChanges();
             return author.Id;
         }
+
+        public void DeleteAuthor(int id)
+        {
+           var author = _context.Authors.Find(id);
+            if(author != null)
+            {
+                _context.Authors.Remove(author);
+                _context.SaveChanges();
+            }
+        }
     }
 }

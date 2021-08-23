@@ -165,5 +165,10 @@ namespace LibraryMVC.Application
             var authorVm = _mapper.Map<Author>(model);
             return _bookRepository.AddAuthor(authorVm);
         }
+
+        public void DeleteAuthor(int id)
+        {
+            _bookRepository.DeleteAuthor(id);
+        }
     }
 }
