@@ -28,5 +28,6 @@ namespace LibraryMVC.Domain.Models
         Reservation,
         Rental,
         Active,
+        Dispose
     }
 }
