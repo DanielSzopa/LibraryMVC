@@ -23,8 +23,5 @@ namespace LibraryMVC.Domain.Interfaces
         int AddAuthor(Author author);
         void DeleteAuthor(int id);
 
-
-
-
     }
 }

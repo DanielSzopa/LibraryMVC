@@ -73,9 +73,9 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(authors);
         }
         public IActionResult DisplayAuthorDetails(int id)
-        {
+        {                   
             var author = _bookService.GetAuthorDetailsByBookId(id);
-            return View(author);
+            return View(author);         
         }
 
         [HttpGet]
@@ -96,6 +96,22 @@ namespace LibraryMVC.WebApplication.Controllers
         {
             _bookService.DeleteAuthor(id);
             return RedirectToAction("DisplayListOfAuthors");
+        }
+
+        public IActionResult DisplayListOfCategories(int pageNumber = 1,int pageSize = 2)
+        {
+            var categories = _bookService.GetAllCategories(pageNumber, pageSize);
+            return View(categories);
+        }
+        public IActionResult DisplayListOfTypeOfBooks(int pageNumber, int pageSize)
+        {
+            var categories = _bookService.GetAllTypeOfBooks(pageNumber, pageSize);
+            return View(categories);
+        }
+        public IActionResult DisplayListOfPublishers(int pageNumber, int pageSize)
+        {
+            var categories = _bookService.GetAllPublishers(pageNumber, pageSize);
+            return View(categories);
         }
     }
 }

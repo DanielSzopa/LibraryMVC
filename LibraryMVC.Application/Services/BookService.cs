@@ -170,5 +170,38 @@ namespace LibraryMVC.Application
         {
             _bookRepository.DeleteAuthor(id);
         }
+
+        public CategoryListVm GetAllCategoriesToList(int pageNumber, int pageSize)
+        {
+            var excludeRecords = (pageSize * pageNumber) - pageSize;
+            var categories = _bookRepository.GetAllCategories()
+                .ProjectTo<CategoryVm>(_mapper.ConfigurationProvider)
+                .ToList();
+
+            var categoriesToShow = categories
+                .Skip(excludeRecords)
+                .Take(pageSize)
+                .ToList();
+
+            var result = new CategoryListVm
+            {
+                CategoriesOfBooks = categoriesToShow,
+                Count = categories.Count,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            return result;
+        }
+
+        public TypeOfBookListVm GetAllTypeOfBooksToList(int pageNumber, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PublisherListVm GetAllPublishersToList(int pageNumber, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
