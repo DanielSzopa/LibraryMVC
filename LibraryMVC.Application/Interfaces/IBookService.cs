@@ -27,9 +27,9 @@ namespace LibraryMVC.Application
         AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize);
         int AddAuthor(NewAuthorVm model);
         void DeleteAuthor(int id);
-        CategoryListVm GetAllCategoriesToList(int pageNumber, int pageSize);
-        TypeOfBookListVm GetAllTypeOfBooksToList(int pageNumber, int pageSize);
-        PublisherListVm GetAllPublishersToList(int pageNumber, int pageSize);
+        CategoryListVm GetAllCategoriesToList();
+        TypeOfBookListVm GetAllTypeOfBooksToList();
+        PublisherListVm GetAllPublishersToList();
 
     }
 }

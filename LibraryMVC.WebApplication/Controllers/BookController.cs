@@ -99,9 +99,9 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         
-        public IActionResult DisplayListOfCategories(int pageNumber = 1,int pageSize = 1)
+        public IActionResult DisplayListOfCategories()
         {
-            var categories = _bookService.GetAllCategoriesToList(pageNumber, pageSize);
+            var categories = _bookService.GetAllCategoriesToList();
             return View(categories);
         }
         

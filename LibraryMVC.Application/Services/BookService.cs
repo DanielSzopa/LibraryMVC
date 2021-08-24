@@ -177,32 +177,43 @@ namespace LibraryMVC.Application
             _bookRepository.DeleteAuthor(id);
         }
 
-        public CategoryListVm GetAllCategoriesToList(int pageNumber, int pageSize)
+        public CategoryListVm GetAllCategoriesToList()
         {          
             var categories = GetBookCategories()               
                 .ToList();
 
-            var records = ReturnRecordsToShow<CategoryVm>(pageNumber, pageSize, categories);
-
             var result = new CategoryListVm
             {
-                CategoriesOfBooks = records,
-                Count = categories.Count,
-                PageNumber = pageNumber,
-                PageSize = pageSize
+                CategoriesOfBooks = categories              
             };
 
             return result;
         }
 
-        public TypeOfBookListVm GetAllTypeOfBooksToList(int pageNumber, int pageSize)
+        public TypeOfBookListVm GetAllTypeOfBooksToList()
         {
-            throw new NotImplementedException();
+            var typeOfBooks = GetBookTypeOfBooks()
+               .ToList();
+
+            var result = new TypeOfBookListVm
+            {
+                TypesOfBooks = typeOfBooks
+            };
+
+            return result;
         }
 
-        public PublisherListVm GetAllPublishersToList(int pageNumber, int pageSize)
+        public PublisherListVm GetAllPublishersToList()
         {
-            throw new NotImplementedException();
+            var publishers = GetBookPublishers()
+                .ToList();
+
+            var result = new PublisherListVm
+            {
+                Publishers = publishers
+            };
+
+            return result;
         }       
     }
 }
