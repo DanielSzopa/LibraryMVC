@@ -38,6 +38,20 @@ namespace LibraryMVC.Application
             var book = _mapper.Map<Book>(model);
             _bookRepository.UpdateBook(book);
         }
+        public int GetExcludeRecordsToPagination(int pageNumber, int pageSize)
+        {
+            var excludeRecords = (pageSize * pageNumber) - pageSize;
+            return excludeRecords;
+        }
+        public List<T> ReturnRecordsToShow<T>(int pageNumber, int pageSize, List<T> list)
+        {
+            var excludeRecords = GetExcludeRecordsToPagination(pageNumber, pageSize);
+            var records = list.
+                Skip(excludeRecords)
+                .Take(pageSize)
+                .ToList();
+            return records;
+        }
         public NewBookVm GetBookForEdit(int id)
         {
             var book = _bookRepository.GetBookById(id);
@@ -61,18 +75,14 @@ namespace LibraryMVC.Application
         }
         public BookListVm GetAllBooksToList(int pageNumber, int pageSize)
         {
-            int excludeRecords = (pageSize * pageNumber) - pageSize;
             var books = _bookRepository.GetAllBooks()
                 .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
 
-            var booksToShow = books
-                .Skip(excludeRecords)
-                .Take(pageSize)
-                .ToList();
+            var records = ReturnRecordsToShow<BookForListVm>(pageNumber, pageSize, books);   
 
             var result = new BookListVm()
             {
-                ListOfBookForList = booksToShow,
+                ListOfBookForList = records,
                 Count = books.Count,
                 PageSize = pageSize,
                 PageNumber = pageNumber,
@@ -89,8 +99,8 @@ namespace LibraryMVC.Application
 
         public IQueryable<PublisherVm> GetBookPublishers()
         {
-            var publisherVm = _bookRepository.GetAllPublishers().ProjectTo<PublisherVm>(_mapper.ConfigurationProvider);
-            return publisherVm;
+            var publishersVm = _bookRepository.GetAllPublishers().ProjectTo<PublisherVm>(_mapper.ConfigurationProvider);
+            return publishersVm;
         }
 
         public IQueryable<TypeOfBookVm> GetBookTypeOfBooks()
@@ -133,24 +143,20 @@ namespace LibraryMVC.Application
         }
 
         public AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize)
-        {
-            int excludeRecords = (pageSize * pageNumber) - pageSize;
+        {           
             var authors = GetAllAuthors()
                 .ProjectTo<AuthorForListVm>(_mapper.ConfigurationProvider)
                 .ToList();
 
-            var authorsToShow = authors
-                .Skip(excludeRecords)
-                .Take(pageSize)
-                .ToList();
+            var records = ReturnRecordsToShow<AuthorForListVm>(pageNumber, pageSize, authors);
 
-            foreach(var authorVm in authorsToShow)
+            foreach(var authorVm in records)
             {              
                 authorVm.NumberOfBooks = _bookRepository.CountAuthorsBooks(authorVm.Id);
             }
             var result = new AuthorListVm
             {
-                Authors = authorsToShow,
+                Authors = records,
                 Count = authors.Count,
                 PageNumber = pageNumber,
                 PageSize = pageSize
@@ -172,20 +178,15 @@ namespace LibraryMVC.Application
         }
 
         public CategoryListVm GetAllCategoriesToList(int pageNumber, int pageSize)
-        {
-            var excludeRecords = (pageSize * pageNumber) - pageSize;
-            var categories = _bookRepository.GetAllCategories()
-                .ProjectTo<CategoryVm>(_mapper.ConfigurationProvider)
+        {          
+            var categories = GetBookCategories()               
                 .ToList();
 
-            var categoriesToShow = categories
-                .Skip(excludeRecords)
-                .Take(pageSize)
-                .ToList();
+            var records = ReturnRecordsToShow<CategoryVm>(pageNumber, pageSize, categories);
 
             var result = new CategoryListVm
             {
-                CategoriesOfBooks = categoriesToShow,
+                CategoriesOfBooks = records,
                 Count = categories.Count,
                 PageNumber = pageNumber,
                 PageSize = pageSize
@@ -202,6 +203,6 @@ namespace LibraryMVC.Application
         public PublisherListVm GetAllPublishersToList(int pageNumber, int pageSize)
         {
             throw new NotImplementedException();
-        }
+        }       
     }
 }

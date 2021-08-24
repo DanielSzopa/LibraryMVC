@@ -6,11 +6,13 @@ using System.Linq;
 
 namespace LibraryMVC.Application
 {
-    public interface IBookService
+    public interface IBookService 
     {
         int AddBook(NewBookVm model);
         void DeleteBook(int id);
         void UpdateBook(NewBookVm model);
+        int GetExcludeRecordsToPagination(int pageNumber, int pageSize);
+        List<T> ReturnRecordsToShow<T>(int pageNumber, int pageSize, List<T> list);
         NewBookVm GetBookForEdit(int id);
         Book GetBookById(int id);
         BookDetailsVm GetBookDetails(int bookId);

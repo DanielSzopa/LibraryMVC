@@ -98,20 +98,12 @@ namespace LibraryMVC.WebApplication.Controllers
             return RedirectToAction("DisplayListOfAuthors");
         }
 
-        public IActionResult DisplayListOfCategories(int pageNumber = 1,int pageSize = 2)
+        
+        public IActionResult DisplayListOfCategories(int pageNumber = 1,int pageSize = 1)
         {
-            var categories = _bookService.GetAllCategories(pageNumber, pageSize);
+            var categories = _bookService.GetAllCategoriesToList(pageNumber, pageSize);
             return View(categories);
         }
-        public IActionResult DisplayListOfTypeOfBooks(int pageNumber, int pageSize)
-        {
-            var categories = _bookService.GetAllTypeOfBooks(pageNumber, pageSize);
-            return View(categories);
-        }
-        public IActionResult DisplayListOfPublishers(int pageNumber, int pageSize)
-        {
-            var categories = _bookService.GetAllPublishers(pageNumber, pageSize);
-            return View(categories);
-        }
+        
     }
 }
