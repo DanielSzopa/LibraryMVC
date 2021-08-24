@@ -1,0 +1,43 @@
+﻿@model LibraryMVC.Application.PublisherListVm
+
+@{
+    ViewData["Title"] = "DisplayListOfPublishers";
+}
+
+<h1>DisplayListOfPublishers</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Publishers)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Book" asp-action="Index">Back</a>

@@ -97,13 +97,21 @@ namespace LibraryMVC.WebApplication.Controllers
             _bookService.DeleteAuthor(id);
             return RedirectToAction("DisplayListOfAuthors");
         }
-
-        
+      
         public IActionResult DisplayListOfCategories()
         {
             var categories = _bookService.GetAllCategoriesToList();
             return View(categories);
         }
-        
+        public IActionResult DisplayListOfTypeOfBooks()
+        {
+            var typeOfBooks = _bookService.GetAllTypeOfBooksToList();
+            return View(typeOfBooks);
+        }
+        public IActionResult DisplayListOfPublishers()
+        {
+            var publishers = _bookService.GetAllPublishersToList();
+            return View(publishers);
+        }
     }
 }
