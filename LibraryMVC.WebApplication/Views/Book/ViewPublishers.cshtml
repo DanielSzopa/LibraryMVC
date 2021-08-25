@@ -1,10 +1,10 @@
-﻿@model LibraryMVC.Application.TypeOfBookListVm
+﻿@model LibraryMVC.Application.PublisherListVm
 
 @{
-    ViewData["Title"] = "DisplayListOfTypeOfBooks";
+    ViewData["Title"] = "Publishers";
 }
 
-<h1>DisplayListOfTypeOfBooks</h1>
+<h1>Publishers</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -22,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.TypesOfBooks)
+        @foreach (var item in Model.Publishers)
         {
             <tr>
                 <td>

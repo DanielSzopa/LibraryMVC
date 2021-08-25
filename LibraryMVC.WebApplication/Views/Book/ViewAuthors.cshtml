@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Authors";
     ViewData["Controller"] = "Book";
-    ViewData["Action"] = "DisplayListOfAuthors";
+    ViewData["Action"] = "ViewAuthors";
 }
 
 <h1>Authors</h1>
@@ -48,7 +48,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "DisplayAuthorDetails", new { item.Id }) |
+                    @Html.ActionLink("Details", "AuthorDetails", new { item.Id }) |
                     @Html.ActionLink("Delete", "DeleteAuthor", new { item.Id })
                 </td>
             </tr>

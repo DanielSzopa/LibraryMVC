@@ -1,7 +1,7 @@
 ﻿@model LibraryMVC.Application.BookListVm
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Books";
     ViewData["Controller"] = "Book";
     ViewData["Action"] = "Index";
 }
@@ -11,13 +11,13 @@
 <p>
     <a asp-controller="Book" asp-action="AddNewBook">Create Book</a>
     |
-    <a asp-controller="Book" asp-action="DisplayListOfAuthors">Authors</a>
+    <a asp-controller="Book" asp-action="ViewAuthors">Authors</a>
     |
-    <a asp-controller="Book" asp-action="DisplayListOfCategories">Categories</a>
+    <a asp-controller="Book" asp-action="ViewCategories">Categories</a>
     |
-    <a asp-controller="Book" asp-action="DisplayListOfTypeOfBooks">TypeOfBooks</a>
+    <a asp-controller="Book" asp-action="ViewTypeOfBooks">TypeOfBooks</a>
     |
-    <a asp-controller="Book" asp-action="DisplayListOfPublishers">Publishers</a>
+    <a asp-controller="Book" asp-action="ViewPublishers">Publishers</a>
 </p>
 <table class="table">
     <thead>

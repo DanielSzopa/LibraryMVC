@@ -24,7 +24,7 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(books);
         }
         [HttpGet]
-        public IActionResult AddNewBook()
+        public IActionResult AddBook()
         {
             var model = new NewBookVm();
             _bookService.SetParametersToVm(model);
@@ -33,7 +33,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddNewBook(NewBookVm newBookVm)
+        public IActionResult AddBook(NewBookVm newBookVm)
         {                  
                 var addedBookId =  _bookService.AddBook(newBookVm);
                 return RedirectToAction("Details", new { id = addedBookId});           
@@ -64,15 +64,15 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult EditBook(NewBookVm model)
         {            
             _bookService.UpdateBook(model);
-            return RedirectToAction("Details", new { model.Id });
+            return RedirectToAction("DetailsBook", new { model.Id });
         }
 
-        public IActionResult DisplayListOfAuthors(int pageNumber = 1, int pageSize = 6)
+        public IActionResult ViewAuthors(int pageNumber = 1, int pageSize = 6)
         {
             var authors = _bookService.GetAllAuthorToList(pageNumber, pageSize);
             return View(authors);
         }
-        public IActionResult DisplayAuthorDetails(int id)
+        public IActionResult AuthorDetails(int id)
         {                   
             var author = _bookService.GetAuthorDetailsByBookId(id);
             return View(author);         
@@ -89,26 +89,26 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult AddAuthor(NewAuthorVm newAuthorVm)
         {           
             var newAuthor = _bookService.AddAuthor(newAuthorVm);
-            return RedirectToAction("DisplayListOfAuthors");
+            return RedirectToAction("ViewAuthors");
         }
 
         public IActionResult DeleteAuthor(int id)
         {
             _bookService.DeleteAuthor(id);
-            return RedirectToAction("DisplayListOfAuthors");
+            return RedirectToAction("ViewAuthors");
         }
       
-        public IActionResult DisplayListOfCategories()
+        public IActionResult ViewCategories()
         {
             var categories = _bookService.GetAllCategoriesToList();
             return View(categories);
         }
-        public IActionResult DisplayListOfTypeOfBooks()
+        public IActionResult ViewTypeOfBooks()
         {
             var typeOfBooks = _bookService.GetAllTypeOfBooksToList();
             return View(typeOfBooks);
         }
-        public IActionResult DisplayListOfPublishers()
+        public IActionResult ViewPublishers()
         {
             var publishers = _bookService.GetAllPublishersToList();
             return View(publishers);
