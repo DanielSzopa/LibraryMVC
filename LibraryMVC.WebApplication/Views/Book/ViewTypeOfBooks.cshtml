@@ -7,7 +7,15 @@
 <h1>TypeOfBooks</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="Book" asp-action="">Create TypeOfBook</a>
+    |
+    <a asp-controller="Book" asp-action="Index">Books</a>
+    |
+    <a asp-controller="Book" asp-action="ViewAuthors">Authors</a>
+    |
+    <a asp-controller="Book" asp-action="ViewCategories">Categories</a>
+    |
+    <a asp-controller="Book" asp-action="ViewPublishers">Publishers</a>
 </p>
 <table class="table">
     <thead>

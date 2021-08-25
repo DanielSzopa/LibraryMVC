@@ -9,8 +9,15 @@
 <h1>Authors</h1>
 
 <p>
-    <a asp-action="AddAuthor">Create Author</a> |
-    <a asp-action="Index">Books</a>
+    <a asp-controller="Book" asp-action="AddNewBook">Create Book</a>
+    |
+    <a asp-controller="Book" asp-action="Index">Books</a>
+    |
+    <a asp-controller="Book" asp-action="ViewCategories">Categories</a>
+    |
+    <a asp-controller="Book" asp-action="ViewTypeOfBooks">TypeOfBooks</a>
+    |
+    <a asp-controller="Book" asp-action="ViewPublishers">Publishers</a>
 </p>
 <table class="table">
     <thead>
