@@ -36,7 +36,7 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult AddBook(NewBookVm newBookVm)
         {                  
                 var addedBookId =  _bookService.AddBook(newBookVm);
-                return RedirectToAction("Details", new { id = addedBookId});           
+                return RedirectToAction("DetailsBook", new { id = addedBookId});           
         }
 
         public IActionResult DeleteBook(int id)
@@ -100,8 +100,8 @@ namespace LibraryMVC.WebApplication.Controllers
       
         public IActionResult ViewCategories()
         {
-            var categories = _bookService.GetAllCategoriesToList();
-            return View(categories);
+            ViewBag.Category = _bookService.GetAllCategoriesToList().CategoriesOfBooks;
+            return View();
         }
         public IActionResult ViewTypeOfBooks()
         {
@@ -112,6 +112,11 @@ namespace LibraryMVC.WebApplication.Controllers
         {
             var publishers = _bookService.GetAllPublishersToList();
             return View(publishers);
+        }
+        public IActionResult AddCategory(CategoryVm category)
+        {
+            _bookService.AddCategory(category);
+            return RedirectToAction("ViewCategories");
         }
     }
 }

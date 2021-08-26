@@ -1,5 +1,4 @@
-﻿@model LibraryMVC.Application.CategoryListVm
-
+﻿@model LibraryMVC.Application.CategoryVm
 @{
     ViewData["Title"] = "Categories";
 }
@@ -7,7 +6,7 @@
 <h1>Categories</h1>
 
 <p>
-    <a asp-controller="Book" asp-action="">Create Category</a>
+    <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#categoryModal">Create Category</button> |
     |
     <a asp-controller="Book" asp-action="Index">Books</a>
     |
@@ -17,6 +16,38 @@
     |
     <a asp-controller="Book" asp-action="ViewPublishers">Publishers</a>
 </p>
+
+<div class="modal fade" id="categoryModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-controller="Book" asp-action="AddCategory">
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" class="form-control" />
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -30,13 +61,13 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.CategoriesOfBooks) {
+@foreach (var item in ViewBag.Category) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @item.Id
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @item.Name
             </td>
             <td>
                 @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |

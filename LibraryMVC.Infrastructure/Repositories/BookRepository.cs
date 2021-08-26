@@ -126,5 +126,10 @@ namespace LibraryMVC.Infrastructure.Repositories
                 _context.SaveChanges();
             }
         }
+        public void AddCategory(Category model)
+        {
+            _context.Categories.Add(model);
+            _context.SaveChanges();
+        }
     }
 }

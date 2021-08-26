@@ -38,6 +38,11 @@ namespace LibraryMVC.Application
             var book = _mapper.Map<Book>(model);
             _bookRepository.UpdateBook(book);
         }
+        public void AddCategory(CategoryVm model)
+        {
+            var category = _mapper.Map<Category>(model);
+            _bookRepository.AddCategory(category);
+        }
         public int GetExcludeRecordsToPagination(int pageNumber, int pageSize)
         {
             var excludeRecords = (pageSize * pageNumber) - pageSize;
@@ -214,6 +219,6 @@ namespace LibraryMVC.Application
             };
 
             return result;
-        }       
+        }      
     }
 }

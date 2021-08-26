@@ -11,6 +11,7 @@ namespace LibraryMVC.Domain.Interfaces
         int AddBook(Book book);
         void DeleteBook(int id);
         void UpdateBook(Book book);
+        void AddCategory(Category model);
         Book GetBookById(int bookId);
         IQueryable<Book> GetAllBooks();     
         IQueryable<Category> GetAllCategories();

@@ -11,6 +11,7 @@ namespace LibraryMVC.Application
         int AddBook(NewBookVm model);
         void DeleteBook(int id);
         void UpdateBook(NewBookVm model);
+        void AddCategory(CategoryVm model);
         int GetExcludeRecordsToPagination(int pageNumber, int pageSize);
         List<T> ReturnRecordsToShow<T>(int pageNumber, int pageSize, List<T> list);
         NewBookVm GetBookForEdit(int id);
