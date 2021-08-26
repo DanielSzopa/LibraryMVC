@@ -113,6 +113,9 @@ namespace LibraryMVC.WebApplication.Controllers
             var publishers = _bookService.GetAllPublishersToList();
             return View(publishers);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]      
         public IActionResult AddCategory(CategoryVm category)
         {
             _bookService.AddCategory(category);

@@ -24,8 +24,8 @@ namespace LibraryMVC.Application
         {
             RuleFor(c => c.Id).NotNull();
             RuleFor(c => c.Name)
-                .NotNull().WithMessage("This field can't be null")
-                .MinimumLength(3).WithMessage("Category can't be create with less than 3 characters"); ;
+                .NotNull().WithMessage("This field can't be null");
+                
 
         }
     }
