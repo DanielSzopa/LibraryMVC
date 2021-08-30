@@ -122,18 +122,7 @@ namespace LibraryMVC.Application
             model.Publishers = GetBookPublishers().ToList();
 
             return model;
-        }
-        public AuthorDetailsVm GetAuthorDetailsByBookId(int id)
-        {
-            var author = _bookRepository.GetAuthorByBookId(id);
-            var authorVm = _mapper.Map<AuthorDetailsVm>(author);
-            var authorBooks = _bookRepository.GetAllBooksByAuthor(id).ToList();
-
-            authorVm.Books = authorBooks;
-            authorVm.BooksNumber = authorBooks.Count;
-            authorVm.IdCurrentBook = id;
-            return authorVm;
-        }
+        }       
 
         public IQueryable<Author> GetAllAuthors()
         {
@@ -219,6 +208,30 @@ namespace LibraryMVC.Application
             };
 
             return result;
-        }      
+        }
+
+        public AuthorDetailsVm SetAuthorDetails(Author author)
+        {
+            var authorVm = _mapper.Map<AuthorDetailsVm>(author);
+            var authorBooks = _bookRepository.GetAllBooksByAuthor(author.Id).ToList().Count;
+
+            authorVm.BooksNumber = authorBooks;
+            return authorVm;
+        }
+
+        public AuthorDetailsVm GetAuthorDetailsByAuthorId(int id)
+        {
+            var author = _bookRepository.GetAuthorById(id);
+            var authorVm = SetAuthorDetails(author);
+            return authorVm;
+        }
+        public AuthorDetailsVm GetAuthorDetailsByBookId(int id)
+        {
+            var author = _bookRepository.GetAuthorByBookId(id);
+            var authorVm = SetAuthorDetails(author);
+
+            authorVm.IdCurrentBook = id;
+            return authorVm;
+        }
     }
 }

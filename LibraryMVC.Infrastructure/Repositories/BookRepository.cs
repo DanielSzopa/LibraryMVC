@@ -131,5 +131,11 @@ namespace LibraryMVC.Infrastructure.Repositories
             _context.Categories.Add(model);
             _context.SaveChanges();
         }
+
+        public Author GetAuthorById(int id)
+        {
+            var author = _context.Authors.FirstOrDefault(a=>a.Id == id);
+            return author;
+        }
     }
 }

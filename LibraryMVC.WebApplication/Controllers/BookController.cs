@@ -72,9 +72,14 @@ namespace LibraryMVC.WebApplication.Controllers
             var authors = _bookService.GetAllAuthorToList(pageNumber, pageSize);
             return View(authors);
         }
-        public IActionResult AuthorDetails(int id)
-        {                   
-            var author = _bookService.GetAuthorDetailsByBookId(id);
+        public IActionResult AuthorDetails(int id, bool isAuthorDetailsByBookID)
+        {
+            if(isAuthorDetailsByBookID == true)
+            {
+               var authorByBookId = _bookService.GetAuthorDetailsByBookId(id);
+                return View(authorByBookId);
+            }
+            var author = _bookService.GetAuthorDetailsByAuthorId(id);
             return View(author);         
         }
 

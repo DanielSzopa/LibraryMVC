@@ -14,7 +14,6 @@ namespace LibraryMVC.Application
         public string Biography { get; set; }
         public int IdCurrentBook { get; set; }
         public int BooksNumber { get; set; }
-        public List<Book> Books { get; set; }
 
         public void Mapping(Profile profile)
         {

@@ -19,6 +19,7 @@ namespace LibraryMVC.Domain.Interfaces
         IQueryable<Publisher> GetAllPublishers();
         IQueryable<Author> GetAllAuthors();
         IQueryable<Book> GetAllBooksByAuthor(int authorId);
+        Author GetAuthorById(int id);
         Author GetAuthorByBookId(int bookId);
         int CountAuthorsBooks(int id);
         int AddAuthor(Author author);
