@@ -38,6 +38,7 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "EditAuthor", new { Model.Id }) |
+    @Html.ActionLink("Delete", "DeleteAuthor", new { Model.Id }) |
 
     @if (Model.IdCurrentBook == 0)
     {
@@ -47,5 +48,6 @@
     {
         <a asp-action="DetailsBook" asp-route-id="@Model.IdCurrentBook">Back</a>
     }
+
 
 </div>
