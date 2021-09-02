@@ -42,11 +42,11 @@
 
     @if (Model.IdCurrentBook == 0)
     {
-        <a asp-action="ViewAuthors">Back</a>
+        <a asp-action="Index">Back</a>
     }
     else
     {
-        <a asp-action="DetailsBook" asp-route-id="@Model.IdCurrentBook">Back</a>
+        <a asp-controller="Book" asp-action="DetailsBook" asp-route-id="@Model.IdCurrentBook">Back</a>
     }
 
 

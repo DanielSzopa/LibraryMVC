@@ -3,20 +3,13 @@ using FluentValidation.AspNetCore;
 using LibraryMVC.Application;
 using LibraryMVC.Domain.Interfaces;
 using LibraryMVC.Infrastructure;
-using LibraryMVC.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LibraryMVC.WebApplication
 {
@@ -45,6 +38,8 @@ namespace LibraryMVC.WebApplication
 
             services.AddApplication();
             services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<IAuthorRepository, AuthorRepository>();
+
             services.AddTransient<IValidator<NewBookVm>,NewBookVmValidation>();
             services.AddTransient<IValidator<NewAuthorVm>, NewAuthorVmValidation>();
             services.AddTransient<IValidator<CategoryVm>, NewCategoryVmValidation>();

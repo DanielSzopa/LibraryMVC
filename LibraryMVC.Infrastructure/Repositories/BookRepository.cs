@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LibraryMVC.Infrastructure.Repositories
+namespace LibraryMVC.Infrastructure
 {
     public class BookRepository : IBookRepository
     {
@@ -81,61 +81,13 @@ namespace LibraryMVC.Infrastructure.Repositories
         {
             var publishers = _context.Publishers;
             return publishers;
-        }
+        }    
      
-        public IQueryable<Author> GetAllAuthors()
-        {
-            return _context.Authors;
-        }
-
-        public IQueryable<Book> GetAllBooksByAuthor(int authorId)
-        {
-            var books = _context.Books.Where(b => b.AuthorId == authorId);
-            return books;
-        }
-
-        public Author GetAuthorByBookId(int bookId)
-        {
-            var author = _context.Books
-                .Include(a => a.Author)
-                .FirstOrDefault(b => b.Id == bookId).Author;
-            
-            return author;
-        }
-
-        public int CountAuthorsBooks(int id)
-        {
-            var countBooks = _context.Books.Where(a => a.AuthorId == id).Count();
-
-            return countBooks;
-        }
-
-        public int AddAuthor(Author author)
-        {
-            _context.Authors.Add(author);
-            _context.SaveChanges();
-            return author.Id;
-        }
-
-        public void DeleteAuthor(int id)
-        {
-           var author = _context.Authors.Find(id);
-            if(author != null)
-            {
-                _context.Authors.Remove(author);
-                _context.SaveChanges();
-            }
-        }
         public void AddCategory(Category model)
         {
             _context.Categories.Add(model);
             _context.SaveChanges();
         }
-
-        public Author GetAuthorById(int id)
-        {
-            var author = _context.Authors.FirstOrDefault(a=>a.Id == id);
-            return author;
-        }
+    
     }
 }

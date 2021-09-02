@@ -11,9 +11,7 @@ namespace LibraryMVC.Application
         int AddBook(NewBookVm model);
         void DeleteBook(int id);
         void UpdateBook(NewBookVm model);
-        void AddCategory(CategoryVm model);
-        int GetExcludeRecordsToPagination(int pageNumber, int pageSize);
-        List<T> ReturnRecordsToShow<T>(int pageNumber, int pageSize, List<T> list);
+        void AddCategory(CategoryVm model);            
         NewBookVm GetBookForEdit(int id);
         Book GetBookById(int id);
         BookDetailsVm GetBookDetails(int bookId);
@@ -21,15 +19,8 @@ namespace LibraryMVC.Application
         IQueryable<CategoryVm> GetBookCategories();
         IQueryable<PublisherVm> GetBookPublishers();
         IQueryable<TypeOfBookVm> GetBookTypeOfBooks();
-        NewBookVm SetParametersToVm(NewBookVm model);
-        AuthorDetailsVm GetAuthorDetailsByBookId(int id);
-        IQueryable<Author> GetAllAuthors();
         IQueryable<AuthorVm> GetAuthorsToSelectList();
-        AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize);
-        AuthorDetailsVm SetAuthorDetails(Author author);
-        AuthorDetailsVm GetAuthorDetailsByAuthorId(int id);
-        int AddAuthor(NewAuthorVm model);
-        void DeleteAuthor(int id);
+        NewBookVm SetParametersToVm(NewBookVm model);      
         CategoryListVm GetAllCategoriesToList();
         TypeOfBookListVm GetAllTypeOfBooksToList();
         PublisherListVm GetAllPublishersToList();
