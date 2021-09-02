@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -12,9 +13,16 @@ namespace LibraryMVC.Application
         {
             services.AddTransient<IBookService, BookService>();
             services.AddTransient<IAuthorService, AuthorService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IPublisherService, PublisherService>();
+            services.AddTransient<ITypeOfBookService, TypeOfBookService>();
             services.AddTransient<IPaginationService, PaginationService>();
             
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddTransient<IValidator<NewBookVm>, NewBookVmValidation>();
+            services.AddTransient<IValidator<NewAuthorVm>, NewAuthorVmValidation>();
+            services.AddTransient<IValidator<CategoryVm>, NewCategoryVmValidation>();
 
             return services;
         }

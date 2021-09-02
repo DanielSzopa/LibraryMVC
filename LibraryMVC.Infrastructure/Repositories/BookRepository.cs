@@ -63,31 +63,7 @@ namespace LibraryMVC.Infrastructure
         {
             var books = _context.Books;
             return books;
-        }
-
-        public IQueryable<Category> GetAllCategories()
-        {
-            var categories = _context.Categories;
-            return categories;
-        }
-
-        public IQueryable<TypeOfBook> GetAllTypeOfBooks()
-        {
-            var typeOfBooks = _context.TypeOfBooks;
-            return typeOfBooks;
-        }
-
-        public IQueryable<Publisher> GetAllPublishers()
-        {
-            var publishers = _context.Publishers;
-            return publishers;
-        }    
-     
-        public void AddCategory(Category model)
-        {
-            _context.Categories.Add(model);
-            _context.SaveChanges();
-        }
+        }      
     
     }
 }

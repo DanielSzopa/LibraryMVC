@@ -10,20 +10,16 @@ namespace LibraryMVC.Application
     {
         int AddBook(NewBookVm model);
         void DeleteBook(int id);
-        void UpdateBook(NewBookVm model);
-        void AddCategory(CategoryVm model);            
+        void UpdateBook(NewBookVm model);                  
         NewBookVm GetBookForEdit(int id);
         Book GetBookById(int id);
         BookDetailsVm GetBookDetails(int bookId);
         BookListVm GetAllBooksToList(int pageNumber, int pageSize);         
-        IQueryable<CategoryVm> GetBookCategories();
-        IQueryable<PublisherVm> GetBookPublishers();
-        IQueryable<TypeOfBookVm> GetBookTypeOfBooks();
+        IQueryable<CategoryVm> GetCategoriesToSelectList();
+        IQueryable<PublisherVm> GetPublishersToSelectList();
+        IQueryable<TypeOfBookVm> GetTypeOfBooksToSelectList();
         IQueryable<AuthorVm> GetAuthorsToSelectList();
-        NewBookVm SetParametersToVm(NewBookVm model);      
-        CategoryListVm GetAllCategoriesToList();
-        TypeOfBookListVm GetAllTypeOfBooksToList();
-        PublisherListVm GetAllPublishersToList();
+        NewBookVm SetParametersToVm(NewBookVm model);                  
 
     }
 }

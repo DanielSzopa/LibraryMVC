@@ -15,13 +15,24 @@ namespace LibraryMVC.Application
         private readonly IMapper _mapper;
         private readonly IBookRepository _bookRepository;
         private readonly IAuthorRepository _authorRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IPublisherRepository _publisherRepository;
+        private readonly ITypeOfBookRepository _typeOfBookRepository;
         private readonly IPaginationService _paginationService;
-        public BookService(IBookRepository bookRepository, IAuthorRepository authorRepository, IMapper mapper, IPaginationService paginationService)
+        public BookService(IBookRepository bookRepository, 
+            IAuthorRepository authorRepository, 
+            IMapper mapper, 
+            IPaginationService paginationService, ICategoryRepository categoryRepository, 
+            IPublisherRepository publisherRepository, 
+            ITypeOfBookRepository typeOfBookRepository)
         {
             _bookRepository = bookRepository;
             _mapper = mapper;
             _paginationService = paginationService;
             _authorRepository = authorRepository;
+            _categoryRepository = categoryRepository;
+            _publisherRepository = publisherRepository;
+            _typeOfBookRepository = typeOfBookRepository;
         }
 
         public int AddBook(NewBookVm model)
@@ -41,12 +52,7 @@ namespace LibraryMVC.Application
         {
             var book = _mapper.Map<Book>(model);
             _bookRepository.UpdateBook(book);
-        }
-        public void AddCategory(CategoryVm model)
-        {
-            var category = _mapper.Map<Category>(model);
-            _bookRepository.AddCategory(category);
-        }      
+        }    
         public NewBookVm GetBookForEdit(int id)
         {
             var book = _bookRepository.GetBookById(id);
@@ -86,21 +92,21 @@ namespace LibraryMVC.Application
             return result;
         }
 
-        public IQueryable<CategoryVm> GetBookCategories()
+        public IQueryable<CategoryVm> GetCategoriesToSelectList()
         {
-            var categoriesVm = _bookRepository.GetAllCategories().ProjectTo<CategoryVm>(_mapper.ConfigurationProvider);
+            var categoriesVm = _categoryRepository.GetAllCategories().ProjectTo<CategoryVm>(_mapper.ConfigurationProvider);
             return categoriesVm;
         }
 
-        public IQueryable<PublisherVm> GetBookPublishers()
+        public IQueryable<PublisherVm> GetPublishersToSelectList()
         {
-            var publishersVm = _bookRepository.GetAllPublishers().ProjectTo<PublisherVm>(_mapper.ConfigurationProvider);
+            var publishersVm = _publisherRepository.GetAllPublishers().ProjectTo<PublisherVm>(_mapper.ConfigurationProvider);
             return publishersVm;
         }
 
-        public IQueryable<TypeOfBookVm> GetBookTypeOfBooks()
+        public IQueryable<TypeOfBookVm> GetTypeOfBooksToSelectList()
         {
-            var typeOfBooksVm = _bookRepository.GetAllTypeOfBooks().ProjectTo<TypeOfBookVm>(_mapper.ConfigurationProvider);
+            var typeOfBooksVm = _typeOfBookRepository.GetAllTypeOfBooks().ProjectTo<TypeOfBookVm>(_mapper.ConfigurationProvider);
             return typeOfBooksVm;
         }
         public IQueryable<AuthorVm> GetAuthorsToSelectList()
@@ -111,51 +117,12 @@ namespace LibraryMVC.Application
         public NewBookVm SetParametersToVm(NewBookVm model)
         {
             model.Authors = GetAuthorsToSelectList().ToList();
-            model.Categories = GetBookCategories().ToList();
-            model.TypeOfBooks = GetBookTypeOfBooks().ToList();
-            model.Publishers = GetBookPublishers().ToList();
+            model.Categories = GetCategoriesToSelectList().ToList();
+            model.TypeOfBooks = GetTypeOfBooksToSelectList().ToList();
+            model.Publishers = GetPublishersToSelectList().ToList();
 
             return model;
-        }       
+        }          
      
-        public CategoryListVm GetAllCategoriesToList()
-        {          
-            var categories = GetBookCategories()               
-                .ToList();
-
-            var result = new CategoryListVm
-            {
-                CategoriesOfBooks = categories              
-            };
-
-            return result;
-        }
-
-        public TypeOfBookListVm GetAllTypeOfBooksToList()
-        {
-            var typeOfBooks = GetBookTypeOfBooks()
-               .ToList();
-
-            var result = new TypeOfBookListVm
-            {
-                TypesOfBooks = typeOfBooks
-            };
-
-            return result;
-        }
-
-        public PublisherListVm GetAllPublishersToList()
-        {
-            var publishers = GetBookPublishers()
-                .ToList();
-
-            var result = new PublisherListVm
-            {
-                Publishers = publishers
-            };
-
-            return result;
-        }
-       
     }
 }

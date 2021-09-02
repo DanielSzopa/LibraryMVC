@@ -68,28 +68,6 @@ namespace LibraryMVC.WebApplication.Controllers
             return RedirectToAction("DetailsBook", new { model.Id });
         }
    
-        public IActionResult ViewCategories()
-        {
-            ViewBag.Category = _bookService.GetAllCategoriesToList().CategoriesOfBooks;
-            return View();
-        }
-        public IActionResult ViewTypeOfBooks()
-        {
-            var typeOfBooks = _bookService.GetAllTypeOfBooksToList();
-            return View(typeOfBooks);
-        }
-        public IActionResult ViewPublishers()
-        {
-            var publishers = _bookService.GetAllPublishersToList();
-            return View(publishers);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]      
-        public IActionResult AddCategory(CategoryVm category)
-        {
-            _bookService.AddCategory(category);
-            return RedirectToAction("ViewCategories");
-        }
+        
     }
 }

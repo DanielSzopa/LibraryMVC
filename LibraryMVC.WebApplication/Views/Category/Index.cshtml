@@ -12,9 +12,9 @@
     |
     <a asp-controller="Author" asp-action="Index">Authors</a>
     |
-    <a asp-controller="Book" asp-action="ViewTypeOfBooks">TypeOfBooks</a>
+    <a asp-controller="TypeOfBook" asp-action="Index">TypeOfBooks</a>
     |
-    <a asp-controller="Book" asp-action="ViewPublishers">Publishers</a>
+    <a asp-controller="Publisher" asp-action="Index">Publishers</a>
 </p>
 
 <div class="modal fade" id="categoryModal">
@@ -26,7 +26,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form asp-controller="Book" asp-action="AddCategory">
+            <form asp-controller="Category" asp-action="AddCategory">
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" class="form-control" />
