@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using LibraryMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,19 @@ namespace LibraryMVC.Application
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Publisher, PublisherVm>();
+            profile.CreateMap<Publisher, PublisherVm>()
+                .ReverseMap();
+        }
+    }
+
+    public class PublisherVmValidation : AbstractValidator<PublisherVm>
+    {
+        public PublisherVmValidation()
+        {
+            RuleFor(p => p.Id).NotNull();
+            RuleFor(p => p.Name)
+                .NotNull().WithMessage("This field can't be null");
+            RuleFor(p => p.Name).MinimumLength(3).WithMessage("This field have to have more than 3 characters");
         }
     }
 }

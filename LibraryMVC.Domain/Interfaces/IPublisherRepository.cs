@@ -8,6 +8,7 @@ namespace LibraryMVC.Domain.Interfaces
 {
     public interface IPublisherRepository
     {
+        void AddPublisher(Publisher model);
         IQueryable<Publisher> GetAllPublishers();
     }
 }

@@ -6,6 +6,7 @@ namespace LibraryMVC.Application
 {
     public interface IPublisherService
     {
-        PublisherListVm GetAllPublishersToList();
+        void AddPublisher(PublisherVm model);
+        PublisherListVm GetAllPublishersToList();        
     }
 }

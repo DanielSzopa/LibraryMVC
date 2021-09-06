@@ -15,6 +15,13 @@ namespace LibraryMVC.Infrastructure
         {
             _context = context;
         }
+
+        public void AddPublisher(Publisher model)
+        {
+             _context.Publishers.Add(model);
+            _context.SaveChanges();
+        }
+
         public IQueryable<Publisher> GetAllPublishers()
         {
             var publishers = _context.Publishers;

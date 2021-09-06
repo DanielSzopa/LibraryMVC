@@ -19,5 +19,17 @@ namespace LibraryMVC.WebApplication.Controllers
             var publishers = _publisherService.GetAllPublishersToList();
             return View(publishers);
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var publisher = new PublisherVm();
+            return PartialView("_PublisherModelPartial", publisher);
+        }
+        [HttpPost]
+        public IActionResult Create(PublisherVm publisher)
+        {
+            _publisherService.AddPublisher(publisher);
+            return RedirectToAction("Index");
+        }
     }
 }

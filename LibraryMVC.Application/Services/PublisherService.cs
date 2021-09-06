@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using LibraryMVC.Domain.Interfaces;
 using System.Linq;
+using System.Security.Policy;
 
 namespace LibraryMVC.Application
 {
@@ -14,6 +15,14 @@ namespace LibraryMVC.Application
             _publisherRepository = publisherRepository;
             _mapper = mapper;
         }
+
+        public void AddPublisher(PublisherVm model)
+        {
+            var publisher = _mapper.Map<LibraryMVC.Domain.Models.Publisher>(model);
+            
+            _publisherRepository.AddPublisher(publisher);
+        }
+
         public PublisherListVm GetAllPublishersToList()
         {
             var publishers = _publisherRepository.GetAllPublishers().ProjectTo<PublisherVm>(_mapper.ConfigurationProvider)
