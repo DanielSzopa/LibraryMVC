@@ -9,7 +9,10 @@ namespace LibraryMVC.Application
     public interface IAuthorService
     {
         int AddAuthor(NewAuthorVm model);
-        void DeleteAuthor(int id);     
+        void DeleteAuthor(int id);
+        int EditAuthor(AuthorDetailsVm model);
+        NewAuthorVm GetAuthorForEdit(int id);
+        Author GetAuthorById(int id);
         IQueryable<Author> GetAllAuthors();       
         AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize);
         AuthorDetailsVm SetAuthorDetails(Author author);

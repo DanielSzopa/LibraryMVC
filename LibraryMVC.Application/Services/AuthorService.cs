@@ -69,10 +69,15 @@ namespace LibraryMVC.Application
             authorVm.BooksNumber = authorBooks;
             return authorVm;
         }
-
+        public NewAuthorVm GetAuthorForEdit(int id)
+        {
+            var author = GetAuthorById(id);
+            var authorVm = _mapper.Map<NewAuthorVm>(author);
+            return authorVm;
+        }
         public AuthorDetailsVm GetAuthorDetailsByAuthorId(int id)
         {
-            var author = _authorRepository.GetAuthorById(id);
+            var author = GetAuthorById(id);
             var authorVm = SetAuthorDetails(author);
             return authorVm;
         }
@@ -83,6 +88,18 @@ namespace LibraryMVC.Application
 
             authorVm.IdCurrentBook = id;
             return authorVm;
+        }
+
+        public int EditAuthor(AuthorDetailsVm model)
+        {          
+            var authorToEdit = _mapper.Map<Author>(model);
+
+            return _authorRepository.EditAuthor(authorToEdit);
+        }
+
+        public Author GetAuthorById(int id)
+        {
+            return _authorRepository.GetAuthorById(id);
         }
     }
 }

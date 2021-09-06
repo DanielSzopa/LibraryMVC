@@ -61,5 +61,17 @@ namespace LibraryMVC.Infrastructure
 
             return author;
         }
+
+        public int EditAuthor(Author author)
+        {
+            
+            _context.Attach(author);
+            _context.Entry(author).Property("FirstName").IsModified = true;
+            _context.Entry(author).Property("LastName").IsModified = true;
+            _context.Entry(author).Property("Biography").IsModified = true;
+            _context.SaveChanges();
+
+            return author.Id;
+        }
     }
 }

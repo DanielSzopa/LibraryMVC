@@ -6,7 +6,7 @@
 <h1>Categories</h1>
 
 <p>
-    <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#categoryModal">Create Category</button> 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">Create Category</button>
     |
     <a asp-controller="Book" asp-action="Index">Books</a>
     |
@@ -46,7 +46,9 @@
         </div>
     </div>
 </div>
-
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
 <table class="table">
     <thead>
@@ -61,21 +63,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in ViewBag.Category) {
-        <tr>
-            <td>
-                @item.Id
-            </td>
-            <td>
-                @item.Name
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in ViewBag.Category)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 <a asp-controller="Book" asp-action="Index">Back</a>

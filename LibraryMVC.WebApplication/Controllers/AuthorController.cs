@@ -46,5 +46,18 @@ namespace LibraryMVC.WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult EditAuthor(int id)
+        {
+            var author = _authorService.GetAuthorForEdit(id);
+            return View(author);
+        }
+        [HttpPost]
+        public IActionResult EditAuthor(AuthorDetailsVm model)
+        {
+           var authorId =  _authorService.EditAuthor(model);
+            return RedirectToAction("Index");
+        }
+
     }
 }

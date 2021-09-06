@@ -17,7 +17,8 @@ namespace LibraryMVC.Application
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Author, AuthorDetailsVm>();
+            profile.CreateMap<Author, AuthorDetailsVm>()
+                .ReverseMap();
         }
        
     }

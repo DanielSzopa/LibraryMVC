@@ -10,6 +10,7 @@ namespace LibraryMVC.Domain.Interfaces
     {
         int AddAuthor(Author author);
         void DeleteAuthor(int id);
+        int EditAuthor(Author author);
         int CountAuthorsBooks(int id);
         IQueryable<Author> GetAllAuthors();
         IQueryable<Book> GetAllBooksByAuthor(int authorId);
