@@ -26,6 +26,7 @@ namespace LibraryMVC.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Category>()
                 .HasData(new Category { Id = 1, Name = "Other" });
 

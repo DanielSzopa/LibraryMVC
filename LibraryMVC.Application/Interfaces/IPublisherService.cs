@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LibraryMVC.Domain.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LibraryMVC.Application
@@ -8,6 +10,7 @@ namespace LibraryMVC.Application
     {
         void AddPublisher(PublisherVm model);
         void DeletePublisher(int id);
+        void ChangePublisherBeforeDelete(int id);
         PublisherListVm GetAllPublishersToList();        
     }
 }

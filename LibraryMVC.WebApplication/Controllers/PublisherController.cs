@@ -33,7 +33,11 @@ namespace LibraryMVC.WebApplication.Controllers
         }
         public IActionResult DeletePublisher(int id)
         {
+            if(id != 1)
+            {
             _publisherService.DeletePublisher(id);
+            return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
     }

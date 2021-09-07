@@ -22,6 +22,15 @@ namespace LibraryMVC.Infrastructure
             _context.SaveChanges();
         }
 
+        public void ChangePublisherNameToOther(int id)
+        {
+            var books = _context.Books.Where(b => b.PublisherId == id)
+                 .ToList();
+
+                books.ForEach(b=>b.PublisherId = 1);
+            _context.SaveChanges();
+        }
+
         public void DeletePublisher(int id)
         {
             var publisher = _context.Publishers.Find(id);
