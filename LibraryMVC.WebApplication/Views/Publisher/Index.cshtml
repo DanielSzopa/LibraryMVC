@@ -42,11 +42,10 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "DeletePublisher", new { item.Id }) |
                     @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<a asp-controller="Book" asp-action="Index">Back</a>

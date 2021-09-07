@@ -31,5 +31,10 @@ namespace LibraryMVC.WebApplication.Controllers
             _publisherService.AddPublisher(publisher);
             return RedirectToAction("Index");
         }
+        public IActionResult DeletePublisher(int id)
+        {
+            _publisherService.DeletePublisher(id);
+            return RedirectToAction("Index");
+        }
     }
 }

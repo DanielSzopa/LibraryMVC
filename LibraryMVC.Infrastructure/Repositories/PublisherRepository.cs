@@ -22,6 +22,16 @@ namespace LibraryMVC.Infrastructure
             _context.SaveChanges();
         }
 
+        public void DeletePublisher(int id)
+        {
+            var publisher = _context.Publishers.Find(id);
+            if(publisher != null)
+            {
+                _context.Publishers.Remove(publisher);
+                _context.SaveChanges();
+            }
+        }
+
         public IQueryable<Publisher> GetAllPublishers()
         {
             var publishers = _context.Publishers;
