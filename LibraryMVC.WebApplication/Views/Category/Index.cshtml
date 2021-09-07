@@ -65,19 +65,22 @@
     <tbody>
         @foreach (var item in ViewBag.Category)
         {
-            <tr>
-                <td>
-                    @item.Id
-                </td>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
+                @if (item.Id != 1)
+                {
+                    @Html.ActionLink("Delete", "DeleteCategory", new { item.Id }) <span>|</span>
+                }
+                @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
         }
     </tbody>
 </table>

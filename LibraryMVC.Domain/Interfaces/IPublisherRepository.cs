@@ -7,10 +7,11 @@ using System.Text;
 namespace LibraryMVC.Domain.Interfaces
 {
     public interface IPublisherRepository
-    {
+    {     
+        void AddPublisher(Publisher model);
         void DeletePublisher(int id);
-        void AddPublisher(Publisher model);        
-        IQueryable<Publisher> GetAllPublishers();
         void ChangePublisherNameToOther(int id);
+        IQueryable<Publisher> GetAllPublishers();
+        
     }
 }

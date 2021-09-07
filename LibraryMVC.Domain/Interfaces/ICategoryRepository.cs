@@ -9,6 +9,8 @@ namespace LibraryMVC.Domain.Interfaces
     public interface ICategoryRepository
     {
         void AddCategory(Category model);
+        void DeleteCategory(int id);
+        void ChangeCategoryNameToOther(int id);
         IQueryable<Category> GetAllCategories();
     }
 }

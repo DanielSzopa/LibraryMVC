@@ -25,17 +25,15 @@ namespace LibraryMVC.Application
             
             _publisherRepository.AddPublisher(publisher);
         }
-
+        public void DeletePublisher(int id)
+        {
+            ChangePublisherBeforeDelete(id);
+            _publisherRepository.DeletePublisher(id);
+        }
         public void ChangePublisherBeforeDelete(int id)
         {           
                 _publisherRepository.ChangePublisherNameToOther(id);                                   
-        }
-
-        public void DeletePublisher(int id)
-        {                            
-            ChangePublisherBeforeDelete(id);
-            _publisherRepository.DeletePublisher(id);           
-        }
+        }      
         public PublisherListVm GetAllPublishersToList()
         {
             var publishers = _publisherRepository.GetAllPublishers().ProjectTo<PublisherVm>(_mapper.ConfigurationProvider)

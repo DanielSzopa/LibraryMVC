@@ -27,5 +27,14 @@ namespace LibraryMVC.WebApplication.Controllers
             _categoryService.AddCategory(category);
             return RedirectToAction("Index");
         }
+        public IActionResult DeleteCategory(int id)
+        {
+            if (id != 1)
+            {
+                _categoryService.DeleteCategory(id);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

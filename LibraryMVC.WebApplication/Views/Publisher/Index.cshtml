@@ -43,8 +43,9 @@
                 <td>
                     @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
                     @if (item.Id != 1)
-                    { 
-                        @Html.ActionLink("Delete", "DeletePublisher", new { item.Id }) <span>|</span>} 
+                    {
+                        @Html.ActionLink("Delete", "DeletePublisher", new { item.Id }) <span>|</span>
+                    }
                     @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
                 </td>
    
