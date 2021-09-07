@@ -25,9 +25,18 @@ namespace LibraryMVC.Infrastructure
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {   
-            base.OnModelCreating(modelBuilder);
-            
+        {
+            modelBuilder.Entity<Category>()
+                .HasData(new Category { Id = 1, Name = "Other" });
+
+            modelBuilder.Entity<Publisher>()
+                .HasData(new Publisher { Id = 1, Name = "Other" });
+
+            modelBuilder.Entity<TypeOfBook>()
+                .HasData(new TypeOfBook { Id = 1, Name = "Other" });
+
+            modelBuilder.Entity<Author>()
+               .HasData(new Author { Id = 1, FirstName = "none",LastName = "none", Biography = "none"});
         }    
     }
 }
