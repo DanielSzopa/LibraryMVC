@@ -32,19 +32,22 @@
     <tbody>
         @foreach (var item in Model.TypesOfBooks)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
+                @if (item.Id != 1)
+                {
+                    @Html.ActionLink("Delete", "DeleteTypeOfBook", new { item.Id }) <span>|</span>
+                }
+                @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
         }
     </tbody>
 </table>

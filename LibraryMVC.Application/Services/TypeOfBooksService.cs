@@ -14,6 +14,15 @@ namespace LibraryMVC.Application
             _typeOfBookRepository = typeOfBookRepository;
             _mapper = mapper;
         }
+        public void DeleteTypeOfBook(int id)
+        {
+            ChangeTypeOfBookBeforeDelete(id);
+            _typeOfBookRepository.DeleteTypeOfBook(id);
+        }
+        public void ChangeTypeOfBookBeforeDelete(int id)
+        {
+            _typeOfBookRepository.ChangeTypeOfBookNameToOther(id);
+        }
         public TypeOfBookListVm GetAllTypeOfBooksToList()
         {
             var typeOfBooks = _typeOfBookRepository.GetAllTypeOfBooks().ProjectTo<TypeOfBookVm>(_mapper.ConfigurationProvider)

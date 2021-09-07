@@ -19,5 +19,14 @@ namespace LibraryMVC.WebApplication.Controllers
             var typeOfBooks = _typeOfBookService.GetAllTypeOfBooksToList();
             return View(typeOfBooks);
         }
+        public IActionResult DeleteTypeOfBook(int id)
+        {
+            if (id != 1)
+            {
+                _typeOfBookService.DeleteTypeOfBook(id);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

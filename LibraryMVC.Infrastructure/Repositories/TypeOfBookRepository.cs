@@ -15,6 +15,23 @@ namespace LibraryMVC.Infrastructure
         {
             _context = context;
         }
+        public void DeleteTypeOfBook(int id)
+        {
+            var typeofbook = _context.TypeOfBooks.Find(id);
+            if (typeofbook != null)
+            {
+                _context.TypeOfBooks.Remove(typeofbook);
+                _context.SaveChanges();
+            }
+        }
+        public void ChangeTypeOfBookNameToOther(int id)
+        {
+            var books = _context.Books.Where(b => b.TypeOfBookId == id)
+                 .ToList();
+
+            books.ForEach(b => b.TypeOfBookId = 1);
+            _context.SaveChanges();
+        }
         public IQueryable<TypeOfBook> GetAllTypeOfBooks()
         {
             var typeOfBooks = _context.TypeOfBooks;
