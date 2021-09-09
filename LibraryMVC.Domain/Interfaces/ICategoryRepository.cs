@@ -11,6 +11,7 @@ namespace LibraryMVC.Domain.Interfaces
         void AddCategory(Category model);
         void DeleteCategory(int id);
         void ChangeCategoryNameToOther(int id);
+        int CountBooksOfCategory(int id);
         IQueryable<Category> GetAllCategories();
     }
 }

@@ -10,6 +10,7 @@ namespace LibraryMVC.Application
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int NumberOfBooks { get; set; }
 
         public void Mapping(Profile profile)
         {

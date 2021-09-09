@@ -34,11 +34,17 @@ namespace LibraryMVC.Infrastructure
             books.ForEach(b => b.CategoryId = 1);
             _context.SaveChanges();
         }
-
+        public int CountBooksOfCategory(int id)
+        {
+           var numberOfBooks =  _context.Books.Where(b => b.CategoryId == id).Count();
+            return numberOfBooks;
+        }
         public IQueryable<Category> GetAllCategories()
         {
             var categories = _context.Categories;
             return categories;
         }
+
+       
     }
 }

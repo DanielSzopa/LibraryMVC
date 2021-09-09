@@ -38,7 +38,11 @@ namespace LibraryMVC.Application
         {
             var publishers = _publisherRepository.GetAllPublishers().ProjectTo<PublisherVm>(_mapper.ConfigurationProvider)
                 .ToList();
-
+            foreach(var publisherVm in publishers)
+            {
+                publisherVm.NumberOfBooks = _publisherRepository.CountBooksOfPublisher(publisherVm.Id);
+            }
+            
             var result = new PublisherListVm
             {
                 Publishers = publishers

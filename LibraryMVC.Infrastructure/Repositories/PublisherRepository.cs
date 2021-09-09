@@ -38,7 +38,12 @@ namespace LibraryMVC.Infrastructure
                 books.ForEach(b=>b.PublisherId = 1);
             _context.SaveChanges();
         }
-      
+        public int CountBooksOfPublisher(int id)
+        {
+            var numberOfBooks = _context.Books.Where(b => b.PublisherId == id).Count();
+            return numberOfBooks;
+        }
+
         public IQueryable<Publisher> GetAllPublishers()
         {
             var publishers = _context.Publishers;

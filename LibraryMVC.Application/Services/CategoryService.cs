@@ -33,6 +33,10 @@ namespace LibraryMVC.Application
         {
             var categories = _categoryRepository.GetAllCategories().ProjectTo<CategoryVm>(_mapper.ConfigurationProvider)
                 .ToList();
+            foreach(var categoryVm in categories)
+            {
+                categoryVm.NumberOfBooks = _categoryRepository.CountBooksOfCategory(categoryVm.Id);
+            }
 
             var result = new CategoryListVm
             {

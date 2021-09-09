@@ -28,29 +28,35 @@
             <th>
                 Name
             </th>
+            <th>
+                Number
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Publishers)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
-                    @if (item.Id != 1)
-                    {
-                        @Html.ActionLink("Delete", "DeletePublisher", new { item.Id }) <span>|</span>
-                    }
-                    @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
-                </td>
-   
-               </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBooks)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
+                @if (item.Id != 1)
+                {
+                    @Html.ActionLink("Delete", "DeletePublisher", new { item.Id }) <span>|</span>
+                }
+                @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
+            </td>
+
+        </tr>
         }
     </tbody>
 </table>

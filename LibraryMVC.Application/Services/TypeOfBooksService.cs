@@ -27,6 +27,10 @@ namespace LibraryMVC.Application
         {
             var typeOfBooks = _typeOfBookRepository.GetAllTypeOfBooks().ProjectTo<TypeOfBookVm>(_mapper.ConfigurationProvider)
                .ToList();
+            foreach(var typeOfBookVm in typeOfBooks)
+            {
+                typeOfBookVm.NumberOfBooks = _typeOfBookRepository.CountBooksOfTypeOfBook(typeOfBookVm.Id);
+            }
 
             var result = new TypeOfBookListVm
             {

@@ -10,6 +10,7 @@ namespace LibraryMVC.Domain.Interfaces
     {
         void DeleteTypeOfBook(int id);
         void ChangeTypeOfBookNameToOther(int id);
+        int CountBooksOfTypeOfBook(int id);
         IQueryable<TypeOfBook> GetAllTypeOfBooks();
     }
 }

@@ -26,6 +26,9 @@
             <th>
                 Name
             </th>
+            <th>
+                Number
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -38,6 +41,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBooks)
             </td>
             <td>
                 @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
