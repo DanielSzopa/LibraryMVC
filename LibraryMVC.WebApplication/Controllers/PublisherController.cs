@@ -31,6 +31,21 @@ namespace LibraryMVC.WebApplication.Controllers
             _publisherService.AddPublisher(publisher);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult EditPublisher(int id)
+        {
+            //Need second partial view to edit publisher
+            var publisher = _publisherService.GetPublisherById(id);
+            return View("_PublisherModelPartial",publisher);
+        }
+
+        [HttpPost]
+        public IActionResult EditBook(NewBookVm model)
+        {
+            //_bookService.UpdateBook(model);
+            return RedirectToAction("DetailsBook", new { model.Id });
+        }
+
         public IActionResult DeletePublisher(int id)
         {
             if(id != 1)

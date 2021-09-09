@@ -11,6 +11,7 @@ namespace LibraryMVC.Application
         void AddPublisher(PublisherVm model);
         void DeletePublisher(int id);
         void ChangePublisherBeforeDelete(int id);
+        PublisherVm GetPublisherById(int id);
         PublisherListVm GetAllPublishersToList();        
     }
 }

@@ -48,11 +48,15 @@
                 @Html.DisplayFor(modelItem => item.NumberOfBooks)
             </td>
             <td>
-                @if (item.Id != 1) 
+                @if (item.Id != 1)
                 {
-                    <a asp-controller="Publisher" asp-action="" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
+                    //  <a asp-controller="Publisher" asp-action="EditPublisher" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
+                    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addPublisher"
+                            data-url="@Url.Action("EditPublisher",new { @item.Id })">
+                        Edit
+                    </button>
                 }
-                    <a asp-controller="Publisher" asp-action="" asp-route-id="@item.Id" class="btn btn-primary">Books</a>
+                <a asp-controller="Publisher" asp-action="" asp-route-id="@item.Id" class="btn btn-primary">Books</a>
                 @if (item.Id != 1)
                 {
                     <a asp-controller="Publisher" asp-action="DeletePublisher" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>

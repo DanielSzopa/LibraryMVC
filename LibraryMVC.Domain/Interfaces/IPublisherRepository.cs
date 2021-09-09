@@ -12,6 +12,7 @@ namespace LibraryMVC.Domain.Interfaces
         void DeletePublisher(int id);
         void ChangePublisherNameToOther(int id);
         int CountBooksOfPublisher(int id);
+        Publisher GetPublisherById(int id);
         IQueryable<Publisher> GetAllPublishers();
         
     }

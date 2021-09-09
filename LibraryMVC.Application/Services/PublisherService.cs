@@ -33,7 +33,13 @@ namespace LibraryMVC.Application
         public void ChangePublisherBeforeDelete(int id)
         {           
                 _publisherRepository.ChangePublisherNameToOther(id);                                   
-        }      
+        }
+        public PublisherVm GetPublisherById(int id)
+        {
+            var publisher = _publisherRepository.GetPublisherById(id);
+            var publisherVm = _mapper.Map<PublisherVm>(publisher);
+            return publisherVm;
+        }
         public PublisherListVm GetAllPublishersToList()
         {
             var publishers = _publisherRepository.GetAllPublishers().ProjectTo<PublisherVm>(_mapper.ConfigurationProvider)
@@ -50,5 +56,7 @@ namespace LibraryMVC.Application
 
             return result;
         }
+
+       
     }
 }
