@@ -42,7 +42,11 @@ namespace LibraryMVC.WebApplication.Controllers
 
         public IActionResult DeleteAuthor(int id)
         {
-            _authorService.DeleteAuthor(id);
+            if (id != 1)
+            {
+                _authorService.DeleteAuthor(id);
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 

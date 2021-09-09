@@ -79,12 +79,15 @@
                 @item.NumberOfBooks
             </td>
             <td>
-                @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
                 @if (item.Id != 1)
                 {
-                    @Html.ActionLink("Delete", "DeleteCategory", new { item.Id }) <span>|</span>
+                    <a asp-controller="Category" asp-action="" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
                 }
-                @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
+                <a asp-controller="Category" asp-action="" asp-route-id="@item.Id" class="btn btn-primary">Books</a>
+                @if (item.Id != 1)
+                {
+                    <a asp-controller="Category" asp-action="DeleteCategory" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                }
             </td>
         </tr>
         }

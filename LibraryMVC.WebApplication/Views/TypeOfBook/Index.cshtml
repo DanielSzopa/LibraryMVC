@@ -46,12 +46,15 @@
                 @Html.DisplayFor(modelItem => item.NumberOfBooks)
             </td>
             <td>
-                @Html.ActionLink("Edit", "", new { /* id=item.PrimaryKey */ }) |
                 @if (item.Id != 1)
                 {
-                    @Html.ActionLink("Delete", "DeleteTypeOfBook", new { item.Id }) <span>|</span>
+                    <a asp-controller="TypeOfBook" asp-action="" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
                 }
-                @Html.ActionLink("Books", "", new { /* id=item.PrimaryKey */ })
+                <a asp-controller="TypeOfBook" asp-action="" asp-route-id="@item.Id" class="btn btn-primary">Books</a>
+                @if (item.Id != 1)
+                {
+                    <a asp-controller="TypeOfBook" asp-action="DeleteTypeOfBook" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                }
             </td>
         </tr>
         }
