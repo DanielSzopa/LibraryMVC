@@ -29,7 +29,18 @@ namespace LibraryMVC.Application
 
         public void DeleteAuthor(int id)
         {
+            ChangeAuthorBeforeDelete(id);
             _authorRepository.DeleteAuthor(id);
+        }
+        public int EditAuthor(AuthorDetailsVm model)
+        {
+            var authorToEdit = _mapper.Map<Author>(model);
+
+            return _authorRepository.EditAuthor(authorToEdit);
+        }
+        public void ChangeAuthorBeforeDelete(int id)
+        {
+            _authorRepository.ChangeAuthorNameToNone(id);
         }
 
         public IQueryable<Author> GetAllAuthors()
@@ -88,18 +99,12 @@ namespace LibraryMVC.Application
 
             authorVm.IdCurrentBook = id;
             return authorVm;
-        }
-
-        public int EditAuthor(AuthorDetailsVm model)
-        {          
-            var authorToEdit = _mapper.Map<Author>(model);
-
-            return _authorRepository.EditAuthor(authorToEdit);
-        }
+        }      
 
         public Author GetAuthorById(int id)
         {
             return _authorRepository.GetAuthorById(id);
         }
+       
     }
 }

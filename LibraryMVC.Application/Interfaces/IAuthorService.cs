@@ -11,6 +11,7 @@ namespace LibraryMVC.Application
         int AddAuthor(NewAuthorVm model);
         void DeleteAuthor(int id);
         int EditAuthor(AuthorDetailsVm model);
+        void ChangeAuthorBeforeDelete(int id);
         NewAuthorVm GetAuthorForEdit(int id);
         Author GetAuthorById(int id);
         IQueryable<Author> GetAllAuthors();       

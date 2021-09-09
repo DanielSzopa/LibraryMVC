@@ -37,6 +37,14 @@ namespace LibraryMVC.Infrastructure
 
             return countBooks;
         }
+        public void ChangeAuthorNameToNone(int id)
+        {
+            var authors = _context.Books.Where(b => b.AuthorId == id)
+                .ToList();
+
+            authors.ForEach(b => b.AuthorId = 1);
+            _context.SaveChanges();
+        }
 
         public IQueryable<Author> GetAllAuthors()
         {
@@ -73,5 +81,7 @@ namespace LibraryMVC.Infrastructure
 
             return author.Id;
         }
+
+       
     }
 }
