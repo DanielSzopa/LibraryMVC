@@ -5,9 +5,13 @@
 }
 
 <h1>TypeOfBooks</h1>
+<div id="PlaceHolderHere"></div>
 
 <p>
-    <a asp-controller="Book" asp-action="">Create TypeOfBook</a>
+    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addTypeOfBook"
+            data-url="@Url.Action("Create")">
+        Create
+    </button>
     |
     <a asp-controller="Book" asp-action="Index">Books</a>
     |

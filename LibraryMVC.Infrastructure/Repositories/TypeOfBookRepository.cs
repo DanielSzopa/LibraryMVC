@@ -15,6 +15,11 @@ namespace LibraryMVC.Infrastructure
         {
             _context = context;
         }
+        public void AddTypeOfBook(TypeOfBook model)
+        {
+            _context.TypeOfBooks.Add(model);
+            _context.SaveChanges();
+        }
         public void DeleteTypeOfBook(int id)
         {
             var typeofbook = _context.TypeOfBooks.Find(id);
@@ -42,5 +47,6 @@ namespace LibraryMVC.Infrastructure
             var typeOfBooks = _context.TypeOfBooks;
             return typeOfBooks;
         }
+      
     }
 }

@@ -1,18 +1,17 @@
-﻿@model LibraryMVC.Application.PublisherVm
+﻿@model LibraryMVC.Application.CategoryVm
 
 
-
-<div class="modal fade" id="addPublisher">
+<div class="modal fade" id="addCategory">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="addPublisher">Add Publisher</h4>
+                <h4 class="modal-title" id="addCategory">Add Category</h4>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>x</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/Publisher/Create" method="post">
+                <form action="/Category/Create" method="post">                   
                     <input type="hidden" asp-for="Id" class="form-control" />
                     <div class="form-group">
                         <label asp-for="Name"></label>

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using LibraryMVC.Domain.Interfaces;
+using LibraryMVC.Domain.Models;
 using System.Linq;
 
 namespace LibraryMVC.Application
@@ -13,6 +14,11 @@ namespace LibraryMVC.Application
         {
             _typeOfBookRepository = typeOfBookRepository;
             _mapper = mapper;
+        }
+        public void AddTypeOfBook(TypeOfBookVm model)
+        {
+            var typeOfBook = _mapper.Map<TypeOfBook>(model);
+            _typeOfBookRepository.AddTypeOfBook(typeOfBook);
         }
         public void DeleteTypeOfBook(int id)
         {
@@ -39,5 +45,6 @@ namespace LibraryMVC.Application
 
             return result;
         }
+        
     }
 }

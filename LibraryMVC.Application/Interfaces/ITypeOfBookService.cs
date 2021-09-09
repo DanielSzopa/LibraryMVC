@@ -6,6 +6,7 @@ namespace LibraryMVC.Application
 {
     public interface ITypeOfBookService
     {
+        void AddTypeOfBook(TypeOfBookVm model);
         void DeleteTypeOfBook(int id);
         void ChangeTypeOfBookBeforeDelete(int id);
         TypeOfBookListVm GetAllTypeOfBooksToList();
