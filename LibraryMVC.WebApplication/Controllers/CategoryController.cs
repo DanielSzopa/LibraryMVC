@@ -20,9 +20,14 @@ namespace LibraryMVC.WebApplication.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var category = new CategoryVm();
+            return PartialView("_CategoryModelPartial", category);
+        }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AddCategory(CategoryVm category)
+        public IActionResult Create(CategoryVm category)
         {
             _categoryService.AddCategory(category);
             return RedirectToAction("Index");

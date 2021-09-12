@@ -5,8 +5,13 @@
 
 <h1>Categories</h1>
 
+<div id="PlaceHolderHere"></div>
+
 <p>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">Create</button>
+    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addCategory"
+            data-url="@Url.Action("Create")">
+        Create
+    </button>
     |
     <a asp-controller="Book" asp-action="Index">Books</a>
     |
@@ -16,40 +21,6 @@
     |
     <a asp-controller="Publisher" asp-action="Index">Publishers</a>
 </p>
-
-<div class="modal fade" id="categoryModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add Category</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form asp-controller="Category" asp-action="AddCategory">
-                <div class="modal-body">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" class="form-control" />
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="form-group">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-
 <table class="table">
     <thead>
         <tr>
