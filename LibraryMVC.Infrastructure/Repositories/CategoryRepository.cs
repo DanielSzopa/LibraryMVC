@@ -17,6 +17,12 @@ namespace LibraryMVC.Infrastructure
             _context.Categories.Add(model);
             _context.SaveChanges();
         }
+        public void UpdateCategory(Category model)
+        {
+            _context.Attach(model);
+            _context.Entry(model).Property("Name").IsModified = true;
+            _context.SaveChanges();
+        }
         public void DeleteCategory(int id)
         {
             var category = _context.Categories.Find(id);
@@ -39,12 +45,16 @@ namespace LibraryMVC.Infrastructure
            var numberOfBooks =  _context.Books.Where(b => b.CategoryId == id).Count();
             return numberOfBooks;
         }
+        public Category GetCategoryById(int id)
+        {
+            var category = _context.Categories.Find(id);
+            return category;
+        }
         public IQueryable<Category> GetAllCategories()
         {
             var categories = _context.Categories;
             return categories;
         }
 
-       
     }
 }

@@ -25,6 +25,11 @@ namespace LibraryMVC.Application
             
             _publisherRepository.AddPublisher(publisher);
         }
+        public void UpdatePublisher(PublisherVm model)
+        {
+            var publisher = _mapper.Map<LibraryMVC.Domain.Models.Publisher>(model);
+            _publisherRepository.UpdatePublisher(publisher);
+        }
         public void DeletePublisher(int id)
         {
             ChangePublisherBeforeDelete(id);
@@ -56,7 +61,6 @@ namespace LibraryMVC.Application
 
             return result;
         }
-
        
     }
 }

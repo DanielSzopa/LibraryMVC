@@ -8,7 +8,7 @@
 <div id="PlaceHolderHere"></div>
 
 <p>
-    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addPublisher" 
+    <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addPublisher" 
             data-url="@Url.Action("Create")">Create</button>
     |
     <a asp-controller="Book" asp-action="Index">Books</a>
@@ -50,8 +50,7 @@
             <td>
                 @if (item.Id != 1)
                 {
-                    //  <a asp-controller="Publisher" asp-action="EditPublisher" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
-                    <button type="button" class="btn btn-secondary" data-toggle="ajax-modal" data-target="#addPublisher"
+                    <button class="btn btn-secondary" data-toggle="ajax-modal" data-target="#editPublisher"
                             data-url="@Url.Action("EditPublisher",new { @item.Id })">
                         Edit
                     </button>

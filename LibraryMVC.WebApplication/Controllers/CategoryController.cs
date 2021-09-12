@@ -32,6 +32,21 @@ namespace LibraryMVC.WebApplication.Controllers
             _categoryService.AddCategory(category);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult EditCategory(int id)
+        {
+            var category = _categoryService.GetCategoryById(id);
+            return View("_CategoryModelPartialForEdit", category);
+        }
+
+        [HttpPost]
+        public IActionResult EditCategory(CategoryVm model)
+        {
+            _categoryService.UpdateCategory(model);
+            return RedirectToAction("Index", new { model.Id });
+        }
+
         public IActionResult DeleteCategory(int id)
         {
             if (id != 1)

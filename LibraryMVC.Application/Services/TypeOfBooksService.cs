@@ -20,6 +20,11 @@ namespace LibraryMVC.Application
             var typeOfBook = _mapper.Map<TypeOfBook>(model);
             _typeOfBookRepository.AddTypeOfBook(typeOfBook);
         }
+        public void UpdateTypeOfBook(TypeOfBookVm model)
+        {
+            var typeOfBook = _mapper.Map<TypeOfBook>(model);
+            _typeOfBookRepository.UpdateTypeOfBook(typeOfBook);
+        }
         public void DeleteTypeOfBook(int id)
         {
             ChangeTypeOfBookBeforeDelete(id);
@@ -28,6 +33,12 @@ namespace LibraryMVC.Application
         public void ChangeTypeOfBookBeforeDelete(int id)
         {
             _typeOfBookRepository.ChangeTypeOfBookNameToOther(id);
+        }
+        public TypeOfBookVm GetTypeOfBookById(int id)
+        {
+            var typeOfBook = _typeOfBookRepository.GetTypeOfBookById(id);
+            var typeOfBookVm = _mapper.Map<TypeOfBookVm>(typeOfBook);
+            return typeOfBookVm;
         }
         public TypeOfBookListVm GetAllTypeOfBooksToList()
         {
@@ -45,6 +56,6 @@ namespace LibraryMVC.Application
 
             return result;
         }
-        
+      
     }
 }

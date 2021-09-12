@@ -32,6 +32,19 @@ namespace LibraryMVC.WebApplication.Controllers
             _typeOfBookService.AddTypeOfBook(typeOfBook);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult EditTypeOfBook(int id)
+        {
+            var typeOfBook = _typeOfBookService.GetTypeOfBookById(id);
+            return View("_TypeOfBookModelPartialForEdit", typeOfBook);
+        }
+
+        [HttpPost]
+        public IActionResult EditTypeOfBook(TypeOfBookVm model)
+        {
+            _typeOfBookService.UpdateTypeOfBook(model);
+            return RedirectToAction("Index", new { model.Id });
+        }
         public IActionResult DeleteTypeOfBook(int id)
         {
             if (id != 1)

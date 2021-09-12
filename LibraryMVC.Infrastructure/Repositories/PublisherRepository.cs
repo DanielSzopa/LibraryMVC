@@ -21,6 +21,12 @@ namespace LibraryMVC.Infrastructure
              _context.Publishers.Add(model);
             _context.SaveChanges();
         }
+        public void UpdatePublisher(Publisher model)
+        {
+            _context.Attach(model);
+            _context.Entry(model).Property("Name").IsModified = true;
+            _context.SaveChanges();
+        }
         public void DeletePublisher(int id)
         {
             var publisher = _context.Publishers.Find(id);
@@ -53,6 +59,6 @@ namespace LibraryMVC.Infrastructure
             var publishers = _context.Publishers;
             return publishers;
         }
-        
+       
     }
 }

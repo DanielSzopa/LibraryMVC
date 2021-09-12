@@ -20,6 +20,12 @@ namespace LibraryMVC.Infrastructure
             _context.TypeOfBooks.Add(model);
             _context.SaveChanges();
         }
+        public void UpdateTypeOfBook(TypeOfBook model)
+        {
+            _context.Attach(model);
+            _context.Entry(model).Property("Name").IsModified = true;
+            _context.SaveChanges();
+        }
         public void DeleteTypeOfBook(int id)
         {
             var typeofbook = _context.TypeOfBooks.Find(id);
@@ -42,11 +48,16 @@ namespace LibraryMVC.Infrastructure
             var numberOfBooks = _context.Books.Where(b => b.TypeOfBookId == id).Count();
             return numberOfBooks;
         }
+        public TypeOfBook GetTypeOfBookById(int id)
+        {
+            var typeOfBook = _context.TypeOfBooks.Find(id);
+            return typeOfBook;
+        }
         public IQueryable<TypeOfBook> GetAllTypeOfBooks()
         {
             var typeOfBooks = _context.TypeOfBooks;
             return typeOfBooks;
         }
-      
+        
     }
 }
