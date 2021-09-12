@@ -37,17 +37,15 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "EditAuthor", new { Model.Id }) |
-    @Html.ActionLink("Delete", "DeleteAuthor", new { Model.Id }) |
-
     @if (Model.IdCurrentBook == 0)
     {
-        <a asp-action="Index">Back</a>
+        <a class="btn btn-secondary" asp-action="Index">Back</a>
     }
     else
     {
-        <a asp-controller="Book" asp-action="DetailsBook" asp-route-id="@Model.IdCurrentBook">Back</a>
+        <a class="btn btn-secondary" asp-controller="Book" asp-action="DetailsBook" asp-route-id="@Model.IdCurrentBook">Back</a>
     }
-
-
+    <a class="btn btn-primary" asp-action="">Books</a>
+    <a class="btn btn-secondary" asp-action="EditAuthor" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-danger" asp-action="DeleteAuthor" asp-route-id="@Model.Id">Delete</a>
 </div>

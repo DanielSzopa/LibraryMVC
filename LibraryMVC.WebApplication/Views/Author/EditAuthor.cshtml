@@ -1,6 +1,10 @@
 ﻿@model LibraryMVC.Application.NewAuthorVm
 
-<h4>NewAuthorVm</h4>
+@{
+    ViewData["Title"] = "Edit Author";
+}
+
+<h4>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -29,9 +33,7 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<a class="btn btn-secondary" asp-action="Index">Close</a>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

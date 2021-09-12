@@ -1,12 +1,12 @@
 ﻿@model LibraryMVC.Application.NewBookVm
 
 @{
-    ViewData["Title"] = "EditBook";
+    ViewData["Title"] = "Edit Book";
 }
 
 <h1>Edit book</h1>
 
-<h4>NewBookVm</h4>
+<h4>Complete form to edit a book</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label">Category</label>
-                <select asp-for="CategoryId" class="form-control"  asp-items="@(new SelectList(Model.Categories,"Id", "Name"))"></select>
+                <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id", "Name"))"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -34,7 +34,7 @@
                 <span asp-validation-for="PublisherId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TypeOfBookId" class="control-label">TypeOfBooks</label>
+                <label asp-for="TypeOfBookId" class="control-label">Type</label>
                 <select asp-for="TypeOfBookId" class="form-control" asp-items="@(new SelectList(Model.TypeOfBooks,"Id", "Name"))"></select>
                 <span asp-validation-for="TypeOfBookId" class="text-danger"></span>
             </div>
@@ -44,7 +44,7 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateOfRelease" class="control-label"></label>
+                <label asp-for="DateOfRelease" class="control-label">Date</label>
                 <input asp-for="DateOfRelease" class="form-control" type="date" />
                 <span asp-validation-for="DateOfRelease" class="text-danger"></span>
             </div>
@@ -54,10 +54,7 @@
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<a class="btn btn-secondary" asp-action="Index">Close</a>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
