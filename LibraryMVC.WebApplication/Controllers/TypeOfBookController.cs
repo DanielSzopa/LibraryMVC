@@ -20,14 +20,14 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(typeOfBooks);
         }
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateTypeOfBook()
         {
              var typeOfBook = new TypeOfBookVm();
-             return PartialView("_TypeOfBookModelPartial", typeOfBook);
+             return PartialView("_TypeOfBookModelPartialForCreate", typeOfBook);
         }
 
         [HttpPost]
-        public IActionResult Create(TypeOfBookVm typeOfBook)
+        public IActionResult CreateTypeOfBook(TypeOfBookVm typeOfBook)
         {
             _typeOfBookService.AddTypeOfBook(typeOfBook);
             return RedirectToAction("Index");

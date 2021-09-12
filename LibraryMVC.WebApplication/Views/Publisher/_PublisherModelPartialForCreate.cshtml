@@ -1,18 +1,18 @@
-﻿@model LibraryMVC.Application.TypeOfBookVm
+﻿@model LibraryMVC.Application.PublisherVm
 
 
 
-<div class="modal fade" id="addTypeOfBook">
+<div class="modal fade" id="addPublisher">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="addTypeOfBook">Add Type</h4>
+                <h4 class="modal-title" id="addPublisher">Add Publisher</h4>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>x</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/TypeOfBook/Create" method="post">                   
+                <form action="/Publisher/CreatePublisher" method="post">
                     <input type="hidden" asp-for="Id" class="form-control" />
                     <div class="form-group">
                         <label asp-for="Name"></label>

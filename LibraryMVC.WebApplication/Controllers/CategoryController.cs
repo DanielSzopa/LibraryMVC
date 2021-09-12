@@ -21,13 +21,13 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateCategory()
         {
             var category = new CategoryVm();
-            return PartialView("_CategoryModelPartial", category);
+            return PartialView("_CategoryModelPartialForCreate", category);
         }
         [HttpPost]
-        public IActionResult Create(CategoryVm category)
+        public IActionResult CreateCategory(CategoryVm category)
         {
             _categoryService.AddCategory(category);
             return RedirectToAction("Index");
