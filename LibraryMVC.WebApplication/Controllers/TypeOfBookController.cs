@@ -36,7 +36,7 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult EditTypeOfBook(int id)
         {
             var typeOfBook = _typeOfBookService.GetTypeOfBookById(id);
-            return View("_TypeOfBookModelPartialForEdit", typeOfBook);
+            return PartialView("_TypeOfBookModelPartialForEdit", typeOfBook);
         }
 
         [HttpPost]

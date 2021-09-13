@@ -30,12 +30,13 @@ namespace LibraryMVC.WebApplication.Controllers
         {
             _publisherService.AddPublisher(publisher);
             return RedirectToAction("Index");
-        }
+        } 
+
         [HttpGet]
         public IActionResult EditPublisher(int id)
         {
             var publisher = _publisherService.GetPublisherById(id);
-            return View("_PublisherModelPartialForEdit", publisher);
+            return PartialView("_PublisherModelPartialForEdit", publisher);
         }
 
         [HttpPost]

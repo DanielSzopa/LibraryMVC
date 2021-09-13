@@ -37,7 +37,7 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult EditCategory(int id)
         {
             var category = _categoryService.GetCategoryById(id);
-            return View("_CategoryModelPartialForEdit", category);
+            return PartialView("_CategoryModelPartialForEdit", category);
         }
 
         [HttpPost]

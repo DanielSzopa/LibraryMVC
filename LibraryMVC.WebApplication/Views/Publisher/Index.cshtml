@@ -8,16 +8,12 @@
 <div id="PlaceHolderHere"></div>
 
 <p>
-    <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addPublisher" 
-            data-url="@Url.Action("CreatePublisher")">Create</button>
-    |
-    <a asp-controller="Book" asp-action="Index">Books</a>
-    |
-    <a asp-controller="Author" asp-action="Index">Authors</a>
-    |
-    <a asp-controller="Category" asp-action="Index">Categories</a>
-    |
-    <a asp-controller="TypeOfBook" asp-action="Index">Types</a>
+    <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addPublisher"
+             data-url="@Url.Action("CreatePublisher")">Create</button>   
+    <a class="btn btn-secondary" asp-controller="Book" asp-action="Index">Books</a>
+    <a class="btn btn-secondary" asp-controller="Author" asp-action="Index">Authors</a>
+    <a class="btn btn-secondary" asp-controller="Category" asp-action="Index">Categories</a>
+    <a class="btn btn-secondary" asp-controller="TypeOfBook" asp-action="Index">Types</a>
 </p>
 <table class="table">
     <thead>
@@ -53,7 +49,7 @@
                     <button class="btn btn-secondary" data-toggle="ajax-modal" data-target="#editPublisher"
                             data-url="@Url.Action("EditPublisher",new { @item.Id })">
                         Edit
-                    </button>
+                    </button>                  
                 }
                 <a asp-controller="Publisher" asp-action="" asp-route-id="@item.Id" class="btn btn-primary">Books</a>
                 @if (item.Id != 1)

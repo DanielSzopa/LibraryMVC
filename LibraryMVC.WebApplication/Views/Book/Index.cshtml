@@ -7,17 +7,12 @@
 }
 
 <h1>Books</h1>
-
 <p>
-    <a asp-controller="Book" asp-action="AddBook">Create</a>
-    |
-    <a asp-controller="Author" asp-action="Index">Authors</a>
-    |
-    <a asp-controller="Category" asp-action="Index">Categories</a>
-    |
-    <a asp-controller="TypeOfBook" asp-action="Index">Types</a>
-    |
-    <a asp-controller="Publisher" asp-action="Index">Publishers</a>
+    <a class="btn btn-primary" asp-controller="Book" asp-action="AddBook">Create</a>  
+    <a class="btn btn-secondary" asp-controller="Author" asp-action="Index">Authors</a>  
+    <a class="btn btn-secondary" asp-controller="Category" asp-action="Index">Categories</a>  
+    <a class="btn btn-secondary" asp-controller="TypeOfBook" asp-action="Index">Types</a>   
+    <a class="btn btn-secondary" asp-controller="Publisher" asp-action="Index">Publishers</a>
 </p>
 <table class="table">
     <thead>

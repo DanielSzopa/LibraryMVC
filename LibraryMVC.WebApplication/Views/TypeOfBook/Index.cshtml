@@ -11,15 +11,11 @@
     <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addTypeOfBook"
             data-url="@Url.Action("CreateTypeOfBook")">
         Create
-    </button>
-    |
-    <a asp-controller="Book" asp-action="Index">Books</a>
-    |
-    <a asp-controller="Author" asp-action="Index">Authors</a>
-    |
-    <a asp-controller="Category" asp-action="Index">Categories</a>
-    |
-    <a asp-controller="Publisher" asp-action="Index">Publishers</a>
+    </button>   
+    <a class="btn btn-secondary" asp-controller="Book" asp-action="Index">Books</a>   
+    <a class="btn btn-secondary" asp-controller="Author" asp-action="Index">Authors</a>  
+    <a class="btn btn-secondary" asp-controller="Category" asp-action="Index">Categories</a>   
+    <a class="btn btn-secondary" asp-controller="Publisher" asp-action="Index">Publishers</a>
 </p>
 <table class="table">
     <thead>
