@@ -12,6 +12,7 @@ namespace LibraryMVC.Application
         void UpdatePublisher(PublisherVm model);
         void DeletePublisher(int id);
         void ChangePublisherBeforeDelete(int id);
+        BookListVm GetBooksByPublisherId(int id);
         PublisherVm GetPublisherById(int id);
         PublisherListVm GetAllPublishersToList();        
     }

@@ -34,6 +34,18 @@ namespace LibraryMVC.Application
         {
             _categoryRepository.ChangeCategoryNameToOther(id);
         }
+
+        public BookListVm GetBooksByCategoryId(int id)
+        {
+            var books = _categoryRepository.GetAllBooksByCategoryId(id)
+                .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var result = new BookListVm
+            {
+                ListOfBookForList = books
+            };
+            return result;
+        }
         public CategoryVm GetCategoryById(int id)
         {
             var category = _categoryRepository.GetCategoryById(id);

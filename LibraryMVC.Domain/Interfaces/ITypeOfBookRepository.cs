@@ -14,6 +14,7 @@ namespace LibraryMVC.Domain.Interfaces
         void ChangeTypeOfBookNameToOther(int id);
         int CountBooksOfTypeOfBook(int id);
         TypeOfBook GetTypeOfBookById(int id);
+        IQueryable<Book> GetAllBooksByTypeOfBookId(int id);
         IQueryable<TypeOfBook> GetAllTypeOfBooks();
     }
 }

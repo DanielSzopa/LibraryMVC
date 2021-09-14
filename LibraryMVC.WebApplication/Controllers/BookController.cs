@@ -16,11 +16,12 @@ namespace LibraryMVC.WebApplication.Controllers
         public BookController(IBookService bookService)
         {
             _bookService = bookService;           
-        }
-        
+        }   
         public IActionResult Index(int pageNumber = 1, int pageSize = 6)
-        {
+        {           
             var books = _bookService.GetAllBooksToList(pageNumber, pageSize);
+            ViewBag.Headline = "Books";
+            ViewBag.Title = "Books";
 
             return View(books);
         }

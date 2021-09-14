@@ -50,11 +50,15 @@ namespace LibraryMVC.Infrastructure
             var category = _context.Categories.Find(id);
             return category;
         }
+        public IQueryable<Book> GetAllBooksByCategoryId(int id)
+        {
+            var categories = _context.Books.Where(b => b.CategoryId == id);
+            return categories;
+        }
         public IQueryable<Category> GetAllCategories()
         {
             var categories = _context.Categories;
             return categories;
-        }
-
+        }     
     }
 }

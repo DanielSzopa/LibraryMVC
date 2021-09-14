@@ -1,12 +1,12 @@
 ﻿@model LibraryMVC.Application.BookListVm
 
 @{
-    ViewData["Title"] = "Books";
+    ViewData["Title"] = @ViewBag.Title;
     ViewData["Controller"] = "Book";
-    ViewData["Action"] = "Index";
+    ViewData["Action"] = "Index";    
 }
 
-<h1>Books</h1>
+<h1>@ViewBag.Headline</h1>
 <p>
     <a class="btn btn-primary" asp-controller="Book" asp-action="AddBook">Create</a>  
     <a class="btn btn-secondary" asp-controller="Author" asp-action="Index">Authors</a>  
