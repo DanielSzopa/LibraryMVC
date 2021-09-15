@@ -74,19 +74,41 @@ namespace LibraryMVC.Application
 
             return bookDetailVm;
         }
-        public BookListVm GetAllBooksToList(int pageNumber, int pageSize)
+        public BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, int categoryId, int publisherId, int typeOfBookId)
         {
-            var books = _bookRepository.GetAllBooks()
+            var books = default(IQueryable<Book>);
+            if(categoryId != 0)
+            {
+                books = _categoryRepository.GetAllBooksByCategoryId(categoryId).Where(b=>b.Title.StartsWith(searchString));
+            }
+            else if (publisherId != 0)
+            {
+                books = _publisherRepository.GetAllBooksByPublisherId(publisherId).Where(b => b.Title.StartsWith(searchString));
+            }
+            else if (typeOfBookId != 0)
+            {
+                books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(typeOfBookId).Where(b => b.Title.StartsWith(searchString));
+            }
+            else
+            {
+                books = _bookRepository.GetAllBooks().Where(b => b.Title.StartsWith(searchString));
+            }
+            
+            var mappedBooks = books
                 .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
 
-            var records = _paginationService.ReturnRecordsToShow<BookForListVm>(pageNumber, pageSize, books);   
+            var records = _paginationService.ReturnRecordsToShow<BookForListVm>(pageNumber, pageSize, mappedBooks);
 
             var result = new BookListVm()
             {
                 ListOfBookForList = records,
-                Count = books.Count,
+                Count = mappedBooks.Count,
                 PageSize = pageSize,
                 PageNumber = pageNumber,
+                SearchString = searchString,
+                CategoryId = categoryId,
+                PublisherId = publisherId,
+                TypeOfBookId = typeOfBookId
 
             };
             return result;

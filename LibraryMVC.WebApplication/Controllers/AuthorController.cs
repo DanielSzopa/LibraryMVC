@@ -10,7 +10,7 @@ namespace LibraryMVC.WebApplication.Controllers
         {
             _authorService = authorService;
         }
-        public IActionResult Index(int pageNumber = 1, int pageSize = 6)
+        public IActionResult Index(int pageNumber = 1, int pageSize = 2)
         {
             var authors = _authorService.GetAllAuthorToList(pageNumber, pageSize);
             return View(authors);

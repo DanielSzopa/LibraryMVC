@@ -9,11 +9,14 @@
 
 <p>
     <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addPublisher"
-             data-url="@Url.Action("CreatePublisher")">Create</button>   
+            data-url="@Url.Action("CreatePublisher")">
+        Create
+    </button>
     <a class="btn btn-secondary" asp-controller="Book" asp-action="Index">Books</a>
     <a class="btn btn-secondary" asp-controller="Author" asp-action="Index">Authors</a>
-    <a class="btn btn-secondary" asp-controller="Category" asp-action="Index">Categories</a>
     <a class="btn btn-secondary" asp-controller="TypeOfBook" asp-action="Index">Types</a>
+    <a class="btn btn-secondary" asp-controller="Category" asp-action="Index">Categories</a>
+    <a class="btn btn-secondary" asp-controller="Publisher" asp-action="Index">Publishers</a>
 </p>
 <table class="table">
     <thead>
@@ -51,7 +54,7 @@
                         Edit
                     </button>                  
                 }
-                <a asp-controller="Publisher" asp-action="" asp-route-id="@item.Id" class="btn btn-primary">Books</a>
+                <a asp-controller="Book" asp-action="Index" asp-route-publisherId="@item.Id" class="btn btn-primary">Books</a>
                 @if (item.Id != 1)
                 {
                     <a asp-controller="Publisher" asp-action="DeletePublisher" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>

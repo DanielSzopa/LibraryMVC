@@ -59,6 +59,11 @@ namespace LibraryMVC.Infrastructure
             var publishers = _context.Publishers;
             return publishers;
         }
-       
+
+        public IQueryable<Book> GetAllBooksByPublisherId(int id)
+        {
+            var publishers = _context.Books.Where(b => b.PublisherId == id);
+            return publishers;
+        }
     }
 }

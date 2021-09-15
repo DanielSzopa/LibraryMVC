@@ -58,6 +58,11 @@ namespace LibraryMVC.Infrastructure
             var typeOfBooks = _context.TypeOfBooks;
             return typeOfBooks;
         }
-        
+
+        public IQueryable<Book> GetAllBooksByTypeOfBookId(int id)
+        {
+            var typeOfBooks = _context.Books.Where(b => b.TypeOfBookId == id);
+            return typeOfBooks;
+        }
     }
 }

@@ -12,19 +12,25 @@ namespace LibraryMVC.WebApplication.Controllers
     public class BookController : Controller
     {
         private readonly IBookService _bookService;
-        
         public BookController(IBookService bookService)
         {
-            _bookService = bookService;           
+            _bookService = bookService;
         }   
-        public IActionResult Index(int pageNumber = 1, int pageSize = 6)
-        {           
-            var books = _bookService.GetAllBooksToList(pageNumber, pageSize);
-            ViewBag.Headline = "Books";
-            ViewBag.Title = "Books";
+        public IActionResult Index(int pageNumber, int categoryId, int publisherId, int typeOfBookId, string searchString)
+        {        
+            if (pageNumber == 0)
+            {
+                pageNumber = 1;
+            }
+            if(searchString is null)
+            {
+                searchString = String.Empty;
+            }
+            int pageSize = 2;
+            var books = _bookService.GetAllBooksToList(pageNumber, pageSize, searchString, categoryId, publisherId, typeOfBookId);           
 
             return View(books);
-        }
+        }      
         [HttpGet]
         public IActionResult AddBook()
         {

@@ -55,15 +55,6 @@ namespace LibraryMVC.WebApplication.Controllers
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
-        }
-        public IActionResult ViewBooks(int id)
-        {
-            var bookList = _categoryService.GetBooksByCategoryId(id);
-            var categoryName = _categoryService.GetCategoryById(id).Name;
-            ViewBag.Headline = categoryName;
-            ViewBag.Title = categoryName;
-
-            return View("/Views/Book/Index.cshtml", bookList);
-        }
+        }      
     }
 }

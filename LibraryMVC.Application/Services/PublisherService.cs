@@ -61,6 +61,17 @@ namespace LibraryMVC.Application
 
             return result;
         }
-       
+
+        public BookListVm GetBooksByPublisherId(int id)
+        {
+            var books = _publisherRepository.GetAllBooksByPublisherId(id)
+                .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var result = new BookListVm
+            {
+                ListOfBookForList = books
+            };
+            return result;
+        }
     }
 }
