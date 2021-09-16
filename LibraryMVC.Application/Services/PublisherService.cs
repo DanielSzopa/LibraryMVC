@@ -21,30 +21,46 @@ namespace LibraryMVC.Application
 
         public void AddPublisher(PublisherVm model)
         {
-            var publisher = _mapper.Map<LibraryMVC.Domain.Models.Publisher>(model);
-            
+            var publisher = _mapper.Map<LibraryMVC.Domain.Models.Publisher>(model);           
             _publisherRepository.AddPublisher(publisher);
         }
+
         public void UpdatePublisher(PublisherVm model)
         {
             var publisher = _mapper.Map<LibraryMVC.Domain.Models.Publisher>(model);
             _publisherRepository.UpdatePublisher(publisher);
         }
+
         public void DeletePublisher(int id)
         {
             ChangePublisherBeforeDelete(id);
             _publisherRepository.DeletePublisher(id);
         }
+
         public void ChangePublisherBeforeDelete(int id)
         {           
                 _publisherRepository.ChangePublisherNameToOther(id);                                   
         }
+
+        public BookListVm GetBooksByPublisherId(int id)
+        {
+            var books = _publisherRepository.GetAllBooksByPublisherId(id)
+                .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var result = new BookListVm
+            {
+                ListOfBookForList = books
+            };
+            return result;
+        }
+
         public PublisherVm GetPublisherById(int id)
         {
             var publisher = _publisherRepository.GetPublisherById(id);
             var publisherVm = _mapper.Map<PublisherVm>(publisher);
             return publisherVm;
         }
+
         public PublisherListVm GetAllPublishersToList()
         {
             var publishers = _publisherRepository.GetAllPublishers().ProjectTo<PublisherVm>(_mapper.ConfigurationProvider)
@@ -60,18 +76,6 @@ namespace LibraryMVC.Application
             };
 
             return result;
-        }
-
-        public BookListVm GetBooksByPublisherId(int id)
-        {
-            var books = _publisherRepository.GetAllBooksByPublisherId(id)
-                .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
-
-            var result = new BookListVm
-            {
-                ListOfBookForList = books
-            };
-            return result;
-        }
+        }     
     }
 }

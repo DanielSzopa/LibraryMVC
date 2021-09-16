@@ -14,6 +14,7 @@ namespace LibraryMVC.WebApplication.Controllers
         {
             _categoryService = categoryService;
         }
+
         public IActionResult Index()
         {
             ViewBag.Category = _categoryService.GetAllCategoriesToList().CategoriesOfBooks;
@@ -26,6 +27,7 @@ namespace LibraryMVC.WebApplication.Controllers
             var category = new CategoryVm();
             return PartialView("_CategoryModelPartialForCreate", category);
         }
+
         [HttpPost]
         public IActionResult CreateCategory(CategoryVm category)
         {

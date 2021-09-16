@@ -15,17 +15,20 @@ namespace LibraryMVC.Infrastructure
         {
             _context = context;
         }
+
         public void AddTypeOfBook(TypeOfBook model)
         {
             _context.TypeOfBooks.Add(model);
             _context.SaveChanges();
         }
+
         public void UpdateTypeOfBook(TypeOfBook model)
         {
             _context.Attach(model);
             _context.Entry(model).Property("Name").IsModified = true;
             _context.SaveChanges();
         }
+
         public void DeleteTypeOfBook(int id)
         {
             var typeofbook = _context.TypeOfBooks.Find(id);
@@ -35,6 +38,7 @@ namespace LibraryMVC.Infrastructure
                 _context.SaveChanges();
             }
         }
+
         public void ChangeTypeOfBookNameToOther(int id)
         {
             var books = _context.Books.Where(b => b.TypeOfBookId == id)
@@ -43,20 +47,17 @@ namespace LibraryMVC.Infrastructure
             books.ForEach(b => b.TypeOfBookId = 1);
             _context.SaveChanges();
         }
+
         public int CountBooksOfTypeOfBook(int id)
         {
             var numberOfBooks = _context.Books.Where(b => b.TypeOfBookId == id).Count();
             return numberOfBooks;
         }
+
         public TypeOfBook GetTypeOfBookById(int id)
         {
             var typeOfBook = _context.TypeOfBooks.Find(id);
             return typeOfBook;
-        }
-        public IQueryable<TypeOfBook> GetAllTypeOfBooks()
-        {
-            var typeOfBooks = _context.TypeOfBooks;
-            return typeOfBooks;
         }
 
         public IQueryable<Book> GetAllBooksByTypeOfBookId(int id)
@@ -64,5 +65,11 @@ namespace LibraryMVC.Infrastructure
             var typeOfBooks = _context.Books.Where(b => b.TypeOfBookId == id);
             return typeOfBooks;
         }
+
+        public IQueryable<TypeOfBook> GetAllTypeOfBooks()
+        {
+            var typeOfBooks = _context.TypeOfBooks;
+            return typeOfBooks;
+        }       
     }
 }

@@ -30,9 +30,22 @@ namespace LibraryMVC.Application
             ChangeTypeOfBookBeforeDelete(id);
             _typeOfBookRepository.DeleteTypeOfBook(id);
         }
+
         public void ChangeTypeOfBookBeforeDelete(int id)
         {
             _typeOfBookRepository.ChangeTypeOfBookNameToOther(id);
+        }
+
+        public BookListVm GetBooksByTypeOfBookId(int id)
+        {
+            var books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(id)
+                .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var result = new BookListVm
+            {
+                ListOfBookForList = books
+            };
+            return result;
         }
         public TypeOfBookVm GetTypeOfBookById(int id)
         {
@@ -52,19 +65,6 @@ namespace LibraryMVC.Application
             var result = new TypeOfBookListVm
             {
                 TypesOfBooks = typeOfBooks
-            };
-
-            return result;
-        }
-
-        public BookListVm GetBooksByTypeOfBookId(int id)
-        {
-            var books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(id)
-                .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider).ToList();
-
-            var result = new BookListVm
-            {
-                ListOfBookForList = books
             };
             return result;
         }

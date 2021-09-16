@@ -16,6 +16,7 @@ namespace LibraryMVC.WebApplication.Controllers
         private readonly IPublisherService _publisherService;
         private readonly ITypeOfBookService _typeOfBookService;
         private readonly IAuthorService _authorService;
+
         public BookController(IBookService bookService, ICategoryService categoryService, 
             IPublisherService publisherService, 
             ITypeOfBookService typeOfBookService, 
@@ -26,7 +27,8 @@ namespace LibraryMVC.WebApplication.Controllers
             _publisherService = publisherService;
             _typeOfBookService = typeOfBookService;
             _authorService = authorService;
-        }   
+        }  
+        
         public IActionResult Index(int pageNumber, int categoryId, int publisherId, int typeOfBookId, int authorId, string searchString)
         {        
             if (pageNumber == 0)
@@ -62,7 +64,8 @@ namespace LibraryMVC.WebApplication.Controllers
             }
             ViewBag.Title = "Books";
             return View(books);
-        }      
+        }   
+        
         [HttpGet]
         public IActionResult AddBook()
         {
@@ -71,6 +74,7 @@ namespace LibraryMVC.WebApplication.Controllers
 
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddBook(NewBookVm newBookVm)
@@ -84,7 +88,6 @@ namespace LibraryMVC.WebApplication.Controllers
             _bookService.DeleteBook(id);
             return RedirectToAction("Index");
         }
-
 
         public IActionResult DetailsBook(int id)
         {
@@ -105,8 +108,6 @@ namespace LibraryMVC.WebApplication.Controllers
         {            
             _bookService.UpdateBook(model);
             return RedirectToAction("DetailsBook", new { model.Id });
-        }
-   
-        
+        }         
     }
 }

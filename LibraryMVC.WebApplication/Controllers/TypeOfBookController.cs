@@ -14,11 +14,13 @@ namespace LibraryMVC.WebApplication.Controllers
         {
             _typeOfBookService = typeOfBookService;
         }
+
         public IActionResult Index()
         {
             var typeOfBooks = _typeOfBookService.GetAllTypeOfBooksToList();
             return View(typeOfBooks);
         }
+
         [HttpGet]
         public IActionResult CreateTypeOfBook()
         {
@@ -32,6 +34,7 @@ namespace LibraryMVC.WebApplication.Controllers
             _typeOfBookService.AddTypeOfBook(typeOfBook);
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public IActionResult EditTypeOfBook(int id)
         {
@@ -45,6 +48,7 @@ namespace LibraryMVC.WebApplication.Controllers
             _typeOfBookService.UpdateTypeOfBook(model);
             return RedirectToAction("Index", new { model.Id });
         }
+
         public IActionResult DeleteTypeOfBook(int id)
         {
             if (id != 1)

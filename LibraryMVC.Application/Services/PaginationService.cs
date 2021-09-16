@@ -14,6 +14,7 @@ namespace LibraryMVC.Application
                 .ToList();
             return records;
         }
+
         public int GetExcludeRecordsToPagination(int pageNumber, int pageSize)
         {
             var excludeRecords = (pageSize * pageNumber) - pageSize;

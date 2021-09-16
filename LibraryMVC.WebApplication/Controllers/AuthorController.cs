@@ -6,15 +6,18 @@ namespace LibraryMVC.WebApplication.Controllers
     public class AuthorController : Controller
     {
         private readonly IAuthorService _authorService;
+
         public AuthorController(IAuthorService authorService)
         {
             _authorService = authorService;
         }
+
         public IActionResult Index(int pageNumber = 1, int pageSize = 2)
         {           
             var authors = _authorService.GetAllAuthorToList(pageNumber, pageSize);
             return View(authors);
         }
+
         public IActionResult AuthorDetails(int id, bool isAuthorDetailsByBookID)
         {
             if (isAuthorDetailsByBookID == true)

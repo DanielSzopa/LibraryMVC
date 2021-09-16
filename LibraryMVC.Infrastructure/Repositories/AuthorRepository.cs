@@ -31,12 +31,24 @@ namespace LibraryMVC.Infrastructure
                 _context.SaveChanges();
             }
         }
+
+        public int EditAuthor(Author author)
+        {
+            _context.Attach(author);
+            _context.Entry(author).Property("FirstName").IsModified = true;
+            _context.Entry(author).Property("LastName").IsModified = true;
+            _context.Entry(author).Property("Biography").IsModified = true;
+            _context.SaveChanges();
+            return author.Id;
+        }
+
         public int CountAuthorsBooks(int id)
         {
             var countBooks = _context.Books.Where(a => a.AuthorId == id).Count();
 
             return countBooks;
         }
+
         public void ChangeAuthorNameToNone(int id)
         {
             var authors = _context.Books.Where(b => b.AuthorId == id)
@@ -56,11 +68,13 @@ namespace LibraryMVC.Infrastructure
             var books = _context.Books.Where(b => b.AuthorId == authorId);
             return books;
         }
+
         public Author GetAuthorById(int id)
         {
             var author = _context.Authors.FirstOrDefault(a => a.Id == id);
             return author;
         }
+
         public Author GetAuthorByBookId(int bookId)
         {
             var author = _context.Books
@@ -68,20 +82,6 @@ namespace LibraryMVC.Infrastructure
                 .FirstOrDefault(b => b.Id == bookId).Author;
 
             return author;
-        }
-
-        public int EditAuthor(Author author)
-        {
-            
-            _context.Attach(author);
-            _context.Entry(author).Property("FirstName").IsModified = true;
-            _context.Entry(author).Property("LastName").IsModified = true;
-            _context.Entry(author).Property("Biography").IsModified = true;
-            _context.SaveChanges();
-
-            return author.Id;
-        }
-
-       
+        }      
     }
 }

@@ -53,6 +53,7 @@ namespace LibraryMVC.Application
             var book = _mapper.Map<Book>(model);
             _bookRepository.UpdateBook(book);
         }    
+
         public NewBookVm GetBookForEdit(int id)
         {
             var book = _bookRepository.GetBookById(id);
@@ -74,6 +75,7 @@ namespace LibraryMVC.Application
 
             return bookDetailVm;
         }
+
         public BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, int categoryId, int publisherId, int typeOfBookId, int authorId)
         {
             var books = default(IQueryable<Book>);
@@ -147,9 +149,7 @@ namespace LibraryMVC.Application
             model.Categories = GetCategoriesToSelectList().ToList();
             model.TypeOfBooks = GetTypeOfBooksToSelectList().ToList();
             model.Publishers = GetPublishersToSelectList().ToList();
-
             return model;
-        }          
-     
+        }               
     }
 }

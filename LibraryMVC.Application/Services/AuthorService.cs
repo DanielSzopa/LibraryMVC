@@ -32,23 +32,36 @@ namespace LibraryMVC.Application
             ChangeAuthorBeforeDelete(id);
             _authorRepository.DeleteAuthor(id);
         }
+
         public int EditAuthor(AuthorDetailsVm model)
         {
             var authorToEdit = _mapper.Map<Author>(model);
-
             return _authorRepository.EditAuthor(authorToEdit);
         }
+
         public void ChangeAuthorBeforeDelete(int id)
         {
             _authorRepository.ChangeAuthorNameToNone(id);
+        }
+
+        public NewAuthorVm GetAuthorForEdit(int id)
+        {
+            var author = GetAuthorById(id);
+            var authorVm = _mapper.Map<NewAuthorVm>(author);
+            return authorVm;
+        }
+
+        public Author GetAuthorById(int id)
+        {
+            return _authorRepository.GetAuthorById(id);
         }
 
         public IQueryable<Author> GetAllAuthors()
         {
             var authors = _authorRepository.GetAllAuthors();
             return authors;
-        }       
-
+        }    
+        
         public AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize)
         {
             var authors = GetAllAuthors()
@@ -69,9 +82,9 @@ namespace LibraryMVC.Application
                 PageSize = pageSize
 
             };
-
             return result;
         }
+
         public AuthorDetailsVm SetAuthorDetails(Author author)
         {
             var authorVm = _mapper.Map<AuthorDetailsVm>(author);
@@ -79,13 +92,8 @@ namespace LibraryMVC.Application
 
             authorVm.BooksNumber = authorBooks;
             return authorVm;
-        }
-        public NewAuthorVm GetAuthorForEdit(int id)
-        {
-            var author = GetAuthorById(id);
-            var authorVm = _mapper.Map<NewAuthorVm>(author);
-            return authorVm;
-        }
+        }     
+        
         public AuthorDetailsVm GetAuthorDetailsByAuthorId(int id)
         {
             var author = GetAuthorById(id);
@@ -99,12 +107,6 @@ namespace LibraryMVC.Application
 
             authorVm.IdCurrentBook = id;
             return authorVm;
-        }      
-
-        public Author GetAuthorById(int id)
-        {
-            return _authorRepository.GetAuthorById(id);
-        }
-       
+        }             
     }
 }

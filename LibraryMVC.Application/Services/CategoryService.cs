@@ -15,21 +15,25 @@ namespace LibraryMVC.Application
             _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
+
         public void AddCategory(CategoryVm model)
         {
             var category = _mapper.Map<Category>(model);
             _categoryRepository.AddCategory(category);
         }
+
         public void UpdateCategory(CategoryVm model)
         {
             var category = _mapper.Map<Category>(model);
             _categoryRepository.UpdateCategory(category);
         }
+
         public void DeleteCategory(int id)
         {
             ChangeCategoryBeforeDelete(id);
             _categoryRepository.DeleteCategory(id);
         }
+
         public void ChangeCategoryBeforeDelete(int id)
         {
             _categoryRepository.ChangeCategoryNameToOther(id);
@@ -46,6 +50,7 @@ namespace LibraryMVC.Application
             };
             return result;
         }
+
         public CategoryVm GetCategoryById(int id)
         {
             var category = _categoryRepository.GetCategoryById(id);
