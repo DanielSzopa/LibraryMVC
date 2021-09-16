@@ -12,11 +12,22 @@ namespace LibraryMVC.WebApplication.Controllers
     public class BookController : Controller
     {
         private readonly IBookService _bookService;
-        public BookController(IBookService bookService)
+        private readonly ICategoryService _categoryService;
+        private readonly IPublisherService _publisherService;
+        private readonly ITypeOfBookService _typeOfBookService;
+        private readonly IAuthorService _authorService;
+        public BookController(IBookService bookService, ICategoryService categoryService, 
+            IPublisherService publisherService, 
+            ITypeOfBookService typeOfBookService, 
+            IAuthorService authorService)
         {
             _bookService = bookService;
+            _categoryService = categoryService;
+            _publisherService = publisherService;
+            _typeOfBookService = typeOfBookService;
+            _authorService = authorService;
         }   
-        public IActionResult Index(int pageNumber, int categoryId, int publisherId, int typeOfBookId, string searchString)
+        public IActionResult Index(int pageNumber, int categoryId, int publisherId, int typeOfBookId, int authorId, string searchString)
         {        
             if (pageNumber == 0)
             {
@@ -27,8 +38,29 @@ namespace LibraryMVC.WebApplication.Controllers
                 searchString = String.Empty;
             }
             int pageSize = 2;
-            var books = _bookService.GetAllBooksToList(pageNumber, pageSize, searchString, categoryId, publisherId, typeOfBookId);           
-
+            var books = _bookService.GetAllBooksToList(pageNumber, pageSize, searchString, categoryId, publisherId, typeOfBookId, authorId);
+            if(categoryId != 0)
+            {
+                ViewBag.Title = _categoryService.GetCategoryById(categoryId).Name;
+                return View(books);
+            }
+            else if(publisherId != 0) 
+            {
+                ViewBag.Title = _publisherService.GetPublisherById(publisherId).Name;
+                return View(books);
+            }
+            else if(typeOfBookId != 0)
+            {
+                ViewBag.Title = _typeOfBookService.GetTypeOfBookById(typeOfBookId).Name;
+                return View(books);
+            }
+            else if (authorId != 0)
+            {
+                var author = _authorService.GetAuthorById(authorId);
+                ViewBag.Title = $"{author.FirstName} {author.LastName}";
+                return View(books);
+            }
+            ViewBag.Title = "Books";
             return View(books);
         }      
         [HttpGet]

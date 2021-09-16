@@ -1,12 +1,12 @@
 ﻿@model LibraryMVC.Application.BookListVm
 
 @{
-    ViewData["Title"] = "Books";
+    ViewData["Title"] = ViewBag.Title;
     ViewData["Controller"] = "Book";
-    ViewData["Action"] = "Index";    
+    ViewData["Action"] = "Index";
 }
 
-<h1>Books</h1>
+<h1>@ViewBag.Title</h1>
 <p>
     <a class="btn btn-primary" asp-controller="Book" asp-action="AddBook">Create</a>
     <a class="btn btn-secondary" asp-controller="Book" asp-action="Index">Books</a>
@@ -16,14 +16,13 @@
     <a class="btn btn-secondary" asp-controller="Publisher" asp-action="Index">Publishers</a>
 
 </p>
-    <form asp-controller="Book" asp-action="Index" method="get">
-        <input placeholder="Search" type="text" name="searchString" id="searchString" asp-for="SearchString" />
+    <form class="form-inline my-2 my-lg-0" asp-controller="Book" asp-action="Index" method="get">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchString" id="searchString" asp-for="SearchString">
         <input type="hidden" asp-for="CategoryId" />
         <input type="hidden" asp-for="PublisherId" />
         <input type="hidden" asp-for="TypeOfBookId" />
-        <button class="btn btn-outline-primary" type="submit">Search</button>
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
-
     <table class="table">
         <thead>
             <tr>

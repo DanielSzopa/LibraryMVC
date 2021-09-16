@@ -74,7 +74,7 @@ namespace LibraryMVC.Application
 
             return bookDetailVm;
         }
-        public BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, int categoryId, int publisherId, int typeOfBookId)
+        public BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, int categoryId, int publisherId, int typeOfBookId, int authorId)
         {
             var books = default(IQueryable<Book>);
             if(categoryId != 0)
@@ -88,6 +88,10 @@ namespace LibraryMVC.Application
             else if (typeOfBookId != 0)
             {
                 books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(typeOfBookId).Where(b => b.Title.StartsWith(searchString));
+            }
+            else if (authorId != 0)
+            {
+                books =  _authorRepository.GetAllBooksByAuthor(authorId).Where(b => b.Title.StartsWith(searchString));
             }
             else
             {
@@ -108,7 +112,8 @@ namespace LibraryMVC.Application
                 SearchString = searchString,
                 CategoryId = categoryId,
                 PublisherId = publisherId,
-                TypeOfBookId = typeOfBookId
+                TypeOfBookId = typeOfBookId,
+                AuthorId = authorId
 
             };
             return result;

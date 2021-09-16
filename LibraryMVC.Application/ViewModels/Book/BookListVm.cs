@@ -14,5 +14,6 @@ namespace LibraryMVC.Application
         public int CategoryId { get; set; }
         public int PublisherId { get; set; }
         public int TypeOfBookId { get; set; }
+        public int AuthorId { get; set; }
     }
 }
