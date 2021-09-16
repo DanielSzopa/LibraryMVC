@@ -16,6 +16,10 @@
     <a class="btn btn-secondary" asp-controller="Category" asp-action="Index">Categories</a>
     <a class="btn btn-secondary" asp-controller="Publisher" asp-action="Index">Publishers</a>
 </p>
+<form class="form-inline my-2 my-lg-0" asp-controller="Author" asp-action="Index" method="get">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchString" id="searchString" asp-for="SearchString">
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -23,13 +27,13 @@
                 Id
             </th>
             <th>
-               FirstName
+                FirstName
             </th>
             <th>
-               LastName
+                LastName
             </th>
             <th>
-              Books
+                Books
             </th>
             <th></th>
         </tr>
@@ -55,15 +59,15 @@
                     {
                         <a asp-controller="Author" asp-action="EditAuthor" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
                     }
-                        <a asp-controller="Author" asp-action="AuthorDetails" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
-                    @if (item.Id != 1) 
-                    { 
+                    <a asp-controller="Author" asp-action="AuthorDetails" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    @if (item.Id != 1)
+                    {
                         <a asp-controller="Author" asp-action="DeleteAuthor" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                     }
                 </td>
             </tr>
 
-        }       
+        }
     </tbody>
 </table>
 

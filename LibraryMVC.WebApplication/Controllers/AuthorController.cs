@@ -1,5 +1,6 @@
 ﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace LibraryMVC.WebApplication.Controllers
 {
@@ -12,9 +13,18 @@ namespace LibraryMVC.WebApplication.Controllers
             _authorService = authorService;
         }
 
-        public IActionResult Index(int pageNumber = 1, int pageSize = 2)
-        {           
-            var authors = _authorService.GetAllAuthorToList(pageNumber, pageSize);
+        public IActionResult Index(int pageNumber, string searchString)
+        {
+            if (pageNumber == 0)
+            {
+                pageNumber = 1;
+            }
+            if (searchString is null)
+            {
+                searchString = String.Empty;
+            }
+            int pageSize = 2;
+            var authors = _authorService.GetAllAuthorToList(pageNumber, pageSize, searchString);
             return View(authors);
         }
 

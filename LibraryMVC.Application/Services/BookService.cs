@@ -81,23 +81,23 @@ namespace LibraryMVC.Application
             var books = default(IQueryable<Book>);
             if(categoryId != 0)
             {
-                books = _categoryRepository.GetAllBooksByCategoryId(categoryId).Where(b=>b.Title.StartsWith(searchString));
+                books = _categoryRepository.GetAllBooksByCategoryId(categoryId).Where(b=>b.Title.Contains(searchString));
             }
             else if (publisherId != 0)
             {
-                books = _publisherRepository.GetAllBooksByPublisherId(publisherId).Where(b => b.Title.StartsWith(searchString));
+                books = _publisherRepository.GetAllBooksByPublisherId(publisherId).Where(b => b.Title.Contains(searchString));
             }
             else if (typeOfBookId != 0)
             {
-                books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(typeOfBookId).Where(b => b.Title.StartsWith(searchString));
+                books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(typeOfBookId).Where(b => b.Title.Contains(searchString));
             }
             else if (authorId != 0)
             {
-                books =  _authorRepository.GetAllBooksByAuthor(authorId).Where(b => b.Title.StartsWith(searchString));
+                books =  _authorRepository.GetAllBooksByAuthor(authorId).Where(b => b.Title.Contains(searchString));
             }
             else
             {
-                books = _bookRepository.GetAllBooks().Where(b => b.Title.StartsWith(searchString));
+                books = _bookRepository.GetAllBooks().Where(b => b.Title.Contains(searchString));
             }
             
             var mappedBooks = books

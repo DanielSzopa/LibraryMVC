@@ -15,7 +15,7 @@ namespace LibraryMVC.Application
         NewAuthorVm GetAuthorForEdit(int id);
         Author GetAuthorById(int id);
         IQueryable<Author> GetAllAuthors();       
-        AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize);
+        AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize, string searchString);
         AuthorDetailsVm SetAuthorDetails(Author author);
         AuthorDetailsVm GetAuthorDetailsByAuthorId(int id);
         AuthorDetailsVm GetAuthorDetailsByBookId(int id);

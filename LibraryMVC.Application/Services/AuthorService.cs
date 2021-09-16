@@ -62,9 +62,9 @@ namespace LibraryMVC.Application
             return authors;
         }    
         
-        public AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize)
+        public AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize, string searchString)
         {
-            var authors = GetAllAuthors()
+            var authors = GetAllAuthors().Where(a => (a.FirstName + " " + a.LastName).Contains(searchString))
                 .ProjectTo<AuthorForListVm>(_mapper.ConfigurationProvider)
                 .ToList();
 
@@ -79,7 +79,8 @@ namespace LibraryMVC.Application
                 Authors = records,
                 Count = authors.Count,
                 PageNumber = pageNumber,
-                PageSize = pageSize
+                PageSize = pageSize,
+                SearchString = searchString
 
             };
             return result;
