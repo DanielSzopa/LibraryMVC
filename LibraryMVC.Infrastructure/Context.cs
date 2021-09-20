@@ -1,4 +1,5 @@
 ﻿using LibraryMVC.Domain.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace LibraryMVC.Infrastructure
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
@@ -26,6 +27,7 @@ namespace LibraryMVC.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             //Default Data
             modelBuilder.Entity<Category>()
                 .HasData(new Category { Id = 1, Name = "Other" });
