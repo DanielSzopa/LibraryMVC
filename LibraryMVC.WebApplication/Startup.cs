@@ -34,7 +34,25 @@ namespace LibraryMVC.WebApplication
                 .AddEntityFrameworkStores<Context>();
             services.AddControllersWithViews().AddFluentValidation();
             services.AddCloudscribePagination();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredUniqueChars = 1;
 
+                options.SignIn.RequireConfirmedEmail = false;
+                options.User.RequireUniqueEmail = true;
+
+            });
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
+                options.ClientId = googleAuthNSection["ClientId"];
+                options.ClientSecret = googleAuthNSection["ClientSecret"];
+            });
 
             services.AddApplication();
             services.AddTransient<IBookRepository, BookRepository>();
@@ -42,7 +60,6 @@ namespace LibraryMVC.WebApplication
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<ITypeOfBookRepository, TypeOfBookRepository>();
             services.AddTransient<IPublisherRepository, PublisherRepository>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
