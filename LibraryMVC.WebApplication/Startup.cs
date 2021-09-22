@@ -73,6 +73,7 @@ namespace LibraryMVC.WebApplication
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<ITypeOfBookRepository, TypeOfBookRepository>();
             services.AddTransient<IPublisherRepository, PublisherRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

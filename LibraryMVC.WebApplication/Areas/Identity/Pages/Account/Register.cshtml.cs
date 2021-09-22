@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using LibraryMVC.Domain.Interfaces;
+using LibraryMVC.Domain.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,17 +25,20 @@ namespace LibraryMVC.WebApplication.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ICustomerRepository _customerRepository;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ICustomerRepository customerRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _customerRepository = customerRepository;
         }
 
         [BindProperty]
@@ -80,6 +85,11 @@ namespace LibraryMVC.WebApplication.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    Customer customer = new Customer();
+
+                    customer.UserId = user.Id;
+                    _customerRepository.AddCustomer(customer);
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
@@ -100,6 +110,7 @@ namespace LibraryMVC.WebApplication.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
+                   
                 }
                 foreach (var error in result.Errors)
                 {
