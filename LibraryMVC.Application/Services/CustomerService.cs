@@ -2,8 +2,10 @@
 using LibraryMVC.Domain.Interfaces;
 using LibraryMVC.Domain.Models;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using AutoMapper.QueryableExtensions;
 
 namespace LibraryMVC.Application
 {
@@ -11,11 +13,38 @@ namespace LibraryMVC.Application
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IMapper _mapper;
+        private readonly IPaginationService _paginationService;
 
-        public CustomerService(ICustomerRepository customerRepository, IMapper mapper)
+        public CustomerService(ICustomerRepository customerRepository, IMapper mapper, IPaginationService paginationService)
         {
             _customerRepository = customerRepository;
             _mapper = mapper;
+            _paginationService = paginationService;
+        }
+
+        public IQueryable<Customer> GetAllCustomers()
+        {
+            var customers = _customerRepository.GetAllCustomers();
+            return customers;
+        }
+
+        public CustomerListVm GetAllCustomerToList(int pageNumber, int pageSize, string searchString)
+        {
+            var customers = GetAllCustomers().Where(c => (c.FirstName + " " + c.LastName).Contains(searchString))
+            .ProjectTo<CustomerForListVm>(_mapper.ConfigurationProvider)
+            .ToList();
+
+            var records = _paginationService.ReturnRecordsToShow<CustomerForListVm>(pageNumber, pageSize, customers);
+
+            var result = new CustomerListVm
+            {
+                Customers = records,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchString = searchString,
+                Count = customers.Count
+            };
+            return result;
         }
 
         public Customer GetCustomerByUserId(string userId)

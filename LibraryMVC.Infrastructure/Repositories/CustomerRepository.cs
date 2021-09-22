@@ -22,6 +22,11 @@ namespace LibraryMVC.Infrastructure
             _context.SaveChanges();
         }
 
+        public IQueryable<Customer> GetAllCustomers()
+        {
+            return _context.Customers;
+        }
+
         public Customer GetCustomerByUserId(string id)
         {
            var customer = _context.Customers

@@ -17,9 +17,19 @@ namespace LibraryMVC.WebApplication.Controllers
             _customerService = customerService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber, string searchString)
         {
-            return View();
+            if (pageNumber == 0)
+            {
+                pageNumber = 1;
+            }
+            if (searchString is null)
+            {
+                searchString = String.Empty;
+            }
+            int pageSize = 2;
+            var customers = _customerService.GetAllCustomerToList(pageNumber, pageSize, searchString);
+            return View(customers);
         }
 
         public IActionResult ViewCustomerProfil()
