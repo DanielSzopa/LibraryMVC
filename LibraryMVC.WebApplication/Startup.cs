@@ -58,6 +58,12 @@ namespace LibraryMVC.WebApplication
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
             });
 
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = Configuration["Authentication:Facebook:AppId"];
+                options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
+
             services.AddApplication();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
