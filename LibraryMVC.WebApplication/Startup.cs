@@ -34,10 +34,7 @@ namespace LibraryMVC.WebApplication
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<Context>();
             services.AddControllersWithViews().AddFluentValidation();
-
             
-
-            services.AddCloudscribePagination();
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -65,15 +62,11 @@ namespace LibraryMVC.WebApplication
             });
 
             services.AddApplication();
+            services.AddInfrastructure();
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-
-            services.AddTransient<IBookRepository, BookRepository>();
-            services.AddTransient<IAuthorRepository, AuthorRepository>();
-            services.AddTransient<ICategoryRepository, CategoryRepository>();
-            services.AddTransient<ITypeOfBookRepository, TypeOfBookRepository>();
-            services.AddTransient<IPublisherRepository, PublisherRepository>();
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddCloudscribePagination();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
