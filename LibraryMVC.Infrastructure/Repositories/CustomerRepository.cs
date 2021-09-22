@@ -1,8 +1,10 @@
 ﻿using LibraryMVC.Domain.Interfaces;
 using LibraryMVC.Domain.Models;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryMVC.Infrastructure
 {
@@ -20,5 +22,14 @@ namespace LibraryMVC.Infrastructure
             _context.SaveChanges();
         }
 
+        public Customer GetCustomerByUserId(string id)
+        {
+           var customer = _context.Customers
+                .Include(c=>c.CustomerContactDetail)
+                .ThenInclude(n=>n.TelephoneNumbers)
+                .Include(c => c.Address)
+                .FirstOrDefault(c => c.UserId == id);
+            return customer;
+        }
     }
 }

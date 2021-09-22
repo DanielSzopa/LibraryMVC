@@ -22,10 +22,10 @@ namespace LibraryMVC.Application
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Book, BookDetailsVm>()
-                .ForMember(s => s.Publisher, opt => opt.MapFrom(d => d.Publisher.Name))
-                .ForMember(s => s.Category, opt => opt.MapFrom(d => d.Category.Name))
-                .ForMember(s => s.TypeOfBook, opt => opt.MapFrom(d => d.TypeOfBook.Name))
-                .ForMember(s => s.Author, opt => opt.MapFrom(d => d.Author.FirstName + " " + d.Author.LastName));
+                .ForMember(d => d.Publisher, opt => opt.MapFrom(s => s.Publisher.Name))
+                .ForMember(d => d.Category, opt => opt.MapFrom(s => s.Category.Name))
+                .ForMember(d => d.TypeOfBook, opt => opt.MapFrom(s => s.TypeOfBook.Name))
+                .ForMember(d => d.Author, opt => opt.MapFrom(s => s.Author.FirstName + " " + s.Author.LastName));
         }
     }
 }

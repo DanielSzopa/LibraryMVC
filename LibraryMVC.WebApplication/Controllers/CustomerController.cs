@@ -10,9 +10,11 @@ namespace LibraryMVC.WebApplication.Controllers
     public class CustomerController : Controller
     {
         private readonly IUserService _userService;
-        public CustomerController(IUserService userService)
+        private readonly ICustomerService _customerService;
+        public CustomerController(IUserService userService, ICustomerService customerService)
         {
             _userService = userService;
+            _customerService = customerService;
         }
 
         public IActionResult Index()
@@ -23,7 +25,8 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult ViewCustomerProfil()
         {
             var currentUserId = _userService.GetCurrentUserId();
-            return View();
+            var customer = _customerService.GetCustomerDetailsByUserId(currentUserId);
+            return View(customer);
         }
 
     }

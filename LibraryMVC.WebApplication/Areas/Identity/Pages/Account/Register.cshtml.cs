@@ -86,6 +86,15 @@ namespace LibraryMVC.WebApplication.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     Customer customer = new Customer();
+                    Address adress = new Address();
+                    CustomerContactDetail customerContactDetail = new CustomerContactDetail();
+                    TelephoneNumber telephoneNumber = new TelephoneNumber();
+                    customerContactDetail.TelephoneNumbers = new List<TelephoneNumber> { telephoneNumber };
+                    customerContactDetail.Mail = Input.Email;
+                    
+
+                    customer.CustomerContactDetail = customerContactDetail;
+                    customer.Address = adress;
 
                     customer.UserId = user.Id;
                     _customerRepository.AddCustomer(customer);

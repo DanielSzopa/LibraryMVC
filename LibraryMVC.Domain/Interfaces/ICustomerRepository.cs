@@ -8,5 +8,6 @@ namespace LibraryMVC.Domain.Interfaces
     public interface ICustomerRepository
     {
         void AddCustomer(Customer customer);
+        Customer GetCustomerByUserId(string id);
     }
 }
