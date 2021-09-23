@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LibraryMVC.WebApplication.Areas.Identity.Pages.Account
 {
@@ -15,10 +13,14 @@ namespace LibraryMVC.WebApplication.Areas.Identity.Pages.Account
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ICustomerService _customerService;
 
-        public ConfirmEmailModel(UserManager<IdentityUser> userManager)
+        public ConfirmEmailModel(UserManager<IdentityUser> userManager,
+            ICustomerService customerService)
         {
             _userManager = userManager;
+            _customerService = customerService;
+            
         }
 
         [TempData]
@@ -36,10 +38,18 @@ namespace LibraryMVC.WebApplication.Areas.Identity.Pages.Account
             {
                 return NotFound($"Unable to load user with ID '{userId}'.");
             }
-
+           
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+            if(result.Succeeded)
+            {
+                StatusMessage = "Thank you for confirming your email.";
+                _customerService.AddCustomerAfterConfirmEmail(user.Id, user.Email);
+            }
+            else
+            {
+                StatusMessage = "Error confirming your email.";
+            }
             return Page();
         }
     }

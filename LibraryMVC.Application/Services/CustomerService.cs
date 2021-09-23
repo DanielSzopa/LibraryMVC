@@ -22,6 +22,23 @@ namespace LibraryMVC.Application
             _paginationService = paginationService;
         }
 
+        public void AddCustomerAfterConfirmEmail(string userId, string mail)
+        {
+            Customer customer = new Customer();
+            Address adress = new Address();
+            CustomerContactDetail customerContactDetail = new CustomerContactDetail();
+            TelephoneNumber telephoneNumber = new TelephoneNumber();
+            customerContactDetail.TelephoneNumbers = new List<TelephoneNumber> { telephoneNumber };
+            customerContactDetail.Mail = mail;
+
+
+            customer.CustomerContactDetail = customerContactDetail;
+            customer.Address = adress;
+
+            customer.UserId = userId;
+            _customerRepository.AddCustomer(customer);
+        }
+
         public IQueryable<Customer> GetAllCustomers()
         {
             var customers = _customerRepository.GetAllCustomers();
