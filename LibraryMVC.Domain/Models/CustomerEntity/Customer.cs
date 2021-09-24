@@ -10,7 +10,7 @@ namespace LibraryMVC.Domain.Models
         public IdentityUser User { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int Pesel { get; set; }
+        public string Pesel { get; set; }
         public CustomerContactDetail CustomerContactDetail { get; set; }
         public Address Address { get; set; } 
         public List<Reservation> Reservations { get; set; } 

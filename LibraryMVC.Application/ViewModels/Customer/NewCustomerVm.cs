@@ -14,6 +14,7 @@ namespace LibraryMVC.Application
         public string LastName { get; set; }
         public string Pesel { get; set; }
         public List<TelephoneNumber> Number { get; set; }
+        public string Locality { get; set; }
         public string Country { get; set; }
         public string Street { get; set; }
         public string PostCode { get; set; }
@@ -28,6 +29,7 @@ namespace LibraryMVC.Application
                 .ForMember(d => d.Mail, opt => opt.MapFrom(s => s.CustomerContactDetail.Mail))
                 .ForMember(d => d.Number, opt => opt.MapFrom(s => s.CustomerContactDetail.TelephoneNumbers))
                 .ForMember(d => d.Country, opt => opt.MapFrom(s => s.Address.Country))
+                .ForMember(d => d.Locality, opt => opt.MapFrom(s => s.Address.Locality))
                 .ForMember(d => d.Street, opt => opt.MapFrom(s => s.Address.Street))
                 .ForMember(d => d.PostCode, opt => opt.MapFrom(s => s.Address.PostCode))
                 .ForMember(d => d.NumberOfLocal, opt => opt.MapFrom(s => s.Address.NumberOfLocal))

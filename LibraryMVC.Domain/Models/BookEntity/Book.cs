@@ -8,7 +8,6 @@ namespace LibraryMVC.Domain.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        [Column(TypeName = "date")]
         public DateTime DateOfRelease { get; set; }
         public string Description { get; set; }
         public Status Status { get; set; }

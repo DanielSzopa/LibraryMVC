@@ -6,6 +6,7 @@ namespace LibraryMVC.Domain.Models
     {
         public int Id { get; set; }
         public string Country { get; set; }
+        public string Locality { get; set; }
         public string Street { get; set; }
         public string PostCode { get; set; }
         public int NumberOfLocal { get; set; }
