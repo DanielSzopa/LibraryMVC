@@ -1,14 +1,29 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LibraryMVC.Domain.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Security.Claims;
+using System.Threading.Tasks;
+
 namespace LibraryMVC.Application
 {
     public class UserService : IUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public UserService(IHttpContextAccessor httpContextAccessor)
+        private readonly UserManager<IdentityUser> _userManager;
+        public UserService(IHttpContextAccessor httpContextAccessor, UserManager<IdentityUser> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
+
+        public async Task<string> CreateUser(string mail, string password)
+        {
+            var user = new IdentityUser { UserName = mail, Email = mail, EmailConfirmed = true };
+            var result =  await _userManager.CreateAsync(user, password);
+            return user.Id;
+        }
+
 
         public string GetCurrentUserId()
         {

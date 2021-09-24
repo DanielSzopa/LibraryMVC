@@ -14,12 +14,24 @@ namespace LibraryMVC.Application
         private readonly ICustomerRepository _customerRepository;
         private readonly IMapper _mapper;
         private readonly IPaginationService _paginationService;
+        private readonly IUserService _userService;
 
-        public CustomerService(ICustomerRepository customerRepository, IMapper mapper, IPaginationService paginationService)
+        public CustomerService(ICustomerRepository customerRepository, IMapper mapper, IPaginationService paginationService, IUserService userService)
         {
             _customerRepository = customerRepository;
             _mapper = mapper;
             _paginationService = paginationService;
+            _userService = userService;
+        }
+
+        public int AddCustomer(NewCustomerVm newCustomerVm)
+        {
+            var customer = _mapper.Map<Customer>(newCustomerVm);
+            var userId = _userService.CreateUser(newCustomerVm.Mail, newCustomerVm.Password);
+            customer.UserId = userId.Result;     
+            var customerId = _customerRepository.AddCustomer(customer);
+
+            return customerId;
         }
 
         public void AddCustomerAfterConfirmEmail(string userId, string mail)
@@ -30,7 +42,6 @@ namespace LibraryMVC.Application
             TelephoneNumber telephoneNumber = new TelephoneNumber();
             customerContactDetail.TelephoneNumbers = new List<TelephoneNumber> { telephoneNumber };
             customerContactDetail.Mail = mail;
-
 
             customer.CustomerContactDetail = customerContactDetail;
             customer.Address = adress;
@@ -75,5 +86,7 @@ namespace LibraryMVC.Application
             var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
             return customerVm;
         }
+
+        
     }
 }

@@ -24,8 +24,7 @@ namespace LibraryMVC.Application
 
             services.AddTransient<IValidator<NewBookVm>, NewBookVmValidation>();
             services.AddTransient<IValidator<NewAuthorVm>, NewAuthorVmValidation>();
-            services.AddTransient<IValidator<PublisherVm>, PublisherVmValidation>();
-            services.AddTransient<IValidator<CategoryVm>, NewCategoryVmValidation>();
+            services.AddTransient<IValidator<NewCustomerVm>, NewCustomerValidation>();
 
             return services;
         }

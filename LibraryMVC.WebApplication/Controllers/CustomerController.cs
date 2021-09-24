@@ -32,6 +32,22 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(customers);
         }
 
+        [HttpGet]
+        public IActionResult AddCustomer()
+        {
+            var customer = new NewCustomerVm();
+
+            return View(customer);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult AddCustomer(NewCustomerVm newCustomerVm)
+        {
+            _customerService.AddCustomer(newCustomerVm);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult ViewCustomerProfil()
         {
             var currentUserId = _userService.GetCurrentUserId();

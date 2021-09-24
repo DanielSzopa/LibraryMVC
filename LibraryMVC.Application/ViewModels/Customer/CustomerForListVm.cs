@@ -10,11 +10,13 @@ namespace LibraryMVC.Application
     {
         public int Id { get; set; }
         public string FullName { get; set; }
+        public string Mail { get; set; }
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Customer, CustomerForListVm>()
-                .ForMember(d => d.FullName, opt => opt.MapFrom(s => s.FirstName + " " + s.LastName));
+                .ForMember(d => d.FullName, opt => opt.MapFrom(s => s.FirstName + " " + s.LastName))
+                .ForMember(d => d.Mail, opt => opt.MapFrom(s => s.CustomerContactDetail.Mail));
         }
     }
 }

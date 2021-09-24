@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace LibraryMVC.Infrastructure
 {
@@ -16,10 +17,11 @@ namespace LibraryMVC.Infrastructure
             _context = context;
         }
 
-        public void AddCustomer(Customer customer)
+        public int AddCustomer(Customer customer)
         {
             _context.Customers.Add(customer);
             _context.SaveChanges();
+            return customer.Id;
         }
 
         public IQueryable<Customer> GetAllCustomers()

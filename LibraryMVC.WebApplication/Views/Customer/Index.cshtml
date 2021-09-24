@@ -9,7 +9,8 @@
 <h1>Customers</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="">Create</a>
+    <a class="btn btn-primary" asp-action="AddCustomer">Create Online Account</a>
+    <a class="btn btn-primary" asp-action="">Create Local Account</a>
 </p>
 <form class="form-inline my-2 my-lg-0" asp-controller="Customer" asp-action="Index" method="get">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchString" id="searchString" asp-for="SearchString">
@@ -19,11 +20,14 @@
     <thead>
         <tr>
             <th>
-               Id
+                Id
+            </th>
+            <th>
+                Nick
             </th>
             <th>
                 Name
-            </th>        
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -34,9 +38,12 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Mail)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
-          
+
             <td>
                 <a class="btn btn-secondary" asp-action="">Edit</a>
                 <a class="btn btn-primary" asp-action="">Details</a>

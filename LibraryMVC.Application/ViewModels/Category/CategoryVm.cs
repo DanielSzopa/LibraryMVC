@@ -19,15 +19,4 @@ namespace LibraryMVC.Application
                 .ReverseMap();
         }       
     }
-    public class NewCategoryVmValidation : AbstractValidator<CategoryVm>
-    {
-        public NewCategoryVmValidation()
-        {
-            RuleFor(c => c.Id).NotNull();
-            RuleFor(c => c.Name)
-                .NotNull().WithMessage("This field can't be null");
-                
-
-        }
-    }
 }
