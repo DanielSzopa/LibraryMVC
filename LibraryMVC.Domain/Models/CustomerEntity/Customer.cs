@@ -11,6 +11,7 @@ namespace LibraryMVC.Domain.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Pesel { get; set; }
+        public bool IsLocalAccount { get; set; }
         public CustomerContactDetail CustomerContactDetail { get; set; }
         public Address Address { get; set; } 
         public List<Reservation> Reservations { get; set; } 

@@ -9,8 +9,8 @@
 <h1>Customers</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="AddCustomer">Create Online Account</a>
-    <a class="btn btn-primary" asp-action="">Create Local Account</a>
+    <a class="btn btn-primary" asp-action="AddCustomer" asp-route-isLocalAccount=false>Create Online Account</a>
+    <a class="btn btn-primary" asp-action="AddCustomer" asp-route-isLocalAccount=true>Create Local Account</a>
 </p>
 <form class="form-inline my-2 my-lg-0" asp-controller="Customer" asp-action="Index" method="get">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchString" id="searchString" asp-for="SearchString">
@@ -22,11 +22,11 @@
             <th>
                 Id
             </th>
-            <th>
-                Nick
+            <th>             
+                Name
             </th>
             <th>
-                Name
+                Nick
             </th>
             <th></th>
         </tr>
@@ -38,10 +38,10 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mail)
+                @Html.DisplayFor(modelItem => item.FullName)             
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
+                @Html.DisplayFor(modelItem => item.Mail)
             </td>
 
             <td>

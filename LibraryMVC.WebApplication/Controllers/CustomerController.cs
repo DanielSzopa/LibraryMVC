@@ -33,10 +33,10 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddCustomer()
+        public IActionResult AddCustomer(bool isLocalAccount)
         {
             var customer = new NewCustomerVm();
-
+            customer.isLocalAccount = isLocalAccount;
             return View(customer);
         }
 
@@ -44,9 +44,9 @@ namespace LibraryMVC.WebApplication.Controllers
         [HttpPost]
         public IActionResult AddCustomer(NewCustomerVm newCustomerVm)
         {
-            _customerService.AddCustomer(newCustomerVm);
+           var customerId = _customerService.AddCustomer(newCustomerVm);
             return RedirectToAction("Index");
-        }
+        }   
 
         public IActionResult ViewCustomerProfil()
         {

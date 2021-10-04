@@ -22,6 +22,7 @@ namespace LibraryMVC.Application
         public int NumberOfAccommodation { get; set; }
         public string Mail { get; set; }
         public string Password { get; set; }
+        public bool isLocalAccount { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -61,7 +62,7 @@ namespace LibraryMVC.Application
                 .EmailAddress().WithMessage("Wrong e-mail address");
 
             RuleFor(c => c.Password).NotNull().WithMessage("Password can not be null");
-
+              
 
 
         }

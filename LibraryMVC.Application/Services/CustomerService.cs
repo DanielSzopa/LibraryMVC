@@ -26,9 +26,14 @@ namespace LibraryMVC.Application
 
         public int AddCustomer(NewCustomerVm newCustomerVm)
         {
-            var customer = _mapper.Map<Customer>(newCustomerVm);
-            var userId = _userService.CreateUser(newCustomerVm.Mail, newCustomerVm.Password);
-            customer.UserId = userId.Result;     
+            var customerWithoutDefaultsNumbers = RemoveDefaultNumbersOfCustomers(newCustomerVm);
+            var customer = _mapper.Map<Customer>(customerWithoutDefaultsNumbers);      
+            
+            if (!(newCustomerVm.isLocalAccount))
+            {
+                var userId = _userService.CreateUser(newCustomerVm.Mail, newCustomerVm.Password);
+                customer.UserId = userId.Result;
+            }          
             var customerId = _customerRepository.AddCustomer(customer);
 
             return customerId;
@@ -48,6 +53,20 @@ namespace LibraryMVC.Application
 
             customer.UserId = userId;
             _customerRepository.AddCustomer(customer);
+        }
+
+        public NewCustomerVm RemoveDefaultNumbersOfCustomers(NewCustomerVm customerVm)
+        {
+            var numbers = customerVm.Number;
+            foreach(var number in numbers.ToList())
+            {
+                if(number.Number == 0)
+                {
+                    numbers.Remove(number);
+                }
+            }
+            customerVm.Number = numbers;
+            return customerVm;
         }
 
         public IQueryable<Customer> GetAllCustomers()
@@ -85,8 +104,6 @@ namespace LibraryMVC.Application
             var customer = GetCustomerByUserId(currentUserId);
             var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
             return customerVm;
-        }
-
-        
+        }      
     }
 }

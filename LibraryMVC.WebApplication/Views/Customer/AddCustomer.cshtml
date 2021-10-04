@@ -28,10 +28,24 @@
                 <input asp-for="Pesel" type="number" class="form-control" />
                 <span asp-validation-for="Pesel" class="text-danger"></span>
             </div>
+            @for (int i = 0; i < 2; i++)
+            {
+                string valueNumber = $"Number {i + 1}";
+                <div class="form-group">
+                    <label asp-for="Number" class="control-label">@valueNumber</label>
+                    <input asp-for="Number[i].Number" class="form-control" value=0 />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <label asp-for="Country" class="control-label"></label>
                 <input asp-for="Country" class="form-control" />
                 <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Locality" class="control-label"></label>
+                <input asp-for="Locality" class="form-control" />
+                <span asp-validation-for="Locality" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Street" class="control-label"></label>
@@ -44,26 +58,30 @@
                 <span asp-validation-for="PostCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfLocal" class="control-label"></label>
+                <label asp-for="NumberOfLocal" class="control-label">Local</label>
                 <input asp-for="NumberOfLocal" class="form-control" />
                 <span asp-validation-for="NumberOfLocal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumberOfAccommodation" class="control-label"></label>
+                <label asp-for="NumberOfAccommodation" class="control-label">Accommodation</label>
                 <input asp-for="NumberOfAccommodation" class="form-control" />
                 <span asp-validation-for="NumberOfAccommodation" class="text-danger"></span>
             </div>
+            @if (Model.isLocalAccount == false)
+            {
+                <div class="form-group">
+                    <label asp-for="Mail" class="control-label"></label>
+                    <input asp-for="Mail" class="form-control" />
+                    <span asp-validation-for="Mail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
-                <label asp-for="Mail" class="control-label"></label>
-                <input asp-for="Mail" class="form-control" />
-                <span asp-validation-for="Mail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+                <input type="hidden" asp-for="isLocalAccount" asp-route-isLocalAccount=true class="form-control" />
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
