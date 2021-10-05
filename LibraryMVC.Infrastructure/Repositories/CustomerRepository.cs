@@ -48,5 +48,10 @@ namespace LibraryMVC.Infrastructure
                 .FirstOrDefault(c => c.UserId == id);
             return customer;
         }
+
+        public void UpdateCustomer(Customer customer)
+        {
+            _context.Attach(customer);
+        }
     }
 }

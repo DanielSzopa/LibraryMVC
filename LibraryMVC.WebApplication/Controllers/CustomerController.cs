@@ -61,6 +61,16 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(customerVm);
         }
 
-       
+        [HttpGet]
+        public IActionResult EditCustomer(int id)
+        {
+            var customer = _customerService.GetCustomerForEdit(id);
+            return View(customer);
+        }
+        [HttpPost]
+        public IActionResult EditCustomer(NewCustomerVm newCustomerVm)
+        {
+            
+        }
     }
 }

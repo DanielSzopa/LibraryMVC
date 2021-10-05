@@ -54,7 +54,42 @@ namespace LibraryMVC.Application
             customer.UserId = userId;
             _customerRepository.AddCustomer(customer);
         }
+        public Customer GetCustomerById(int id)
+        {
+            return _customerRepository.GetCustomerByCustomerId(id);
+        }
 
+        public Customer GetCustomerByUserId(string userId)
+        {
+            return _customerRepository.GetCustomerByUserId(userId);
+        }
+
+        public CustomerDetailsVm GetCustomerDetailsByUserId(string currentUserId)
+        {
+            var customer = GetCustomerByUserId(currentUserId);
+            var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
+            return customerVm;
+        }
+
+        public NewCustomerVm GetCustomerForEdit(int id)
+        {
+            var customer = GetCustomerById(id);
+            var customerVm = _mapper.Map<NewCustomerVm>(customer);
+            return customerVm;
+        }
+
+        public void UpdateCustomer(NewCustomerVm customerVm)
+        {
+            var customer = _mapper.Map<Customer>(customerVm);
+
+        }
+
+        public CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId)
+        {
+            var customer = GetCustomerById(customerId);
+            var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
+            return customerVm;
+        }
         public NewCustomerVm RemoveDefaultNumbersOfCustomers(NewCustomerVm customerVm)
         {
             var numbers = customerVm.Number;
@@ -93,24 +128,6 @@ namespace LibraryMVC.Application
             };
             return result;
         }
-
-        public Customer GetCustomerByUserId(string userId)
-        {
-            return _customerRepository.GetCustomerByUserId(userId);
-        }
-
-        public CustomerDetailsVm GetCustomerDetailsByUserId(string currentUserId)
-        {
-            var customer = GetCustomerByUserId(currentUserId);
-            var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
-            return customerVm;
-        }
-
-        public CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId)
-        {
-            var customer = _customerRepository.GetCustomerByCustomerId(customerId);
-            var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
-            return customerVm;
-        }
+      
     }
 }
