@@ -10,6 +10,7 @@ namespace LibraryMVC.Domain.Interfaces
     {
         int AddCustomer(Customer customer);
         Customer GetCustomerByUserId(string id);
+        Customer GetCustomerByCustomerId(int id);
         IQueryable<Customer> GetAllCustomers();
     }
 }

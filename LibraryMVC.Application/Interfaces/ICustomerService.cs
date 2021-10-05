@@ -13,6 +13,7 @@ namespace LibraryMVC.Application
         int AddCustomer(NewCustomerVm newCustomerVm);
         NewCustomerVm RemoveDefaultNumbersOfCustomers(NewCustomerVm customerVm);
         Customer GetCustomerByUserId(string userId);
+        CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId);
         CustomerDetailsVm GetCustomerDetailsByUserId(string userId);
         CustomerListVm GetAllCustomerToList(int pageNumber, int pageSize, string searchString);
         IQueryable<Customer> GetAllCustomers();

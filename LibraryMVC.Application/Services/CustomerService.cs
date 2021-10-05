@@ -104,6 +104,13 @@ namespace LibraryMVC.Application
             var customer = GetCustomerByUserId(currentUserId);
             var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
             return customerVm;
-        }      
+        }
+
+        public CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId)
+        {
+            var customer = _customerRepository.GetCustomerByCustomerId(customerId);
+            var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
+            return customerVm;
+        }
     }
 }

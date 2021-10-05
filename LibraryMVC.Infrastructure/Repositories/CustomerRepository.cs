@@ -29,6 +29,16 @@ namespace LibraryMVC.Infrastructure
             return _context.Customers;
         }
 
+        public Customer GetCustomerByCustomerId(int id)
+        {
+            var customer = _context.Customers
+                .Include(c => c.CustomerContactDetail)
+                .ThenInclude(n => n.TelephoneNumbers)
+                .Include(c => c.Address)
+                .FirstOrDefault(c => c.Id == id);
+            return customer;
+        }
+
         public Customer GetCustomerByUserId(string id)
         {
            var customer = _context.Customers

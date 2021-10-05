@@ -1,7 +1,7 @@
 ﻿@model LibraryMVC.Application.CustomerDetailsVm
 
 @{
-    ViewData["Title"] = Model.FirstName + " " + Model.LastName;
+    ViewData["Title"] = $"{Model.FirstName} {Model.LastName}";
 }
 
 <h1>@Model.FirstName @Model.LastName</h1>

@@ -55,5 +55,10 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(customer);
         }
 
+        public IActionResult CustomerDetails(int id)
+        {
+            var customerVm = _customerService.GetCustomerDetailsByCustomerId(id);
+            return View(customerVm);
+        }
     }
 }
