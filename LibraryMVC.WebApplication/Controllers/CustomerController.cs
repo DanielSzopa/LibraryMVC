@@ -45,7 +45,7 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult AddCustomer(NewCustomerVm newCustomerVm)
         {
            var customerId = _customerService.AddCustomer(newCustomerVm);
-            return RedirectToAction("Index");
+            return RedirectToAction("CustomerDetails", new { id = customerId});
         }   
 
         public IActionResult ViewCustomerProfil()
@@ -60,5 +60,7 @@ namespace LibraryMVC.WebApplication.Controllers
             var customerVm = _customerService.GetCustomerDetailsByCustomerId(id);
             return View(customerVm);
         }
+
+       
     }
 }
