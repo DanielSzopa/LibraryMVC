@@ -1,16 +1,16 @@
 ﻿@model LibraryMVC.Application.NewCustomerVm
 
 @{
-    ViewData["Title"] = "Create Customer";
+    ViewData["Title"] = "EditCustomer";
 }
 
-<h1>Create Customer</h1>
+<h1>EditCustomer</h1>
 
-<h4>Complete form to create a new customer</h4>
+<h4>NewCustomerVm</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddCustomer">
+        <form asp-action="EditCustomer">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" class="form-control" />
             <div class="form-group">
@@ -25,27 +25,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="Pesel" class="control-label"></label>
-                <input asp-for="Pesel" type="number" class="form-control" />
+                <input asp-for="Pesel" class="form-control" />
                 <span asp-validation-for="Pesel" class="text-danger"></span>
-            </div>
-            @for (int i = 0; i < 2; i++)
-            {
-                string valueNumber = $"Number {i + 1}";
-                <div class="form-group">
-                    <label asp-for="Number" class="control-label">@valueNumber</label>
-                    <input asp-for="Number[i].Number" class="form-control" value=0 />
-                    <span asp-validation-for="Number" class="text-danger"></span>
-                </div>
-            }
-            <div class="form-group">
-                <label asp-for="Address.Country" class="control-label"></label>
-                <input asp-for="Address.Country" class="form-control" />
-                <span asp-validation-for="Address.Country" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address.Locality" class="control-label"></label>
                 <input asp-for="Address.Locality" class="form-control" />
                 <span asp-validation-for="Address.Locality" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address.Country" class="control-label"></label>
+                <input asp-for="Address.Country" class="form-control" />
+                <span asp-validation-for="Address.Country" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address.Street" class="control-label"></label>
@@ -58,30 +49,21 @@
                 <span asp-validation-for="Address.PostCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address.NumberOfLocal" class="control-label">Local</label>
+                <label asp-for="Address.NumberOfLocal" class="control-label"></label>
                 <input asp-for="Address.NumberOfLocal" class="form-control" />
                 <span asp-validation-for="Address.NumberOfLocal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address.NumberOfAccommodation" class="control-label">Accommodation</label>
+                <label asp-for="Address.NumberOfAccommodation" class="control-label"></label>
                 <input asp-for="Address.NumberOfAccommodation" class="form-control" />
                 <span asp-validation-for="Address.NumberOfAccommodation" class="text-danger"></span>
             </div>
-            @if (Model.isLocalAccount == false)
-            {
-                <div class="form-group">
-                    <label asp-for="Mail" class="control-label"></label>
-                    <input asp-for="Mail" class="form-control" />
-                    <span asp-validation-for="Mail" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input value="-LibraryMvc123-" asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            }
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="isLocalAccount" /> @Html.DisplayNameFor(model => model.isLocalAccount)
+                </label>
+            </div>
             <div class="form-group">
-                <input type="hidden" asp-for="isLocalAccount" asp-route-isLocalAccount=true class="form-control" />
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -89,7 +71,7 @@
 </div>
 
 <div>
-    <a class="btn btn-secondary" asp-action="Index">Close</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
