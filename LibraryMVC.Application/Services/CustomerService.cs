@@ -81,7 +81,7 @@ namespace LibraryMVC.Application
         public void UpdateCustomer(NewCustomerVm customerVm)
         {
             var customer = _mapper.Map<Customer>(customerVm);
-
+            _customerRepository.UpdateCustomer(customer);
         }
 
         public CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId)

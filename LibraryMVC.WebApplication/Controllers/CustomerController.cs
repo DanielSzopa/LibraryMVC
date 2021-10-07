@@ -70,6 +70,7 @@ namespace LibraryMVC.WebApplication.Controllers
         [HttpPost]
         public IActionResult EditCustomer(NewCustomerVm newCustomerVm)
         {
+            _customerService.UpdateCustomer(newCustomerVm);
             return RedirectToAction("Index");
         }
     }

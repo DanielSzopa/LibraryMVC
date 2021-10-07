@@ -52,6 +52,16 @@ namespace LibraryMVC.Infrastructure
         public void UpdateCustomer(Customer customer)
         {
             _context.Attach(customer);
+            _context.Entry(customer).Property("FirstName").IsModified = true;
+            _context.Entry(customer).Property("LastName").IsModified = true;
+            _context.Entry(customer.Address).Property("Country").IsModified = true;
+            _context.Entry(customer.Address).Property("Locality").IsModified = true;
+            _context.Entry(customer.Address).Property("Street").IsModified = true;
+            _context.Entry(customer.Address).Property("PostCode").IsModified = true;
+            _context.Entry(customer.Address).Property("NumberOfLocal").IsModified = true;
+            _context.Entry(customer.Address).Property("NumberOfAccommodation").IsModified = true;           
+           
+           _context.SaveChanges();
         }
     }
 }
