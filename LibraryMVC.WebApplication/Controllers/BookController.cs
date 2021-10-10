@@ -39,7 +39,7 @@ namespace LibraryMVC.WebApplication.Controllers
             {
                 searchString = String.Empty;
             }
-            int pageSize = 2;
+            int pageSize = 10;
             var books = _bookService.GetAllBooksToList(pageNumber, pageSize, searchString, categoryId, publisherId, typeOfBookId, authorId);
             if(categoryId != 0)
             {

@@ -35,20 +35,20 @@
 @foreach (var item in Model.Customers) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @item.Id
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)             
+                @item.FullName            
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mail)
+                @item.Mail
             </td>
 
             <td>
                 <a class="btn btn-secondary" asp-route-id="@item.Id" asp-action="EditCustomer">Edit</a>
                 <a class="btn btn-primary" asp-route-id="@item.Id" asp-action="CustomerDetails">Details</a>
                 <a class="btn btn-secondary" asp-action="">Rentals</a>
-                <a class="btn btn-secondary" asp-action="">Reservations</a>
+                <a class="btn btn-danger" asp-action="">Reservations</a>
             </td>
         </tr>
 }

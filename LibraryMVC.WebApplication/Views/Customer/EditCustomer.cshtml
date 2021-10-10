@@ -1,12 +1,13 @@
 ﻿@model LibraryMVC.Application.NewCustomerVm
 
 @{
-    ViewData["Title"] = "EditCustomer";
+    ViewData["Title"] = $"Edit {Model.FirstName} {Model.LastName}";
 }
 
-<h1>EditCustomer</h1>
+<h1>Edit @Model.FirstName @Model.LastName</h1>
 
-<h4>NewCustomerVm</h4>
+<h4>Complete form to edit a customer</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -28,6 +29,18 @@
                 <input asp-for="Pesel" class="form-control" />
                 <span asp-validation-for="Pesel" class="text-danger"></span>
             </div>
+            @for (int i = 0; i < 2; i++)
+            {
+                string valueNumber = $"Number {i + 1}";
+                <div class="form-group">
+                    <label asp-for="CustomerContactDetail.TelephoneNumbers" class="control-label">@valueNumber</label>
+                    <input asp-for="CustomerContactDetail.TelephoneNumbers[i].Number" class="form-control" />
+                    <span asp-validation-for="CustomerContactDetail.TelephoneNumbers" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="CustomerContactDetail.TelephoneNumbers[i].Id" class="form-control" />
+            }
+            <input type="hidden" asp-for="CustomerContactDetail.Id" class="form-control" />
+            <input type="hidden" asp-for="Address.Id" class="form-control" />
             <div class="form-group">
                 <label asp-for="Address.Locality" class="control-label"></label>
                 <input asp-for="Address.Locality" class="form-control" />
@@ -58,11 +71,6 @@
                 <input asp-for="Address.NumberOfAccommodation" class="form-control" />
                 <span asp-validation-for="Address.NumberOfAccommodation" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="isLocalAccount" /> @Html.DisplayNameFor(model => model.isLocalAccount)
-                </label>
-            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -71,7 +79,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-secondary" asp-action="Index">Close</a>
 </div>
 
 @section Scripts {

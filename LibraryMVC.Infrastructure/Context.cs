@@ -71,10 +71,10 @@ namespace LibraryMVC.Infrastructure
                 .HasData(
                 new Book { Id = 1, Title = "Lampiony", DateOfRelease = new DateTime(2010, 01, 01), Description = "Sasza Załuska zostaje przyjęta na cywilny etat do gdańskiej policji i natychmiast oddelegowana do zadania w Łodzi.", Status = Status.Active, PublisherId = 2, CategoryId = 2, TypeOfBookId = 2, AuthorId = 2 },
                 new Book { Id = 2, Title = "Lalka", DateOfRelease = new DateTime(2000, 01, 01), Description = "Historia zamożnego kupca warszawskiego Stanisława Wokulskiego i jego miłości do pięknej, lecz zubożałej arystokratki Izabeli Łęckiej.", Status = Status.Active, PublisherId = 3, CategoryId = 2, TypeOfBookId = 2, AuthorId = 3 },
-                new Book { Id = 3, Title = "Pan Tadeusz", DateOfRelease = new DateTime(1990, 01, 01), Description = "Ta epopeja narodowa (z elementami gawędy szlacheckiej) powstała w latach 1832–1834 w Paryżu.", Status = Status.Active, PublisherId = 3, CategoryId = 2, TypeOfBookId = 2, AuthorId = 3 },
-                new Book { Id = 4, Title = "Biografia Daniela Szopy", DateOfRelease = new DateTime(2015, 01, 01), Description = "Czasopismo opowiadające o początku kariery Junior Developera", Status = Status.Active, PublisherId = 2, CategoryId = 3, TypeOfBookId = 2, AuthorId = 2 },
+                new Book { Id = 3, Title = "Pan Tadeusz", DateOfRelease = new DateTime(1990, 01, 01), Description = "Ta epopeja narodowa (z elementami gawędy szlacheckiej) powstała w latach 1832–1834 w Paryżu.", Status = Status.Active, PublisherId = 3, CategoryId = 2, TypeOfBookId = 3, AuthorId = 3 },
+                new Book { Id = 4, Title = "Biografia Daniela Szopy", DateOfRelease = new DateTime(2015, 01, 01), Description = "Czasopismo opowiadające o początku kariery Junior Developera", Status = Status.Active, PublisherId = 2, CategoryId = 3, TypeOfBookId = 3, AuthorId = 2 },
                 new Book { Id = 5, Title = "Wesele", DateOfRelease = new DateTime(2016, 01, 01), Description = "„Wesele” stanowi najważniejszy młodopolski dramat. w Łodzi.", Status = Status.Active, PublisherId = 2, CategoryId = 2, TypeOfBookId = 2, AuthorId = 2 },
-                new Book { Id = 6, Title = "Miłość w Zakopanem", DateOfRelease = new DateTime(2018, 01, 01), Description = "Historia dwojga ludzi, którzy zakochali się w Zakopanem", Status = Status.Active, PublisherId = 2, CategoryId = 2, TypeOfBookId = 2, AuthorId = 3 }
+                new Book { Id = 6, Title = "Miłość w Zakopanem", DateOfRelease = new DateTime(2018, 01, 01), Description = "Historia dwojga ludzi, którzy zakochali się w Zakopanem", Status = Status.Active, PublisherId = 2, CategoryId = 2, TypeOfBookId = 3, AuthorId = 3 }
             );
 
         }    

@@ -32,9 +32,9 @@
             {
                 string valueNumber = $"Number {i + 1}";
                 <div class="form-group">
-                    <label asp-for="Number" class="control-label">@valueNumber</label>
-                    <input asp-for="Number[i].Number" class="form-control" value=0 />
-                    <span asp-validation-for="Number" class="text-danger"></span>
+                    <label asp-for="CustomerContactDetail.TelephoneNumbers" class="control-label">@valueNumber</label>
+                    <input asp-for="CustomerContactDetail.TelephoneNumbers[i].Number" class="form-control" value=0 />
+                    <span asp-validation-for="CustomerContactDetail.TelephoneNumbers" class="text-danger"></span>
                 </div>
             }
             <div class="form-group">
@@ -70,9 +70,9 @@
             @if (Model.isLocalAccount == false)
             {
                 <div class="form-group">
-                    <label asp-for="Mail" class="control-label"></label>
-                    <input asp-for="Mail" class="form-control" />
-                    <span asp-validation-for="Mail" class="text-danger"></span>
+                    <label asp-for="CustomerContactDetail.Mail" class="control-label"></label>
+                    <input asp-for="CustomerContactDetail.Mail" class="form-control" />
+                    <span asp-validation-for="CustomerContactDetail.Mail" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Password" class="control-label"></label>

@@ -13,17 +13,14 @@ namespace LibraryMVC.Application
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Pesel { get; set; }
-        public List<TelephoneNumber> Number { get; set; } 
+        public CustomerContactDetailsVm CustomerContactDetail {get; set;}
         public AddressVm Address { get; set;}
-        public string Mail { get; set; }
         public string Password { get; set; }
         public bool isLocalAccount { get; set; }
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Customer, NewCustomerVm>()
-                .ForMember(d => d.Mail, opt => opt.MapFrom(s => s.CustomerContactDetail.Mail))
-                .ForMember(d => d.Number, opt => opt.MapFrom(s => s.CustomerContactDetail.TelephoneNumbers))
                 .ReverseMap();
         }
     }
@@ -43,7 +40,7 @@ namespace LibraryMVC.Application
             RuleFor(c => c.Pesel).NotNull().WithMessage("Pesel can not be null")
                .Length(11).WithMessage("Pasel must have 11 characters");
 
-            RuleFor(c => c.Mail).NotNull().WithMessage("Mail can not be null")
+            RuleFor(c => c.CustomerContactDetail.Mail).NotNull().WithMessage("Mail can not be null")
                 .EmailAddress().WithMessage("Wrong e-mail address");
 
             RuleFor(c => c.Password).NotNull().WithMessage("Password can not be null");

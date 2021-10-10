@@ -10,72 +10,84 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+            Id
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id)
+            @Model.Id
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
+           FirstName
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
+            @Model.FirstName
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
+            LastName
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
+            @Model.LastName
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pesel)
+            Pesel
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pesel)
+            @Model.Pesel
         </dd>
-        @if (!Model.IsLocalAccount) { 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Mail)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Mail)
-        </dd>
+        @for (int i = 0; i < 2; i++)
+        {
+            string valueNumber = $"Number {i + 1}";
+            <dt class="col-sm-2">
+              @valueNumber
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Number[i].Number
+            </dd>
+        }
+
+        @if (!Model.IsLocalAccount)
+        {
+            <dt class="col-sm-2">
+                Mail
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Mail
+            </dd>
         }
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Country)
+            Country
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Country)
+            @Model.Country
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Locality)
+            Locality
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Locality)
+            @Model.Locality
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Street)
+            Street
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Street)
+            @Model.Street
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PostCode)
+            PostCode
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PostCode)
+            @Model.PostCode
         </dd>
         <dt class="col-sm-2">
-           Local
+            Local
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfLocal)
+            @Model.NumberOfLocal
         </dd>
         <dt class="col-sm-2">
             Accommodation
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfAccommodation)
+            @Model.NumberOfAccommodation
         </dd>
         @if (Model.IsLocalAccount == true)
         {
@@ -83,15 +95,15 @@
                 Local Account
             </dt>
         }
-        else if(Model.IsLocalAccount == false)
+        else if (Model.IsLocalAccount == false)
         {
             <dt class="col-sm-2">
-               Online Account
+                Online Account
             </dt>
         }
     </dl>
 </div>
 <div>
     <a class="btn btn-secondary" asp-action="Index">Back</a>
-    <a class="btn btn-primary" asp-action="">Edit</a>
+    <a class="btn btn-primary" asp-action="EditCustomer" asp-route-id="@Model.Id">Edit</a>
 </div>

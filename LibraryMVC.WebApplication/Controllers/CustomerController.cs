@@ -27,7 +27,7 @@ namespace LibraryMVC.WebApplication.Controllers
             {
                 searchString = String.Empty;
             }
-            int pageSize = 2;
+            int pageSize = 10;
             var customers = _customerService.GetAllCustomerToList(pageNumber, pageSize, searchString);
             return View(customers);
         }
@@ -40,8 +40,9 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(customer);
         }
 
-        [ValidateAntiForgeryToken]
+       
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddCustomer(NewCustomerVm newCustomerVm)
         {
            var customerId = _customerService.AddCustomer(newCustomerVm);
@@ -68,6 +69,7 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(customer);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditCustomer(NewCustomerVm newCustomerVm)
         {
             _customerService.UpdateCustomer(newCustomerVm);

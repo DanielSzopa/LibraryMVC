@@ -26,12 +26,11 @@ namespace LibraryMVC.Application
 
         public int AddCustomer(NewCustomerVm newCustomerVm)
         {
-            var customerWithoutDefaultsNumbers = RemoveDefaultNumbersOfCustomers(newCustomerVm);
-            var customer = _mapper.Map<Customer>(customerWithoutDefaultsNumbers);      
+            var customer = _mapper.Map<Customer>(newCustomerVm);      
             
             if (!(newCustomerVm.isLocalAccount))
             {
-                var userId = _userService.CreateUser(newCustomerVm.Mail, newCustomerVm.Password);
+                var userId = _userService.CreateUser(newCustomerVm.CustomerContactDetail.Mail, newCustomerVm.Password);
                 customer.UserId = userId.Result;
             }          
             var customerId = _customerRepository.AddCustomer(customer);
@@ -75,6 +74,13 @@ namespace LibraryMVC.Application
         {
             var customer = GetCustomerById(id);
             var customerVm = _mapper.Map<NewCustomerVm>(customer);
+            if(customer.CustomerContactDetail is null)
+            {
+                customerVm.CustomerContactDetail = new CustomerContactDetailsVm();
+            }else
+            {
+                customerVm.CustomerContactDetail.TelephoneNumbers = customer.CustomerContactDetail.TelephoneNumbers;
+            }           
             return customerVm;
         }
 
@@ -90,20 +96,7 @@ namespace LibraryMVC.Application
             var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
             return customerVm;
         }
-        public NewCustomerVm RemoveDefaultNumbersOfCustomers(NewCustomerVm customerVm)
-        {
-            var numbers = customerVm.Number;
-            foreach(var number in numbers.ToList())
-            {
-                if(number.Number == 0)
-                {
-                    numbers.Remove(number);
-                }
-            }
-            customerVm.Number = numbers;
-            return customerVm;
-        }
-
+        
         public IQueryable<Customer> GetAllCustomers()
         {
             var customers = _customerRepository.GetAllCustomers();
@@ -128,6 +121,6 @@ namespace LibraryMVC.Application
             };
             return result;
         }
-      
+        
     }
 }
