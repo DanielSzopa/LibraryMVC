@@ -72,8 +72,8 @@ namespace LibraryMVC.WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EditCustomer(NewCustomerVm newCustomerVm)
         {
-            _customerService.UpdateCustomer(newCustomerVm);
-            return RedirectToAction("Index");
+            var customerId = _customerService.UpdateCustomer(newCustomerVm);
+            return RedirectToAction("CustomerDetails", new { id = customerId });
         }
     }
 }

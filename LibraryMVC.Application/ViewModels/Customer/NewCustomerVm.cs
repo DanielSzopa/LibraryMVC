@@ -17,6 +17,7 @@ namespace LibraryMVC.Application
         public AddressVm Address { get; set;}
         public string Password { get; set; }
         public bool isLocalAccount { get; set; }
+        public string UserId { get; set; }
 
         public void Mapping(Profile profile)
         {

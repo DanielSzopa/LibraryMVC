@@ -34,7 +34,6 @@ namespace LibraryMVC.Application
                 customer.UserId = userId.Result;
             }          
             var customerId = _customerRepository.AddCustomer(customer);
-
             return customerId;
         }
 
@@ -44,7 +43,8 @@ namespace LibraryMVC.Application
             Address adress = new Address();
             CustomerContactDetail customerContactDetail = new CustomerContactDetail();
             TelephoneNumber telephoneNumber = new TelephoneNumber();
-            customerContactDetail.TelephoneNumbers = new List<TelephoneNumber> { telephoneNumber };
+            TelephoneNumber telephoneNumber2 = new TelephoneNumber();
+            customerContactDetail.TelephoneNumbers = new List<TelephoneNumber> { telephoneNumber, telephoneNumber2 };
             customerContactDetail.Mail = mail;
 
             customer.CustomerContactDetail = customerContactDetail;
@@ -53,6 +53,29 @@ namespace LibraryMVC.Application
             customer.UserId = userId;
             _customerRepository.AddCustomer(customer);
         }
+
+        public int UpdateCustomer(NewCustomerVm customerVm)
+        {
+            var customer = _mapper.Map<Customer>(customerVm);
+            var updateCustomerId =  _customerRepository.UpdateCustomer(customer);
+            return updateCustomerId;
+        }
+
+        public NewCustomerVm GetCustomerForEdit(int id)
+        {
+            var customer = GetCustomerById(id);
+            var customerVm = _mapper.Map<NewCustomerVm>(customer);
+            if (customer.CustomerContactDetail is null)
+            {
+                customerVm.CustomerContactDetail = new CustomerContactDetailsVm();
+            }
+            else
+            {
+                customerVm.CustomerContactDetail.TelephoneNumbers = customer.CustomerContactDetail.TelephoneNumbers;
+            }
+            return customerVm;
+        }
+
         public Customer GetCustomerById(int id)
         {
             return _customerRepository.GetCustomerByCustomerId(id);
@@ -63,44 +86,18 @@ namespace LibraryMVC.Application
             return _customerRepository.GetCustomerByUserId(userId);
         }
 
-        public CustomerDetailsVm GetCustomerDetailsByUserId(string currentUserId)
-        {
-            var customer = GetCustomerByUserId(currentUserId);
-            var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
-            return customerVm;
-        }
-
-        public NewCustomerVm GetCustomerForEdit(int id)
-        {
-            var customer = GetCustomerById(id);
-            var customerVm = _mapper.Map<NewCustomerVm>(customer);
-            if(customer.CustomerContactDetail is null)
-            {
-                customerVm.CustomerContactDetail = new CustomerContactDetailsVm();
-            }else
-            {
-                customerVm.CustomerContactDetail.TelephoneNumbers = customer.CustomerContactDetail.TelephoneNumbers;
-            }           
-            return customerVm;
-        }
-
-        public void UpdateCustomer(NewCustomerVm customerVm)
-        {
-            var customer = _mapper.Map<Customer>(customerVm);
-            _customerRepository.UpdateCustomer(customer);
-        }
-
         public CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId)
         {
             var customer = GetCustomerById(customerId);
             var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
             return customerVm;
         }
-        
-        public IQueryable<Customer> GetAllCustomers()
+
+        public CustomerDetailsVm GetCustomerDetailsByUserId(string currentUserId)
         {
-            var customers = _customerRepository.GetAllCustomers();
-            return customers;
+            var customer = GetCustomerByUserId(currentUserId);
+            var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
+            return customerVm;
         }
 
         public CustomerListVm GetAllCustomerToList(int pageNumber, int pageSize, string searchString)
@@ -121,6 +118,11 @@ namespace LibraryMVC.Application
             };
             return result;
         }
-        
+
+        public IQueryable<Customer> GetAllCustomers()
+        {
+            var customers = _customerRepository.GetAllCustomers();
+            return customers;
+        }
     }
 }

@@ -22,11 +22,14 @@
             <th>
                 Id
             </th>
-            <th>             
+            <th>
                 Name
             </th>
             <th>
                 Nick
+            </th>
+            <th>
+                Account
             </th>
             <th></th>
         </tr>
@@ -38,12 +41,23 @@
                 @item.Id
             </td>
             <td>
-                @item.FullName            
+                @item.FullName
             </td>
             <td>
                 @item.Mail
             </td>
-
+            @if (item.IsLocalAccount == true)
+            {
+                <td>
+                    Local
+                </td>
+            }
+            else
+            {
+                <td>
+                    Online
+                </td>
+            }
             <td>
                 <a class="btn btn-secondary" asp-route-id="@item.Id" asp-action="EditCustomer">Edit</a>
                 <a class="btn btn-primary" asp-route-id="@item.Id" asp-action="CustomerDetails">Details</a>

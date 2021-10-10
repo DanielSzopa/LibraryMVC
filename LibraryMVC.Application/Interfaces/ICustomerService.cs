@@ -9,12 +9,12 @@ namespace LibraryMVC.Application
 {
     public interface ICustomerService
     {
-        void AddCustomerAfterConfirmEmail(string userId, string mail);
         int AddCustomer(NewCustomerVm newCustomerVm);
-        Customer GetCustomerById(int id);
-        Customer GetCustomerByUserId(string userId);
+        void AddCustomerAfterConfirmEmail(string userId, string mail);        
+        int UpdateCustomer(NewCustomerVm customerVm);
         NewCustomerVm GetCustomerForEdit(int id);
-        void UpdateCustomer(NewCustomerVm customerVm);
+        Customer GetCustomerById(int id);
+        Customer GetCustomerByUserId(string userId);              
         CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId);
         CustomerDetailsVm GetCustomerDetailsByUserId(string userId);
         CustomerListVm GetAllCustomerToList(int pageNumber, int pageSize, string searchString);

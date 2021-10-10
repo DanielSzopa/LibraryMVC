@@ -49,10 +49,11 @@ namespace LibraryMVC.Infrastructure
             return customer;
         }
 
-        public void UpdateCustomer(Customer customer)
+        public int UpdateCustomer(Customer customer)
         {         
             _context.Update<Customer>(customer);
             _context.SaveChanges();
+            return customer.Id;
         }
     }
 }

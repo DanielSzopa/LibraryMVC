@@ -1,10 +1,10 @@
 ﻿@model LibraryMVC.Application.NewCustomerVm
 
 @{
-    ViewData["Title"] = $"Edit {Model.FirstName} {Model.LastName}";
+    ViewData["Title"] = "Edit Customer";
 }
 
-<h1>Edit @Model.FirstName @Model.LastName</h1>
+<h1>Edit Customer</h1>
 
 <h4>Complete form to edit a customer</h4>
 
@@ -14,6 +14,8 @@
         <form asp-action="EditCustomer">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" class="form-control" />
+            <input type="hidden" asp-for="UserId" class="form-control" />
+            <input type="hidden" asp-for="CustomerContactDetail.Mail" class="form-control" />
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />

@@ -11,6 +11,7 @@ namespace LibraryMVC.Application
         public int Id { get; set; }
         public string FullName { get; set; }
         public string Mail { get; set; }
+        public bool IsLocalAccount { get; set; }
 
         public void Mapping(Profile profile)
         {
