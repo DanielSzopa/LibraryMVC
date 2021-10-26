@@ -16,6 +16,8 @@ namespace LibraryMVC.Infrastructure
             services.AddTransient<ITypeOfBookRepository, TypeOfBookRepository>();
             services.AddTransient<IPublisherRepository, PublisherRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IRentalRepository, RentalRepository>();
+            services.AddTransient<IReservationRepository, ReservationRepository>();
 
             return services;
         }

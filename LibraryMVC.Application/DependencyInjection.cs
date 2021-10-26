@@ -17,9 +17,11 @@ namespace LibraryMVC.Application
             services.AddTransient<IPublisherService, PublisherService>();
             services.AddTransient<ITypeOfBookService, TypeOfBookService>();
             services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IRentalService,RentalService>();
+            services.AddTransient<IReservationService,ReservationService>();
             services.AddTransient<IPaginationService, PaginationService>();
             services.AddTransient<IUserService, UserService>();
-            
+           
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddTransient<IValidator<NewBookVm>, NewBookVmValidation>();
