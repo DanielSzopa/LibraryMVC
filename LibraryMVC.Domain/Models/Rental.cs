@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace LibraryMVC.Domain.Models
 {
-    public class Reservation
+    public class Rental
     {
         public int Id { get; set; }
         public DateTime From { get; set; }
@@ -14,5 +15,4 @@ namespace LibraryMVC.Domain.Models
         public Book Book { get; set; }
 
     }
-   
 }

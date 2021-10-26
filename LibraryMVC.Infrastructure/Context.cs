@@ -20,6 +20,7 @@ namespace LibraryMVC.Infrastructure
         public DbSet<CustomerContactDetail> CustomerContactDetails { get; set; }
         public DbSet<TelephoneNumber> TelephoneNumbers { get; set; }
         public DbSet<Reservation> Reservations { get; set; } 
+        public DbSet<Rental> Rentals { get; set; } 
         public Context(DbContextOptions dbContext) : base(dbContext)
         {
 
