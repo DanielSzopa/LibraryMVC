@@ -76,28 +76,27 @@ namespace LibraryMVC.Application
             return bookDetailVm;
         }
 
-        public BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, int categoryId, int publisherId, int typeOfBookId, int authorId)
+        public BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, string filter, int categoryId, int publisherId, int typeOfBookId, int authorId)
         {
             var books = default(IQueryable<Book>);
-            if(categoryId != 0)
+
+            switch (filter)
             {
-                books = _categoryRepository.GetAllBooksByCategoryId(categoryId).Where(b=>b.Title.Contains(searchString));
-            }
-            else if (publisherId != 0)
-            {
-                books = _publisherRepository.GetAllBooksByPublisherId(publisherId).Where(b => b.Title.Contains(searchString));
-            }
-            else if (typeOfBookId != 0)
-            {
-                books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(typeOfBookId).Where(b => b.Title.Contains(searchString));
-            }
-            else if (authorId != 0)
-            {
-                books =  _authorRepository.GetAllBooksByAuthor(authorId).Where(b => b.Title.Contains(searchString));
-            }
-            else
-            {
-                books = _bookRepository.GetAllBooks().Where(b => b.Title.Contains(searchString));
+                case "Category":
+                    books = _categoryRepository.GetAllBooksByCategoryId(categoryId).Where(b => b.Title.Contains(searchString));
+                    break;
+                case "Publisher":
+                    books = _publisherRepository.GetAllBooksByPublisherId(publisherId).Where(b => b.Title.Contains(searchString));
+                    break;
+                case "TypeOfBook":
+                    books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(typeOfBookId).Where(b => b.Title.Contains(searchString));
+                    break;
+                case "Author":
+                    books = _authorRepository.GetAllBooksByAuthor(authorId).Where(b => b.Title.Contains(searchString));
+                    break;
+                default:
+                    books = _bookRepository.GetAllBooks().Where(b => b.Title.Contains(searchString));
+                    break;
             }
             
             var mappedBooks = books

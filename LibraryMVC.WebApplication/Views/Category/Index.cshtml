@@ -54,7 +54,7 @@
                         Edit
                     </button>
                 }
-                <a asp-controller="Book" asp-action="Index" asp-route-categoryId="@item.Id" class="btn btn-primary">Books</a>
+                <a asp-controller="Book" asp-action="Index" asp-route-filter="Category" asp-route-categoryId="@item.Id" class="btn btn-primary">Books</a>
                 @if (item.Id != 1)
                 {
                     <a asp-controller="Category" asp-action="DeleteCategory" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
