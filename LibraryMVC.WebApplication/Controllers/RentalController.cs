@@ -12,7 +12,7 @@ namespace LibraryMVC.WebApplication.Controllers
         private readonly IRentalService _rentalService;
         public RentalController(IRentalService rentalService)
         {
-            rentalService = _rentalService;
+            _rentalService = rentalService;
         }
         public IActionResult Index()
         {

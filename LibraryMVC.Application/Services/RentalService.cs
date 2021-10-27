@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryMVC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,10 +7,10 @@ namespace LibraryMVC.Application
 {
     public class RentalService : IRentalService
     {
-        private readonly IRentalService _rentalService;
-        public RentalService(IRentalService rentalService)
+        private readonly IRentalRepository _rentalRepository;
+        public RentalService(IRentalRepository rentalRepository)
         {
-            _rentalService = rentalService;
+            _rentalRepository = rentalRepository;
         }
     }
 }

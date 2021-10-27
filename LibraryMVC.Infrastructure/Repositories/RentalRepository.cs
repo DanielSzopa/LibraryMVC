@@ -7,10 +7,10 @@ namespace LibraryMVC.Infrastructure
 {
     public class RentalRepository : IRentalRepository
     {
-        private readonly IRentalRepository _rentalRepository;
-        public RentalRepository(IRentalRepository rentalRepository)
+        private readonly Context _context;
+        public RentalRepository(Context context)
         {
-            _rentalRepository = rentalRepository;
+            _context = context;
         }
     }
 }

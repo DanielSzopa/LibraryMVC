@@ -7,10 +7,10 @@ namespace LibraryMVC.Infrastructure
 {
     public class ReservationRepository : IReservationRepository
     {
-        private readonly IReservationRepository _reservationRepository;
-        public ReservationRepository(IReservationRepository reservationRepository)
+        private readonly Context _context;
+        public ReservationRepository(Context context)
         {
-            _reservationRepository = reservationRepository;
+            _context = context;
         }
     }
 }
