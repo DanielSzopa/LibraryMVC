@@ -11,9 +11,7 @@ namespace LibraryMVC.Application
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public int Count { get; set; }
-        public int CategoryId { get; set; }
-        public int PublisherId { get; set; }
-        public int TypeOfBookId { get; set; }
-        public int AuthorId { get; set; }
+        public string Filter { get; set; }
+        public int FilterId { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace LibraryMVC.WebApplication.Controllers
             _authorService = authorService;
         }  
         
-        public IActionResult Index(int pageNumber, int categoryId, int publisherId, int typeOfBookId, int authorId, string filter, string searchString)
+        public IActionResult Index(int pageNumber, int filterId, string filter, string searchString)
         {        
             if (pageNumber == 0)
             {
@@ -40,21 +40,21 @@ namespace LibraryMVC.WebApplication.Controllers
                 searchString = String.Empty;
             }
             int pageSize = 10;
-            var books = _bookService.GetAllBooksToList(pageNumber, pageSize, searchString, filter, categoryId, publisherId, typeOfBookId, authorId);
+            var books = _bookService.GetAllBooksToList(pageNumber, pageSize, searchString, filter, filterId);
 
             switch(filter)
             {
                 case "Category":
-                    ViewBag.Title = _categoryService.GetCategoryById(categoryId).Name;
+                    ViewBag.Title = _categoryService.GetCategoryById(filterId).Name;
                     return View(books);
                 case "Publisher":
-                    ViewBag.Title = _publisherService.GetPublisherById(publisherId).Name;
+                    ViewBag.Title = _publisherService.GetPublisherById(filterId).Name;
                     return View(books);
                 case "TypeOfBook":
-                    ViewBag.Title = _typeOfBookService.GetTypeOfBookById(typeOfBookId).Name;
+                    ViewBag.Title = _typeOfBookService.GetTypeOfBookById(filterId).Name;
                     return View(books);
                 case "Author":
-                    var author = _authorService.GetAuthorById(authorId);
+                    var author = _authorService.GetAuthorById(filterId);
                     ViewBag.Title = $"{author.FirstName} {author.LastName}";
                     return View(books);
             }         

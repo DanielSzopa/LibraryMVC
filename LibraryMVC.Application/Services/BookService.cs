@@ -76,23 +76,23 @@ namespace LibraryMVC.Application
             return bookDetailVm;
         }
 
-        public BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, string filter, int categoryId, int publisherId, int typeOfBookId, int authorId)
+        public BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, string filter, int filterId)
         {
             var books = default(IQueryable<Book>);
 
             switch (filter)
             {
                 case "Category":
-                    books = _categoryRepository.GetAllBooksByCategoryId(categoryId).Where(b => b.Title.Contains(searchString));
+                    books = _categoryRepository.GetAllBooksByCategoryId(filterId).Where(b => b.Title.Contains(searchString));
                     break;
                 case "Publisher":
-                    books = _publisherRepository.GetAllBooksByPublisherId(publisherId).Where(b => b.Title.Contains(searchString));
+                    books = _publisherRepository.GetAllBooksByPublisherId(filterId).Where(b => b.Title.Contains(searchString));
                     break;
                 case "TypeOfBook":
-                    books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(typeOfBookId).Where(b => b.Title.Contains(searchString));
+                    books = _typeOfBookRepository.GetAllBooksByTypeOfBookId(filterId).Where(b => b.Title.Contains(searchString));
                     break;
                 case "Author":
-                    books = _authorRepository.GetAllBooksByAuthor(authorId).Where(b => b.Title.Contains(searchString));
+                    books = _authorRepository.GetAllBooksByAuthor(filterId).Where(b => b.Title.Contains(searchString));
                     break;
                 default:
                     books = _bookRepository.GetAllBooks().Where(b => b.Title.Contains(searchString));
@@ -111,10 +111,8 @@ namespace LibraryMVC.Application
                 PageSize = pageSize,
                 PageNumber = pageNumber,
                 SearchString = searchString,
-                CategoryId = categoryId,
-                PublisherId = publisherId,
-                TypeOfBookId = typeOfBookId,
-                AuthorId = authorId
+                Filter = filter,
+                FilterId = filterId
 
             };
             return result;
