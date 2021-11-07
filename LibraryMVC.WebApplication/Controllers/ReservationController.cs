@@ -18,5 +18,10 @@ namespace LibraryMVC.WebApplication.Controllers
         {
             return View();
         }
+
+        public IActionResult ReserveBook(int bookId)
+        {
+            return Ok();
+        }
     }
 }
