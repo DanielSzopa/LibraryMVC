@@ -22,20 +22,24 @@ namespace LibraryMVC.Application
         {
             var book = _bookService.GetBookById(bookId);
             var customer = _customerService.GetCustomerByUserId(userId);
-            
+
 
             var reservationVm = new NewReservationVm
             {
+                BookId = bookId,
+                CustomerId = customer.Id,
                 Title = book.Title,
                 Author = $"{book.Author.FirstName} {book.Author.LastName}",
                 CustomerFirstName = customer.FirstName,
                 CustomerLastName = customer.LastName,
                 CustomerEmail = customer.CustomerContactDetail.Mail,
                 CustomerPesel = customer.Pesel,
+                ReservationFrom = DateTime.Now,
+                ReservationTo = DateTime.Now.AddDays(7)
             };
 
             return reservationVm;
         }
-
+      
     }
 }

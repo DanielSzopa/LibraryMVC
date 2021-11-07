@@ -8,7 +8,7 @@
 
 <h1>@ViewBag.Title</h1>
 
-
+<div id="PlaceHolderHere"></div>
 
 <p>
     <a class="btn btn-primary" asp-controller="Book" asp-action="AddBook">Create</a>
@@ -81,6 +81,10 @@
                         <a asp-controller="Book" asp-action="EditBook" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
                         <a asp-controller="Book" asp-action="DetailsBook" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
                         <a asp-controller="Book" asp-action="DeleteBook" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        <button class="btn btn-success" data-toggle="ajax-modal" data-target="#createReservation"
+                                data-url="@Url.Action("CreateReservation","Reservation",new {bookId = item.Id })">
+                            Reserve
+                        </button>
                     </td>
                 </tr>
             }

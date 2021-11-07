@@ -7,6 +7,8 @@ namespace LibraryMVC.Application.ViewModels.Reservation
     public class NewReservationVm
     {
         public int Id { get; set; }
+        public int BookId { get; set; }
+        public int CustomerId { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public string CustomerFirstName { get; set; }
