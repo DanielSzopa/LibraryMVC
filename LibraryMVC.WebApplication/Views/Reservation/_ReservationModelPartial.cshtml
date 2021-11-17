@@ -1,0 +1,58 @@
+﻿@model LibraryMVC.Application.NewReservationVm
+
+
+<div class="modal fade" id="createReservation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="createReservation">Reservation</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>x</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Reservation/CreateReservation" method="post">                   
+                    <input type="hidden" asp-for="Id" class="form-control" />
+                    <input type="hidden" asp-for="BookId" class="form-control" />
+                    <input type="hidden" asp-for="CustomerId" class="form-control" />
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Author"></label>
+                        <input asp-for="Author" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerFirstName">First Name</label>
+                        <input asp-for="CustomerFirstName" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerLastName">Last Name</label>
+                        <input asp-for="CustomerLastName" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerEmail">Email</label>
+                        <input asp-for="CustomerEmail" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerPesel">Pesel</label>
+                        <input asp-for="CustomerPesel" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ReservationFrom">Reservation From</label>
+                        <input asp-for="ReservationFrom" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ReservationTo">Reservation To</label>
+                        <input asp-for="ReservationTo" class="form-control" readonly="readonly"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-save="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

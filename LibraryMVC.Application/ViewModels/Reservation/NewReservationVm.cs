@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LibraryMVC.Application.ViewModels.Reservation
-{
+namespace LibraryMVC.Application
+{ 
     public class NewReservationVm
     {
         public int Id { get; set; }

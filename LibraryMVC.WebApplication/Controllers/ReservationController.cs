@@ -25,8 +25,14 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult CreateReservation(int bookId)
         {
             var userId = _userService.GetCurrentUserId();
-            var reservationVm = _reservationService.GetReservationVm(bookId,userId); 
-            return Ok();
+            var reservationVm = _reservationService.GetReservationVm(bookId,userId);
+            return PartialView("_ReservationModelPartial", reservationVm);
+        }
+
+        public IActionResult CreateReservation(NewReservationVm reservationVm)
+        {
+            var test = reservationVm;
+            return RedirectToAction("Index");
         }
     }
 }
