@@ -12,6 +12,7 @@ namespace LibraryMVC.Domain.Interfaces
         void DeleteBook(int id);
         void UpdateBook(Book book);
         Book GetBookById(int bookId);
-        IQueryable<Book> GetAllBooks();     
+        IQueryable<Book> GetAllBooks();
+        void ChangeActiveOfBook(int id);
     }
 }

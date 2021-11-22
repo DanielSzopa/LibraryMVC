@@ -1,4 +1,5 @@
 ﻿using LibraryMVC.Domain.Interfaces;
+using LibraryMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,21 @@ namespace LibraryMVC.Application
             _reservationRepository = reservationRepository;
             _bookService = bookService;
             _customerService = customerService;
+        }
+
+        public int AddReservation(NewReservationVm reservationVm)
+        {
+            var reservation = new Reservation
+            {
+                BookId = reservationVm.BookId,
+                CustomerId = reservationVm.CustomerId,
+                From = reservationVm.ReservationFrom,
+                To = reservationVm.ReservationTo
+            };
+
+            _bookService.ChangeActiveOfBook(reservation.BookId);
+            var reservationId = _reservationRepository.AddReservation(reservation);
+            return reservationId;
         }
 
         public NewReservationVm GetReservationVm(int bookId, string userId)

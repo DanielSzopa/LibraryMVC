@@ -19,7 +19,8 @@ namespace LibraryMVC.Application
         IQueryable<PublisherVm> GetPublishersToSelectList();
         IQueryable<TypeOfBookVm> GetTypeOfBooksToSelectList();
         IQueryable<AuthorVm> GetAuthorsToSelectList();
-        NewBookVm SetParametersToVm(NewBookVm model);                  
+        NewBookVm SetParametersToVm(NewBookVm model);     
+        void ChangeActiveOfBook(int id);
 
     }
 }

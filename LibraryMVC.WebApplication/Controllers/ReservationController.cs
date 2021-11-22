@@ -29,10 +29,11 @@ namespace LibraryMVC.WebApplication.Controllers
             return PartialView("_ReservationModelPartial", reservationVm);
         }
 
+        [HttpPost]
         public IActionResult CreateReservation(NewReservationVm reservationVm)
         {
-            var test = reservationVm;
-            return RedirectToAction("Index");
+            var reservationId = _reservationService.AddReservation(reservationVm);
+            return Ok();
         }
     }
 }

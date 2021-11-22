@@ -62,6 +62,12 @@ namespace LibraryMVC.Infrastructure
             var books = _context.Books;
             return books;
         }
-     
+
+        public void ChangeActiveOfBook(int id)
+        {
+            var book = _context.Books.Find(id);
+            book.Status = Status.Reservation;
+            _context.SaveChanges();
+        }
     }
 }

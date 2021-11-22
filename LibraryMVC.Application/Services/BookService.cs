@@ -147,6 +147,11 @@ namespace LibraryMVC.Application
             model.TypeOfBooks = GetTypeOfBooksToSelectList().ToList();
             model.Publishers = GetPublishersToSelectList().ToList();
             return model;
-        }               
+        }
+
+        public void ChangeActiveOfBook(int id)
+        {
+            _bookRepository.ChangeActiveOfBook(id);
+        }
     }
 }
