@@ -26,7 +26,7 @@ namespace LibraryMVC.WebApplication.Controllers
             {
                 searchString = string.Empty;
             }
-            int pageSize = 2;
+            int pageSize = 10;
             var resevationList = _reservationService.GetAllResevationToList(pageNumber,pageSize,searchString);
             return View(resevationList);
         }

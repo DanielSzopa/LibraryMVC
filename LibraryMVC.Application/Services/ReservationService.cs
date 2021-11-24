@@ -54,7 +54,7 @@ namespace LibraryMVC.Application
                 PageNumber = pageNumber,
                 PageSize = pageSize,
                 SearchString = searchString,
-                Count = records.Count,
+                Count = reservationsVm.Count,
                 ListOfReservationForListVm = records
             };
 
