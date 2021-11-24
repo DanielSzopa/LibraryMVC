@@ -1,0 +1,64 @@
+﻿@model LibraryMVC.Application.ReservationListVm
+
+@{
+    ViewData["Title"] = "Reservation";
+    ViewData["Controller"] = "Reservation";
+    ViewData["Action"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form class="form-inline my-2 my-lg-0" asp-controller="Reservation" asp-action="Index" method="get">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchString" id="searchString" asp-for="SearchString">
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Id
+            </th>
+            <th>
+                Customer
+            </th>
+            <th>
+               Book
+            </th>          
+            <th>
+                From
+            </th>
+            <th>
+                To
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ListOfReservationForListVm) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.From)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.To)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<partial name="_PaginationPartial" view-data="ViewData" model="Model" />

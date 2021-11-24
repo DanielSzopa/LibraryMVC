@@ -1,7 +1,10 @@
-﻿using LibraryMVC.Domain.Interfaces;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using LibraryMVC.Domain.Interfaces;
 using LibraryMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LibraryMVC.Application
@@ -11,11 +14,17 @@ namespace LibraryMVC.Application
         private readonly IReservationRepository _reservationRepository;
         private readonly IBookService _bookService;
         private readonly ICustomerService _customerService;
-        public ReservationService(IReservationRepository reservationRepository, IBookService bookService, ICustomerService customerService)
+        private readonly IPaginationService _pagerService;
+        private readonly IMapper _mapper;
+        public ReservationService(IReservationRepository reservationRepository, 
+            IBookService bookService, ICustomerService customerService
+            ,IPaginationService paginationService, IMapper mapper)
         {
             _reservationRepository = reservationRepository;
             _bookService = bookService;
             _customerService = customerService;
+            _pagerService = paginationService;
+            _mapper = mapper;
         }
 
         public int AddReservation(NewReservationVm reservationVm)
@@ -31,6 +40,25 @@ namespace LibraryMVC.Application
             _bookService.ChangeActiveOfBook(reservation.BookId);
             var reservationId = _reservationRepository.AddReservation(reservation);
             return reservationId;
+        }
+
+        public ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString)
+        {
+            var reservationsVm = _reservationRepository.GetAllReservation()
+                .Where(r => r.Book.Title.Contains(searchString) || (r.Customer.FirstName + " " + r.Customer.LastName).Contains(searchString))
+                .ProjectTo<ReservationForListVm>(_mapper.ConfigurationProvider).ToList();
+            
+            var records = _pagerService.ReturnRecordsToShow(pageNumber,pageSize,reservationsVm);
+            var result = new ReservationListVm
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchString = searchString,
+                Count = records.Count,
+                ListOfReservationForListVm = records
+            };
+
+            return result;
         }
 
         public NewReservationVm GetReservationVm(int bookId, string userId)

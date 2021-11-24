@@ -2,6 +2,7 @@
 using LibraryMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LibraryMVC.Infrastructure
@@ -19,6 +20,12 @@ namespace LibraryMVC.Infrastructure
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
             return reservation.Id;
+        }
+
+        public IQueryable<Reservation> GetAllReservation()
+        {
+            var reservations = _context.Reservations;
+            return reservations;
         }
     }
 }

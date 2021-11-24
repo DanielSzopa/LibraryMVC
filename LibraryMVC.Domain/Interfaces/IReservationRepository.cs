@@ -1,6 +1,7 @@
 ﻿using LibraryMVC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LibraryMVC.Domain.Interfaces
@@ -8,5 +9,6 @@ namespace LibraryMVC.Domain.Interfaces
     public interface IReservationRepository
     {
         int AddReservation(Reservation reservation);
+        IQueryable<Reservation> GetAllReservation();
     }
 }

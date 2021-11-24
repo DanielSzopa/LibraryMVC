@@ -16,9 +16,19 @@ namespace LibraryMVC.WebApplication.Controllers
             _reservationService = reservationService;
             _userService = userService;
         }
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber, string searchString)
         {
-            return View();
+            if(pageNumber == 0)
+            {
+                pageNumber = 1;
+            }
+            if(searchString is null)
+            {
+                searchString = string.Empty;
+            }
+            int pageSize = 2;
+            var resevationList = _reservationService.GetAllResevationToList(pageNumber,pageSize,searchString);
+            return View(resevationList);
         }
 
         [HttpGet]
