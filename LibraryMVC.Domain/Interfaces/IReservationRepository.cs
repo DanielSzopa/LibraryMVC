@@ -9,6 +9,7 @@ namespace LibraryMVC.Domain.Interfaces
     public interface IReservationRepository
     {
         int AddReservation(Reservation reservation);
+        Reservation GetReservationDetails(int id);
         IQueryable<Reservation> GetAllReservation();
     }
 }

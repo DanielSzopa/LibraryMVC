@@ -1,5 +1,6 @@
 ﻿using LibraryMVC.Domain.Interfaces;
 using LibraryMVC.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,23 @@ namespace LibraryMVC.Infrastructure
             return reservation.Id;
         }
 
+        public Reservation GetReservationDetails(int id)
+        {
+            var reservation = _context.Reservations
+                .Include(r => r.Book)
+                .ThenInclude(b => b.Author)
+                .Include(r => r.Customer)
+                .ThenInclude(c => c.CustomerContactDetail)
+                .FirstOrDefault(r => r.Id == id);
+
+            return reservation;
+        }
+
         public IQueryable<Reservation> GetAllReservation()
         {
             var reservations = _context.Reservations;
             return reservations;
         }
+
     }
 }

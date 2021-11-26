@@ -40,10 +40,16 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateReservation(NewReservationVm reservationVm)
+        public IActionResult CreateReservation(ReservationDetailsVm reservationVm)
         {
             var reservationId = _reservationService.AddReservation(reservationVm);
             return Ok();
+        }
+
+        public IActionResult ReservationDetails(int id)
+        {
+            var reservationVm = _reservationService.GetReservationDetails(id);
+            return View(reservationVm);
         }
     }
 }

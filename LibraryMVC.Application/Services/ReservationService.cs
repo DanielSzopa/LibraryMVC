@@ -27,19 +27,27 @@ namespace LibraryMVC.Application
             _mapper = mapper;
         }
 
-        public int AddReservation(NewReservationVm reservationVm)
+        public int AddReservation(ReservationDetailsVm reservationVm)
         {
             var reservation = new Reservation
             {
                 BookId = reservationVm.BookId,
                 CustomerId = reservationVm.CustomerId,
-                From = reservationVm.ReservationFrom,
-                To = reservationVm.ReservationTo
+                From = reservationVm.From,
+                To = reservationVm.To
             };
 
             _bookService.ChangeActiveOfBook(reservation.BookId);
             var reservationId = _reservationRepository.AddReservation(reservation);
             return reservationId;
+        }
+
+        public ReservationDetailsVm GetReservationDetails(int id)
+        {
+            var reservation = _reservationRepository.GetReservationDetails(id);
+            var reservationVm = _mapper.Map<ReservationDetailsVm>(reservation);
+
+            return reservationVm;
         }
 
         public ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString)
@@ -61,13 +69,14 @@ namespace LibraryMVC.Application
             return result;
         }
 
-        public NewReservationVm GetReservationVm(int bookId, string userId)
+
+        public ReservationDetailsVm GetReservationVm(int bookId, string userId)
         {
             var book = _bookService.GetBookById(bookId);
             var customer = _customerService.GetCustomerByUserId(userId);
 
 
-            var reservationVm = new NewReservationVm
+            var reservationVm = new ReservationDetailsVm
             {
                 BookId = bookId,
                 CustomerId = customer.Id,
@@ -77,8 +86,8 @@ namespace LibraryMVC.Application
                 CustomerLastName = customer.LastName,
                 CustomerEmail = customer.CustomerContactDetail.Mail,
                 CustomerPesel = customer.Pesel,
-                ReservationFrom = DateTime.Now,
-                ReservationTo = DateTime.Now.AddDays(7)
+                From = DateTime.Now,
+                To = DateTime.Now.AddDays(7)
             };
 
             return reservationVm;

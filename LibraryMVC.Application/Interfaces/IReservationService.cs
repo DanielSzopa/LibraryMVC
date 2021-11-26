@@ -7,8 +7,10 @@ namespace LibraryMVC.Application
 {
     public interface IReservationService
     {
-        NewReservationVm GetReservationVm(int bookId, string userId);
-        int AddReservation(NewReservationVm reservationVm);
+        ReservationDetailsVm GetReservationVm(int bookId, string userId);
+        int AddReservation(ReservationDetailsVm reservationVm);
+        ReservationDetailsVm GetReservationDetails(int id);
         ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString);
+
     }
 }
