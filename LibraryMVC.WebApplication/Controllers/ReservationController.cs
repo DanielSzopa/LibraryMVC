@@ -51,5 +51,11 @@ namespace LibraryMVC.WebApplication.Controllers
             var reservationVm = _reservationService.GetReservationDetails(id);
             return View(reservationVm);
         }
+
+        public IActionResult DeleteReservation(int id)
+        {
+            _reservationService.DeleteReservation(id);
+            return RedirectToAction("Index");
+        }
     }
 }

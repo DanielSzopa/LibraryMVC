@@ -23,6 +23,22 @@ namespace LibraryMVC.Infrastructure
             return reservation.Id;
         }
 
+        public void DeleteReservation(int id)
+        {
+            var reservation = _context.Reservations.Find(id);
+            if (reservation != null)
+            {
+                _context.Reservations.Remove(reservation);
+                _context.SaveChanges();
+            }
+        }
+
+        public int GetBookIdByReservation(int id)
+        {
+            var bookId = _context.Reservations.Find(id).BookId;
+            return bookId;
+        }
+
         public Reservation GetReservationDetails(int id)
         {
             var reservation = _context.Reservations

@@ -13,6 +13,6 @@ namespace LibraryMVC.Domain.Interfaces
         void UpdateBook(Book book);
         Book GetBookById(int bookId);
         IQueryable<Book> GetAllBooks();
-        void ChangeActiveOfBook(int id);
+        void ChangeStatusOfBook(int id, Status status);
     }
 }

@@ -1,13 +1,12 @@
 ﻿@model LibraryMVC.Application.ReservationDetailsVm
 
 @{
-    ViewData["Title"] = "ReservationDetails";
+    ViewData["Title"] = $"Reservation {Model.Title}";
 }
 
-<h1>ReservationDetails</h1>
+<h1>Reservation @Model.Title</h1>
 
 <div>
-    <h4>ReservationDetailsVm</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -67,6 +66,8 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-secondary" asp-action="Index">Back</a>
+    <a class="btn btn-primary" asp-controller="Customer" asp-action="CustomerDetails" asp-route-id="@Model.CustomerId">Customer</a>
+    <a class="btn btn-primary" asp-controller="Book" asp-action="DetailsBook" asp-route-id="@Model.BookId">Book</a>
+    <a class="btn btn-danger" asp-action="DeleteReservation" asp-route-id="@Model.Id">Delete Reservation</a>
 </div>

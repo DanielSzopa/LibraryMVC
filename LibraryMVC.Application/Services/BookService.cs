@@ -149,9 +149,9 @@ namespace LibraryMVC.Application
             return model;
         }
 
-        public void ChangeActiveOfBook(int id)
+        public void ChangeStatusOfBook(int id, Status status)
         {
-            _bookRepository.ChangeActiveOfBook(id);
+            _bookRepository.ChangeStatusOfBook(id, status);
         }
     }
 }

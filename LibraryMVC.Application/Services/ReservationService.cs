@@ -36,10 +36,26 @@ namespace LibraryMVC.Application
                 From = reservationVm.From,
                 To = reservationVm.To
             };
+            var status = Status.Reservation;
 
-            _bookService.ChangeActiveOfBook(reservation.BookId);
+            _bookService.ChangeStatusOfBook(reservation.BookId, status);
             var reservationId = _reservationRepository.AddReservation(reservation);
             return reservationId;
+        }
+
+        public void DeleteReservation(int id)
+        {
+            var status = Status.Active;
+            var bookId = GetBookIdByReservation(id);
+
+            _bookService.ChangeStatusOfBook(bookId, status);
+            _reservationRepository.DeleteReservation(id);
+        }
+
+        public int GetBookIdByReservation(int id)
+        {
+            var bookId =  _reservationRepository.GetBookIdByReservation(id);
+            return bookId;
         }
 
         public ReservationDetailsVm GetReservationDetails(int id)
@@ -92,6 +108,6 @@ namespace LibraryMVC.Application
 
             return reservationVm;
         }
-      
+
     }
 }
