@@ -43,7 +43,7 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult CreateReservation(ReservationDetailsVm reservationVm)
         {
             var reservationId = _reservationService.AddReservation(reservationVm);
-            return RedirectToAction("Index");
+            return RedirectToAction("ReservationDetails", new { id = reservationId });
         }
 
 
@@ -51,15 +51,15 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult CreateLocalReservation()
         {
             var reservationValues = _reservationService.SetParametrsToLocalReservationVm();
-            return Ok();
+            return PartialView("_LocalReservationModelPartial", reservationValues);          
         }
 
 
         [HttpPost]
-        public IActionResult CreateLocalReservation(ReservationDetailsVm reservationVm)
+        public IActionResult CreateLocalReservation(LocalReservationVm localReservationVm)
         {
-            var reservationId = _reservationService.AddReservation(reservationVm);
-            return PartialView();
+            var reservationId = _reservationService.AddLocalReservation(localReservationVm);
+            return RedirectToAction("ReservationDetails", new { id = reservationId });
         }
 
         public IActionResult ReservationDetails(int id)

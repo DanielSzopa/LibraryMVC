@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 
 namespace LibraryMVC.Application
 {
-    public class LocalReservationVm
+    public class LocalReservationVm : IMapFrom<ReservationDetailsVm>
     {
         public int Id { get; set; }
         public int BookId { get; set; }
@@ -12,5 +13,14 @@ namespace LibraryMVC.Application
         public DateTime To { get; set; }
         public List<BookFullNameVm> Books { get; set; }
         public List<CustomerFullNameVm> Customers { get; set; }
+
+
+
+
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<LocalReservationVm, ReservationDetailsVm>();
+        }
     }
 }

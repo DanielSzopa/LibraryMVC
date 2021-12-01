@@ -8,6 +8,13 @@
 
 <h1>Reservations</h1>
 
+<div id="PlaceHolderHere"></div>
+
+
+<button class="btn btn-primary" data-toggle="ajax-modal" data-target="#createLocalReservation"
+        data-url="@Url.Action("CreateLocalReservation")">
+    Create Reservation
+</button>
 <form class="form-inline my-2 my-lg-0" asp-controller="Reservation" asp-action="Index" method="get">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchString" id="searchString" asp-for="SearchString">
     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>

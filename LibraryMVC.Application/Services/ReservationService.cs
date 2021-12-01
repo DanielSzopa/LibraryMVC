@@ -43,6 +43,14 @@ namespace LibraryMVC.Application
             return reservationId;
         }
 
+        public int AddLocalReservation(LocalReservationVm localReservationVm)
+        {
+            var reservationVm = _mapper.Map<ReservationDetailsVm>(localReservationVm);
+            var reservationId = AddReservation(reservationVm);
+
+            return reservationId;
+        }
+
         public void DeleteReservation(int id)
         {
             var status = Status.Active;
@@ -111,8 +119,11 @@ namespace LibraryMVC.Application
 
         public LocalReservationVm SetParametrsToLocalReservationVm()
         {
-            var customersFullNames = _customerService.GetAllCustomersFullName().ToList();
-            var booksFullNames = _bookService.GetAllActiveBooksFullName().ToList();
+            var customersFullNames = _customerService.GetAllCustomersFullName()
+                .OrderBy(c =>c.CustomerFullName).ToList();
+
+            var booksFullNames = _bookService.GetAllActiveBooksFullName()
+                .OrderBy(b => b.BookFullName).ToList();
 
             var localReservation = new LocalReservationVm
             {
@@ -122,6 +133,6 @@ namespace LibraryMVC.Application
                 To = DateTime.Now.AddDays(7)
             };
             return localReservation;
-        }
+        }       
     }
 }

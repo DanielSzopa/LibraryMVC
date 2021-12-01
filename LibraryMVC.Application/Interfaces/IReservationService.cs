@@ -9,6 +9,7 @@ namespace LibraryMVC.Application
     {
         ReservationDetailsVm GetReservationVm(int bookId, string userId);
         int AddReservation(ReservationDetailsVm reservationVm);
+        int AddLocalReservation(LocalReservationVm localReservationVm);
         void DeleteReservation(int id);
         int GetBookIdByReservation(int id);
         ReservationDetailsVm GetReservationDetails(int id);
