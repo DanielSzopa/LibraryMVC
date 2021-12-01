@@ -13,6 +13,7 @@ namespace LibraryMVC.Application
         int GetBookIdByReservation(int id);
         ReservationDetailsVm GetReservationDetails(int id);
         ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString);
+        LocalReservationVm SetParametrsToLocalReservationVm();
 
     }
 }

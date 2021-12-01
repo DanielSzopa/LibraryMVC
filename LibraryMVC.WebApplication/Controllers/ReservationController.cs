@@ -38,12 +38,28 @@ namespace LibraryMVC.WebApplication.Controllers
             var reservationVm = _reservationService.GetReservationVm(bookId,userId);
             return PartialView("_ReservationModelPartial", reservationVm);
         }
-
+       
         [HttpPost]
         public IActionResult CreateReservation(ReservationDetailsVm reservationVm)
         {
             var reservationId = _reservationService.AddReservation(reservationVm);
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
+        public IActionResult CreateLocalReservation()
+        {
+            var reservationValues = _reservationService.SetParametrsToLocalReservationVm();
             return Ok();
+        }
+
+
+        [HttpPost]
+        public IActionResult CreateLocalReservation(ReservationDetailsVm reservationVm)
+        {
+            var reservationId = _reservationService.AddReservation(reservationVm);
+            return PartialView();
         }
 
         public IActionResult ReservationDetails(int id)

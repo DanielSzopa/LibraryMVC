@@ -19,5 +19,7 @@ namespace LibraryMVC.Application
         CustomerDetailsVm GetCustomerDetailsByUserId(string userId);
         CustomerListVm GetAllCustomerToList(int pageNumber, int pageSize, string searchString);
         IQueryable<Customer> GetAllCustomers();
+        IQueryable<CustomerFullNameVm> GetAllCustomersFullName();
+
     }
 }

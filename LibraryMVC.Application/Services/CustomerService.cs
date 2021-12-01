@@ -124,5 +124,12 @@ namespace LibraryMVC.Application
             var customers = _customerRepository.GetAllCustomers();
             return customers;
         }
+
+        public IQueryable<CustomerFullNameVm> GetAllCustomersFullName()
+        {
+            var customers = GetAllCustomers();
+            var customersVm = customers.ProjectTo<CustomerFullNameVm>(_mapper.ConfigurationProvider);
+            return customersVm;
+        }
     }
 }

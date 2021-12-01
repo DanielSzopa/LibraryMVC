@@ -118,6 +118,21 @@ namespace LibraryMVC.Application
             return result;
         }
 
+        public IQueryable<BookForListVm> GetAllActiveBooks()
+        {
+            var activeBooks = _bookRepository.GetAllActiveBooks()
+                .ProjectTo<BookForListVm>(_mapper.ConfigurationProvider);
+
+            return activeBooks;
+        }
+
+        public IQueryable<BookFullNameVm> GetAllActiveBooksFullName()
+        {
+            var books = GetAllActiveBooks();
+            var booksVm = books.ProjectTo<BookFullNameVm>(_mapper.ConfigurationProvider);
+            return booksVm;
+        }
+
         public IQueryable<CategoryVm> GetCategoriesToSelectList()
         {
             var categoriesVm = _categoryRepository.GetAllCategories().ProjectTo<CategoryVm>(_mapper.ConfigurationProvider);
@@ -153,5 +168,7 @@ namespace LibraryMVC.Application
         {
             _bookRepository.ChangeStatusOfBook(id, status);
         }
+
+        
     }
 }

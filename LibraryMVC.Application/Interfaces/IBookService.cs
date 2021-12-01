@@ -14,7 +14,9 @@ namespace LibraryMVC.Application
         NewBookVm GetBookForEdit(int id);
         Book GetBookById(int id);
         BookDetailsVm GetBookDetails(int bookId);
-        BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, string filter, int filterId);         
+        BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, string filter, int filterId);
+        IQueryable<BookForListVm> GetAllActiveBooks();
+        IQueryable<BookFullNameVm> GetAllActiveBooksFullName();
         IQueryable<CategoryVm> GetCategoriesToSelectList();
         IQueryable<PublisherVm> GetPublishersToSelectList();
         IQueryable<TypeOfBookVm> GetTypeOfBooksToSelectList();

@@ -62,6 +62,11 @@ namespace LibraryMVC.Infrastructure
             var books = _context.Books;
             return books;
         }
+        public IQueryable<Book> GetAllActiveBooks()
+        {
+            var books = _context.Books.Where(b => b.Status == Status.Active);
+            return books;
+        }
 
         public void ChangeStatusOfBook(int id, Status status)
         {
@@ -70,5 +75,6 @@ namespace LibraryMVC.Infrastructure
             book.Status = status;
             _context.SaveChanges();
         }
+
     }
 }

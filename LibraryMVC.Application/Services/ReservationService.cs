@@ -109,5 +109,19 @@ namespace LibraryMVC.Application
             return reservationVm;
         }
 
+        public LocalReservationVm SetParametrsToLocalReservationVm()
+        {
+            var customersFullNames = _customerService.GetAllCustomersFullName().ToList();
+            var booksFullNames = _bookService.GetAllActiveBooksFullName().ToList();
+
+            var localReservation = new LocalReservationVm
+            {
+                Customers = customersFullNames,
+                Books = booksFullNames,
+                From = DateTime.Now,
+                To = DateTime.Now.AddDays(7)
+            };
+            return localReservation;
+        }
     }
 }
