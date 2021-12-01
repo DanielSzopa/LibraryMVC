@@ -1,9 +1,11 @@
 ﻿using LibraryMVC.Application;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace LibraryMVC.WebApplication.Controllers
 {
+    [Authorize]
     public class AuthorController : Controller
     {
         private readonly IAuthorService _authorService;

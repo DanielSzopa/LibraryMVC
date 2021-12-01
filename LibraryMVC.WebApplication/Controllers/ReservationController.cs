@@ -1,4 +1,5 @@
 ﻿using LibraryMVC.Application;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibraryMVC.WebApplication.Controllers
 {
+    [Authorize]
     public class ReservationController : Controller
     {
         private readonly IReservationService _reservationService;
