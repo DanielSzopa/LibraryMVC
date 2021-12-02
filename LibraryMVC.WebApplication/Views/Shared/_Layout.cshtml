@@ -40,9 +40,12 @@
                             <li class="nav-item">
                                 <a class="nav-link  text-white" asp-area="" asp-controller="Book" asp-action="Index">Books</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link  text-white" asp-area="" asp-controller="Customer" asp-action="Index">Customers</a>
-                            </li>
+                            @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link  text-white" asp-area="" asp-controller="Customer" asp-action="Index">Customers</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link  text-white" asp-area="" asp-controller="Reservation" asp-action="Index">Reservations</a>
                             </li>

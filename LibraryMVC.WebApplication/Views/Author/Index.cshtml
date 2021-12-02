@@ -9,7 +9,10 @@
 <h1>Authors</h1>
 
 <p>
-    <a class="btn btn-primary" asp-controller="Author" asp-action="AddAuthor">Create</a>
+    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
+        <a class="btn btn-primary" asp-controller="Author" asp-action="AddAuthor">Create</a>
+    }
     <a class="btn btn-secondary" asp-controller="Book" asp-action="Index">Books</a>
     <a class="btn btn-secondary" asp-controller="Author" asp-action="Index">Authors</a>
     <a class="btn btn-secondary" asp-controller="TypeOfBook" asp-action="Index">Types</a>
@@ -57,12 +60,18 @@
                 <td>
                     @if (item.Id != 1)
                     {
-                        <a asp-controller="Author" asp-action="EditAuthor" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                        {
+                            <a asp-controller="Author" asp-action="EditAuthor" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
+                        }
                     }
                     <a asp-controller="Author" asp-action="AuthorDetails" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
                     @if (item.Id != 1)
                     {
-                        <a asp-controller="Author" asp-action="DeleteAuthor" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                        {
+                            <a asp-controller="Author" asp-action="DeleteAuthor" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        }
                     }
                 </td>
             </tr>

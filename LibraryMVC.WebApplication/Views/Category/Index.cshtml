@@ -8,10 +8,13 @@
 <div id="PlaceHolderHere"></div>
 
 <p>
-    <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addCategory"
-            data-url="@Url.Action("CreateCategory")">
-        Create
-    </button>
+    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
+        <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addCategory"
+                data-url="@Url.Action("CreateCategory")">
+            Create
+        </button>
+    }
     <a class="btn btn-secondary" asp-controller="Book" asp-action="Index">Books</a>
     <a class="btn btn-secondary" asp-controller="Author" asp-action="Index">Authors</a>
     <a class="btn btn-secondary" asp-controller="TypeOfBook" asp-action="Index">Types</a>
@@ -36,31 +39,37 @@
     <tbody>
         @foreach (var item in ViewBag.Category)
         {
-        <tr>
-            <td>
-                @item.Id
-            </td>
-            <td>
-                @item.Name
-            </td>
-            <td>
-                @item.NumberOfBooks
-            </td>
-            <td>
-                @if (item.Id != 1)
-                {
-                    <button class="btn btn-secondary" data-toggle="ajax-modal" data-target="#editCategory"
-                            data-url="@Url.Action("EditCategory",new { @item.Id })">
-                        Edit
-                    </button>
-                }
-                <a asp-controller="Book" asp-action="Index" asp-route-filter="Category" asp-route-filterId="@item.Id" class="btn btn-primary">Books</a>
-                @if (item.Id != 1)
-                {
-                    <a asp-controller="Category" asp-action="DeleteCategory" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                }
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.NumberOfBooks
+                </td>
+                <td>
+                    @if (item.Id != 1)
+                    {
+                        @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                        {
+                            <button class="btn btn-secondary" data-toggle="ajax-modal" data-target="#editCategory"
+                                    data-url="@Url.Action("EditCategory", new { @item.Id })">
+                                Edit
+                            </button>
+                        }
+                    }
+                    <a asp-controller="Book" asp-action="Index" asp-route-filter="Category" asp-route-filterId="@item.Id" class="btn btn-primary">Books</a>
+                    @if (item.Id != 1)
+                    {
+                        @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                        {
+                            <a asp-controller="Category" asp-action="DeleteCategory" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        }
+                    }
+                </td>
+            </tr>
         }
     </tbody>
 </table>

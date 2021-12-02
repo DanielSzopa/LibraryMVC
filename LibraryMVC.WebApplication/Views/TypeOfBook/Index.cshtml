@@ -8,10 +8,13 @@
 <div id="PlaceHolderHere"></div>
 
 <p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
     <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#addTypeOfBook"
             data-url="@Url.Action("CreateTypeOfBook")">
         Create
     </button>
+    }
     <a class="btn btn-secondary" asp-controller="Book" asp-action="Index">Books</a>
     <a class="btn btn-secondary" asp-controller="Author" asp-action="Index">Authors</a>
     <a class="btn btn-secondary" asp-controller="TypeOfBook" asp-action="Index">Types</a>
@@ -36,31 +39,39 @@
     <tbody>
         @foreach (var item in Model.TypesOfBooks)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfBooks)
-            </td>
-            <td>
-                @if (item.Id != 1)
-                {
-                <button class="btn btn-secondary" data-toggle="ajax-modal" data-target="#editTypeOfBook"
-                        data-url="@Url.Action("EditTypeOfBook",new { @item.Id })">
-                    Edit
-                </button>
-                }
-                <a asp-controller="Book" asp-action="Index" asp-route-filter="TypeOfBook" asp-route-filterId="@item.Id" class="btn btn-primary">Books</a>
-                @if (item.Id != 1)
-                {
-                    <a asp-controller="TypeOfBook" asp-action="DeleteTypeOfBook" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                }
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfBooks)
+                </td>
+                <td>
+                    @if (item.Id != 1)
+                    {
+                        @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                            {
+                            <button class="btn btn-secondary" data-toggle="ajax-modal" data-target="#editTypeOfBook"
+                                    data-url="@Url.Action("EditTypeOfBook", new { @item.Id })">
+                                Edit
+                            </button>
+                        }
+                    }
+
+                    <a asp-controller="Book" asp-action="Index" asp-route-filter="TypeOfBook" asp-route-filterId="@item.Id" class="btn btn-primary">Books</a>
+
+                    @if (item.Id != 1)
+                    {
+                        @if(User.IsInRole("Admin") || User.IsInRole("Employee"))
+                        {                
+                             <a asp-controller="TypeOfBook" asp-action="DeleteTypeOfBook" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        }
+                    }
+                </td>
+            </tr>
         }
     </tbody>
 </table>

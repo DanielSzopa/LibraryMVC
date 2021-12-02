@@ -46,6 +46,9 @@
         <a class="btn btn-secondary" asp-controller="Book" asp-action="DetailsBook" asp-route-id="@Model.IdCurrentBook">Back</a>
     }
     <a class="btn btn-primary" asp-controller="Book" asp-action="Index" asp-route-filter="Author" asp-route-filterId="@Model.Id">Books</a>
+    @if(User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
     <a class="btn btn-secondary" asp-action="EditAuthor" asp-route-id="@Model.Id">Edit</a>
     <a class="btn btn-danger" asp-action="DeleteAuthor" asp-route-id="@Model.Id">Delete</a>
+    }
 </div>

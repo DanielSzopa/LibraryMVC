@@ -16,6 +16,7 @@ namespace LibraryMVC.WebApplication.Controllers
             _customerService = customerService;
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult Index(int pageNumber, string searchString)
         {
             if (pageNumber == 0)

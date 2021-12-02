@@ -90,7 +90,6 @@ namespace LibraryMVC.WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "Admin, Employee")]
         public IActionResult DetailsBook(int id)
         {
             var book = _bookService.GetBookDetails(id);
