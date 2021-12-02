@@ -11,7 +11,8 @@ namespace LibraryMVC.Application
     {
         int AddCustomer(NewCustomerVm newCustomerVm);
         void AddCustomerAfterConfirmEmail(string userId, string mail);        
-        int UpdateCustomer(NewCustomerVm customerVm);       
+        int UpdateCustomer(NewCustomerVm customerVm);
+        bool IsCustomerDetailsAreCorrect(string userId);
         NewCustomerVm GetCustomerForEdit(int id);
         Customer GetCustomerById(int id);
         Customer GetCustomerByUserId(string userId);              

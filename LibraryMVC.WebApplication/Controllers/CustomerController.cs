@@ -51,7 +51,8 @@ namespace LibraryMVC.WebApplication.Controllers
             return RedirectToAction("CustomerDetails", new { id = customerId});
         }   
 
-        public IActionResult ViewCustomerProfil(int id)
+        [HttpGet]
+        public IActionResult ViewCustomerProfil()
         {
             var currentUserId = _userService.GetCurrentUserId();
             var customer = _customerService.GetCustomerDetailsByUserId(currentUserId);

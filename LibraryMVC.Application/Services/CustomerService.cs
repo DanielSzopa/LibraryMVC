@@ -62,6 +62,17 @@ namespace LibraryMVC.Application
             var updateCustomerId =  _customerRepository.UpdateCustomer(customer);
             return updateCustomerId;
         }
+
+        public bool IsCustomerDetailsAreCorrect(string userId)
+        {
+            var customer = _customerRepository.GetCustomerByUserId(userId);
+            if(customer.FirstName == null || customer.LastName == null || customer.Pesel == null)
+            {
+                return false;
+            }
+            return true;
+            
+        }
        
         public NewCustomerVm GetCustomerForEdit(int id)
         {

@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace LibraryMVC.WebApplication.Controllers
 {
-    [Authorize]
+    
     public class ReservationController : Controller
     {
         private readonly IReservationService _reservationService;
         private readonly IUserService _userService;
-        public ReservationController(IReservationService reservationService, IUserService userService)
+        private readonly ICustomerService _customerService;
+        public ReservationController(IReservationService reservationService, IUserService userService, ICustomerService customerService)
         {
             _reservationService = reservationService;
             _userService = userService;
+            _customerService = customerService;
         }
         public IActionResult Index(int pageNumber, string searchString)
         {
@@ -37,10 +39,15 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult CreateReservation(int bookId)
         {
             var userId = _userService.GetCurrentUserId();
+            var result = _customerService.IsCustomerDetailsAreCorrect(userId);
+            if(!result)
+            {
+                return PartialView("_ReservationErrorModelPartial");
+            }
             var reservationVm = _reservationService.GetReservationVm(bookId,userId);
             return PartialView("_ReservationModelPartial", reservationVm);
         }
-       
+     
         [HttpPost]
         public IActionResult CreateReservation(ReservationDetailsVm reservationVm)
         {
