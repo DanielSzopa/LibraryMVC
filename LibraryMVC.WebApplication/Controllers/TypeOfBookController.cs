@@ -24,6 +24,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreateTypeOfBook()
         {
              var typeOfBook = new TypeOfBookVm();
@@ -31,6 +32,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreateTypeOfBook(TypeOfBookVm typeOfBook)
         {
             _typeOfBookService.AddTypeOfBook(typeOfBook);
@@ -38,6 +40,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditTypeOfBook(int id)
         {
             var typeOfBook = _typeOfBookService.GetTypeOfBookById(id);
@@ -45,12 +48,14 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditTypeOfBook(TypeOfBookVm model)
         {
             _typeOfBookService.UpdateTypeOfBook(model);
             return RedirectToAction("Index", new { model.Id });
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult DeleteTypeOfBook(int id)
         {
             if (id != 1)

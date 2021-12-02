@@ -24,6 +24,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreateCategory()
         {
             var category = new CategoryVm();
@@ -31,6 +32,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreateCategory(CategoryVm category)
         {
             _categoryService.AddCategory(category);
@@ -38,6 +40,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditCategory(int id)
         {
             var category = _categoryService.GetCategoryById(id);
@@ -45,12 +48,14 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditCategory(CategoryVm model)
         {
             _categoryService.UpdateCategory(model);
             return RedirectToAction("Index", new { model.Id });
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult DeleteCategory(int id)
         {
             if (id != 1)

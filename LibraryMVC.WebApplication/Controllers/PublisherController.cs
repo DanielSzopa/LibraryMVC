@@ -24,6 +24,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreatePublisher()
         {
             var publisher = new PublisherVm();
@@ -31,6 +32,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreatePublisher(PublisherVm publisher)
         {
             _publisherService.AddPublisher(publisher);
@@ -38,6 +40,7 @@ namespace LibraryMVC.WebApplication.Controllers
         } 
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditPublisher(int id)
         {
             var publisher = _publisherService.GetPublisherById(id);
@@ -45,12 +48,14 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditPublisher(PublisherVm model)
         {
             _publisherService.UpdatePublisher(model);
             return RedirectToAction("Index", new { model.Id });
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult DeletePublisher(int id)
         {
             if(id != 1)

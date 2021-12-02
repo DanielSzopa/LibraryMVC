@@ -50,6 +50,7 @@ namespace LibraryMVC.WebApplication.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreateLocalReservation()
         {
             var reservationValues = _reservationService.SetParametrsToLocalReservationVm();
@@ -58,6 +59,7 @@ namespace LibraryMVC.WebApplication.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreateLocalReservation(LocalReservationVm localReservationVm)
         {
             var reservationId = _reservationService.AddLocalReservation(localReservationVm);
@@ -70,6 +72,7 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(reservationVm);
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult DeleteReservation(int id)
         {
             _reservationService.DeleteReservation(id);

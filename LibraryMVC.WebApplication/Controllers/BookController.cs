@@ -65,6 +65,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }   
         
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddBook()
         {
             var model = new NewBookVm();
@@ -75,18 +76,21 @@ namespace LibraryMVC.WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddBook(NewBookVm newBookVm)
         {                  
                 var addedBookId =  _bookService.AddBook(newBookVm);
                 return RedirectToAction("DetailsBook", new { id = addedBookId});           
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult DeleteBook(int id)
         {
             _bookService.DeleteBook(id);
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult DetailsBook(int id)
         {
             var book = _bookService.GetBookDetails(id);
@@ -94,6 +98,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
       
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditBook(int id)
         {
             var book = _bookService.GetBookForEdit(id);
@@ -102,6 +107,7 @@ namespace LibraryMVC.WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditBook(NewBookVm model)
         {            
             _bookService.UpdateBook(model);

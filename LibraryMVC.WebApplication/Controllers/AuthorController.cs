@@ -8,13 +8,14 @@ namespace LibraryMVC.WebApplication.Controllers
     [Authorize]
     public class AuthorController : Controller
     {
-        private readonly IAuthorService _authorService;
-
+        private readonly IAuthorService _authorService;   
+        
         public AuthorController(IAuthorService authorService)
         {
             _authorService = authorService;
         }
 
+        
         public IActionResult Index(int pageNumber, string searchString)
         {
             if (pageNumber == 0)
@@ -40,21 +41,25 @@ namespace LibraryMVC.WebApplication.Controllers
             var author = _authorService.GetAuthorDetailsByAuthorId(id);
             return View(author);
         }
-
+    
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddAuthor()
         {
             return View(new NewAuthorVm());
         }
-
-        [ValidateAntiForgeryToken]
+       
+        
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddAuthor(NewAuthorVm newAuthorVm)
         {
             var newAuthor = _authorService.AddAuthor(newAuthorVm);
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult DeleteAuthor(int id)
         {
             if (id != 1)
@@ -64,14 +69,18 @@ namespace LibraryMVC.WebApplication.Controllers
             }
             return RedirectToAction("Index");
         }
-
+       
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditAuthor(int id)
         {
             var author = _authorService.GetAuthorForEdit(id);
             return View(author);
         }
+
+      
         [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditAuthor(AuthorDetailsVm model)
         {
            var authorId =  _authorService.EditAuthor(model);

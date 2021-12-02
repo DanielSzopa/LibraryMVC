@@ -32,6 +32,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddCustomer(bool isLocalAccount)
         {
             var customer = new NewCustomerVm();
@@ -42,6 +43,7 @@ namespace LibraryMVC.WebApplication.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddCustomer(NewCustomerVm newCustomerVm)
         {
            var customerId = _customerService.AddCustomer(newCustomerVm);
@@ -55,6 +57,7 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(customer);
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CustomerDetails(int id)
         {
             var customerVm = _customerService.GetCustomerDetailsByCustomerId(id);
@@ -62,6 +65,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditCustomer(int id)
         {
             var customer = _customerService.GetCustomerForEdit(id);
@@ -69,6 +73,7 @@ namespace LibraryMVC.WebApplication.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditCustomer(NewCustomerVm newCustomerVm)
         {
             var customerId = _customerService.UpdateCustomer(newCustomerVm);
