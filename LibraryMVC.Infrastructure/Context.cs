@@ -1,4 +1,5 @@
 ﻿using LibraryMVC.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -41,6 +42,14 @@ namespace LibraryMVC.Infrastructure
 
             modelBuilder.Entity<Author>()
                .HasData(new Author { Id = 1, FirstName = "none", LastName = "none", Biography = "none" });
+
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(
+                    new IdentityRole { Id = "Admin", Name = "Admin", NormalizedName="ADMIN"},
+                    new IdentityRole { Id = "Employee", Name = "Employee", NormalizedName = "EMPLOYEE" },
+                    new IdentityRole { Id = "User", Name = "User", NormalizedName = "USER" }
+                );
+              
 
             //Example Data
 
