@@ -51,7 +51,7 @@ namespace LibraryMVC.WebApplication.Controllers
             return RedirectToAction("CustomerDetails", new { id = customerId});
         }   
 
-        public IActionResult ViewCustomerProfil()
+        public IActionResult ViewCustomerProfil(int id)
         {
             var currentUserId = _userService.GetCurrentUserId();
             var customer = _customerService.GetCustomerDetailsByUserId(currentUserId);
@@ -66,10 +66,34 @@ namespace LibraryMVC.WebApplication.Controllers
         }
 
         [HttpGet]
+        public IActionResult EditProfile(int id)
+        {
+            var customer = _customerService.GetCustomerForEdit(id);
+            ViewBag.FormAction = "EditProfile";
+            ViewBag.Title = "Edit Profile";
+            ViewBag.smallTitle = "profile";
+
+            return View("EditCustomer", customer);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditProfile(NewCustomerVm newCustomerVm)
+        {
+            var customerId = _customerService.UpdateCustomer(newCustomerVm);
+            return RedirectToAction("ViewCustomerProfil", new { id = customerId });
+        }
+
+
+        [HttpGet]
         [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditCustomer(int id)
         {
             var customer = _customerService.GetCustomerForEdit(id);
+            ViewBag.FormAction = "EditCustomer";
+            ViewBag.Title = "Edit Customer";
+            ViewBag.smallTitle = "customer";
+
             return View(customer);
         }
         [HttpPost]

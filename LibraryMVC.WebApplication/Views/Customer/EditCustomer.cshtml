@@ -1,17 +1,17 @@
 ﻿@model LibraryMVC.Application.NewCustomerVm
 
 @{
-    ViewData["Title"] = "Edit Customer";
+    ViewData["Title"] = ViewBag.Title;
 }
 
-<h1>Edit Customer</h1>
+<h1>Edit @ViewBag.smallTitle</h1>
 
-<h4>Complete form to edit a customer</h4>
+<h4>Complete form to edit a @ViewBag.smallTitle</h4>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditCustomer">
+        <form asp-action="@ViewBag.FormAction">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" class="form-control" />
             <input type="hidden" asp-for="UserId" class="form-control" />
