@@ -17,13 +17,18 @@ namespace LibraryMVC.Application
             _userManager = userManager;
         }
 
+       
         public async Task<string> CreateUser(string mail, string password)
         {
             var user = new IdentityUser { UserName = mail, Email = mail, EmailConfirmed = true };
             var result =  await _userManager.CreateAsync(user, password);
             return user.Id;
         }
-
+        public async Task ChangeCustomerRoleToUser(string userId)
+        {
+            var user = new IdentityUser { Id = userId };
+           await _userManager.AddToRoleAsync(user, "User");
+        }
 
         public string GetCurrentUserId()
         {

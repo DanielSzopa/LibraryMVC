@@ -32,6 +32,7 @@ namespace LibraryMVC.Application
             {
                 var userId = _userService.CreateUser(newCustomerVm.CustomerContactDetail.Mail, newCustomerVm.Password);
                 customer.UserId = userId.Result;
+                _userService.ChangeCustomerRoleToUser(userId.Result);
             }          
             var customerId = _customerRepository.AddCustomer(customer);
             return customerId;
@@ -39,6 +40,7 @@ namespace LibraryMVC.Application
 
         public void AddCustomerAfterConfirmEmail(string userId, string mail)
         {
+            _userService.ChangeCustomerRoleToUser(userId);
             Customer customer = new Customer();
             Address adress = new Address();
             CustomerContactDetail customerContactDetail = new CustomerContactDetail();
@@ -60,7 +62,7 @@ namespace LibraryMVC.Application
             var updateCustomerId =  _customerRepository.UpdateCustomer(customer);
             return updateCustomerId;
         }
-
+       
         public NewCustomerVm GetCustomerForEdit(int id)
         {
             var customer = GetCustomerById(id);
@@ -131,5 +133,6 @@ namespace LibraryMVC.Application
             var customersVm = customers.ProjectTo<CustomerFullNameVm>(_mapper.ConfigurationProvider);
             return customersVm;
         }
+
     }
 }
