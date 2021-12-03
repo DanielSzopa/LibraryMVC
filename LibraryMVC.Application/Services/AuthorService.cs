@@ -46,14 +46,15 @@ namespace LibraryMVC.Application
 
         public NewAuthorVm GetAuthorForEdit(int id)
         {
-            var author = GetAuthorById(id);
+            var author = _authorRepository.GetAuthorById(id);
             var authorVm = _mapper.Map<NewAuthorVm>(author);
             return authorVm;
         }
-
-        public Author GetAuthorById(int id)
+        public string GetAuthorFullName(int id)
         {
-            return _authorRepository.GetAuthorById(id);
+            var author = _authorRepository.GetAuthorById(id);
+            var fullName = author.FirstName + " " + author.LastName;
+            return fullName;
         }
 
         public IQueryable<Author> GetAllAuthors()
@@ -97,7 +98,7 @@ namespace LibraryMVC.Application
         
         public AuthorDetailsVm GetAuthorDetailsByAuthorId(int id)
         {
-            var author = GetAuthorById(id);
+            var author = _authorRepository.GetAuthorById(id);
             var authorVm = SetAuthorDetails(author);
             return authorVm;
         }
@@ -108,6 +109,6 @@ namespace LibraryMVC.Application
 
             authorVm.IdCurrentBook = id;
             return authorVm;
-        }             
+        }       
     }
 }

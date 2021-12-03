@@ -13,7 +13,7 @@ namespace LibraryMVC.Application
         int EditAuthor(AuthorDetailsVm model);
         void ChangeAuthorBeforeDelete(int id);
         NewAuthorVm GetAuthorForEdit(int id);
-        Author GetAuthorById(int id);
+        string GetAuthorFullName(int id);
         IQueryable<Author> GetAllAuthors();       
         AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize, string searchString);
         AuthorDetailsVm SetAuthorDetails(Author author);

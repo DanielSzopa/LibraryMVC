@@ -56,8 +56,8 @@ namespace LibraryMVC.WebApplication.Controllers
                     ViewBag.Title = _typeOfBookService.GetTypeOfBookById(filterId).Name;
                     return View(books);
                 case "Author":
-                    var author = _authorService.GetAuthorById(filterId);
-                    ViewBag.Title = $"{author.FirstName} {author.LastName}";
+                    var authorFullName = _authorService.GetAuthorFullName(filterId);
+                    ViewBag.Title = authorFullName;
                     return View(books);
             }         
             ViewBag.Title = "Books";
