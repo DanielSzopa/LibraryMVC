@@ -56,16 +56,12 @@ namespace LibraryMVC.Application
             var fullName = author.FirstName + " " + author.LastName;
             return fullName;
         }
-
-        public IQueryable<Author> GetAllAuthors()
-        {
-            var authors = _authorRepository.GetAllAuthors();
-            return authors;
-        }    
-        
+    
         public AuthorListVm GetAllAuthorToList(int pageNumber, int pageSize, string searchString)
         {
-            var authors = GetAllAuthors().Where(a => (a.FirstName + " " + a.LastName).Contains(searchString))
+            var authors = _authorRepository.GetAllAuthors()
+                .Where(a => (a.FirstName + " " + a.LastName)
+                .Contains(searchString))
                 .ProjectTo<AuthorForListVm>(_mapper.ConfigurationProvider)
                 .ToList();
 
