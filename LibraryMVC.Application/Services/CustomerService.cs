@@ -118,7 +118,9 @@ namespace LibraryMVC.Application
 
         public CustomerListVm GetAllCustomerToList(int pageNumber, int pageSize, string searchString)
         {
-            var customers = GetAllCustomers().Where(c => (c.FirstName + " " + c.LastName).Contains(searchString))
+            var customers = _customerRepository.GetAllCustomers()
+                .Where(c => (c.FirstName + " " + c.LastName)
+                .Contains(searchString))
             .ProjectTo<CustomerForListVm>(_mapper.ConfigurationProvider)
             .ToList();
 
@@ -135,15 +137,9 @@ namespace LibraryMVC.Application
             return result;
         }
 
-        public IQueryable<Customer> GetAllCustomers()
-        {
-            var customers = _customerRepository.GetAllCustomers();
-            return customers;
-        }
-
         public IQueryable<CustomerFullNameVm> GetAllCustomersFullName()
         {
-            var customers = GetAllCustomers();
+            var customers = _customerRepository.GetAllCustomers();
             var customersVm = customers.ProjectTo<CustomerFullNameVm>(_mapper.ConfigurationProvider);
             return customersVm;
         }
