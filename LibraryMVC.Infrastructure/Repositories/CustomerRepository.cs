@@ -24,6 +24,15 @@ namespace LibraryMVC.Infrastructure
             return customer.Id;
         }
 
+        public int GetCustomerIdByUserId(string userId)
+        {
+            var customerId = _context.Customers
+                .Where(c => c.UserId == userId)
+                .Select(c => c.Id).Single();
+
+            return customerId;
+        }
+
         public IQueryable<Customer> GetAllCustomers()
         {
             return _context.Customers;
@@ -48,6 +57,7 @@ namespace LibraryMVC.Infrastructure
                 .FirstOrDefault(c => c.UserId == id);
             return customer;
         }
+
 
         public int UpdateCustomer(Customer customer)
         {         

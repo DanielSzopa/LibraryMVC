@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace LibraryMVC.WebApplication.Controllers
 {
     
+    [Authorize]
     public class ReservationController : Controller
     {
         private readonly IReservationService _reservationService;
@@ -20,9 +21,12 @@ namespace LibraryMVC.WebApplication.Controllers
             _userService = userService;
             _customerService = customerService;
         }
-        public IActionResult Index(int pageNumber, string searchString)
+
+        public IActionResult Index(int pageNumber, string searchString, int reservationsByCustomerId, bool isCustomerReservations)
         {
-            if(pageNumber == 0)
+            int pageSize = 10;
+
+            if (pageNumber == 0)
             {
                 pageNumber = 1;
             }
@@ -30,9 +34,20 @@ namespace LibraryMVC.WebApplication.Controllers
             {
                 searchString = string.Empty;
             }
-            int pageSize = 10;
-            var resevationList = _reservationService.GetAllResevationToList(pageNumber,pageSize,searchString);
-            return View(resevationList);
+            if(isCustomerReservations)
+            {
+                var userId = _userService.GetCurrentUserId();
+                var customerId = _customerService.GetCustomerIdByUserId(userId);
+                reservationsByCustomerId = customerId;
+            }                    
+            if (!(User.IsInRole("User") && isCustomerReservations == false))
+            {
+                var resevationList = _reservationService.GetAllResevationToList(pageNumber, pageSize, searchString, reservationsByCustomerId, isCustomerReservations);
+                return View(resevationList);
+            }
+            var reservation = new ReservationListVm();
+            reservation.ListOfReservationForListVm = new List<ReservationForListVm>();
+            return View(reservation);
         }
 
         [HttpGet]

@@ -26,7 +26,7 @@ namespace LibraryMVC.WebApplication.Controllers
             {
                 searchString = String.Empty;
             }
-            int pageSize = 2;
+            int pageSize = 10;
             var authors = _authorService.GetAllAuthorToList(pageNumber, pageSize, searchString);
             return View(authors);
         }

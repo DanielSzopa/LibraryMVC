@@ -11,6 +11,8 @@ namespace LibraryMVC.Application
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public int Count { get; set; }
+        public int ReservationsByCustomerId { get; set; }
+        public bool IsCustomerReservations { get; set; }
 
     }
 }

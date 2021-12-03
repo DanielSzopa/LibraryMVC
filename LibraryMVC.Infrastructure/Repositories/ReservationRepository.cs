@@ -57,5 +57,11 @@ namespace LibraryMVC.Infrastructure
             return reservations;
         }
 
+        public IQueryable<Reservation> GetAllCustomerReservations(int customerId)
+        {
+            var reservations = _context.Reservations
+                .Where(r => r.CustomerId == customerId);
+            return reservations;
+        }
     }
 }

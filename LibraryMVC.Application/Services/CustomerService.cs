@@ -73,7 +73,13 @@ namespace LibraryMVC.Application
             return true;
             
         }
-       
+
+        public int GetCustomerIdByUserId(string userId)
+        {
+            var customerId = _customerRepository.GetCustomerIdByUserId(userId);
+            return customerId;
+        }
+
         public NewCustomerVm GetCustomerForEdit(int id)
         {
             var customer = GetCustomerById(id);
@@ -145,5 +151,6 @@ namespace LibraryMVC.Application
             return customersVm;
         }
 
+        
     }
 }

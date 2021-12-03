@@ -74,9 +74,19 @@ namespace LibraryMVC.Application
             return reservationVm;
         }
 
-        public ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString)
+        public ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString, int customerId, bool isCustomerReservations)
         {
-            var reservationsVm = _reservationRepository.GetAllReservation()
+            var reservation = default(IQueryable<Reservation>);
+            if(isCustomerReservations)
+            {
+                reservation = _reservationRepository.GetAllCustomerReservations(customerId);               
+            }
+            else
+            {
+                reservation = _reservationRepository.GetAllReservation();
+            }
+
+            var reservationsVm = reservation
                 .Where(r => r.Book.Title.Contains(searchString) || (r.Customer.FirstName + " " + r.Customer.LastName).Contains(searchString))
                 .ProjectTo<ReservationForListVm>(_mapper.ConfigurationProvider).ToList();
             
@@ -87,7 +97,9 @@ namespace LibraryMVC.Application
                 PageSize = pageSize,
                 SearchString = searchString,
                 Count = reservationsVm.Count,
-                ListOfReservationForListVm = records
+                ListOfReservationForListVm = records,
+                ReservationsByCustomerId = customerId,
+                IsCustomerReservations = isCustomerReservations
             };
 
             return result;
