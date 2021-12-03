@@ -12,7 +12,6 @@ namespace LibraryMVC.Application
         void DeleteBook(int id);
         void UpdateBook(NewBookVm model);                  
         NewBookVm GetBookForEdit(int id);
-        Book GetBookById(int id);
         BookDetailsVm GetBookDetails(int bookId);
         BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, string filter, int filterId);
         IQueryable<BookForListVm> GetAllActiveBooks();

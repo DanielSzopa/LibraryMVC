@@ -108,20 +108,20 @@ namespace LibraryMVC.Application
 
         public ReservationDetailsVm GetReservationVm(int bookId, string userId)
         {
-            var book = _bookService.GetBookById(bookId);
-            var customer = _customerService.GetCustomerByUserId(userId);
+            var book = _bookService.GetBookDetails(bookId);
+            var customerVm = _customerService.GetCustomerForReservationByUserId(userId);
 
 
             var reservationVm = new ReservationDetailsVm
             {
                 BookId = bookId,
-                CustomerId = customer.Id,
+                CustomerId = customerVm.Id,
                 Title = book.Title,
-                Author = $"{book.Author.FirstName} {book.Author.LastName}",
-                CustomerFirstName = customer.FirstName,
-                CustomerLastName = customer.LastName,
-                CustomerEmail = customer.CustomerContactDetail.Mail,
-                CustomerPesel = customer.Pesel,
+                Author = book.Author,
+                CustomerFirstName = customerVm.FirstName,
+                CustomerLastName = customerVm.LastName,
+                CustomerEmail = customerVm.Mail,
+                CustomerPesel = customerVm.Pesel,
                 From = DateTime.Now,
                 To = DateTime.Now.AddDays(7)
             };

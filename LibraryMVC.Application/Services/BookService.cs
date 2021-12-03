@@ -62,12 +62,6 @@ namespace LibraryMVC.Application
             return model;
         }
 
-        public Book GetBookById(int id)
-        {
-            var book = _bookRepository.GetBookById(id);
-            return book;
-        }
-
         public BookDetailsVm GetBookDetails(int bookId)
         {
             var book = _bookRepository.GetBookById(bookId);

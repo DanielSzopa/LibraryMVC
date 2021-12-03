@@ -82,7 +82,7 @@ namespace LibraryMVC.Application
 
         public NewCustomerVm GetCustomerForEdit(int id)
         {
-            var customer = GetCustomerById(id);
+            var customer = _customerRepository.GetCustomerByCustomerId(id);
             var customerVm = _mapper.Map<NewCustomerVm>(customer);
             if (customer.CustomerContactDetail is null)
             {
@@ -95,26 +95,23 @@ namespace LibraryMVC.Application
             return customerVm;
         }
 
-        public Customer GetCustomerById(int id)
+        public CustomerForReservationVm GetCustomerForReservationByUserId(string userId)
         {
-            return _customerRepository.GetCustomerByCustomerId(id);
-        }
-
-        public Customer GetCustomerByUserId(string userId)
-        {
-            return _customerRepository.GetCustomerByUserId(userId);
+            var customer = _customerRepository.GetCustomerByUserId(userId);
+            var customerForReservationVm = _mapper.Map<CustomerForReservationVm>(customer);
+            return customerForReservationVm;
         }
 
         public CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId)
         {
-            var customer = GetCustomerById(customerId);
+            var customer = _customerRepository.GetCustomerByCustomerId(customerId);
             var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
             return customerVm;
         }
 
         public CustomerDetailsVm GetCustomerDetailsByUserId(string currentUserId)
         {
-            var customer = GetCustomerByUserId(currentUserId);
+            var customer = _customerRepository.GetCustomerByUserId(currentUserId);
             var customerVm = _mapper.Map<CustomerDetailsVm>(customer);
             return customerVm;
         }
@@ -150,7 +147,6 @@ namespace LibraryMVC.Application
             var customersVm = customers.ProjectTo<CustomerFullNameVm>(_mapper.ConfigurationProvider);
             return customersVm;
         }
-
-        
+       
     }
 }
