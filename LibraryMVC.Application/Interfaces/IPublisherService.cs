@@ -1,10 +1,4 @@
-﻿using LibraryMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LibraryMVC.Application
+﻿namespace LibraryMVC.Application
 {
     public interface IPublisherService
     {      

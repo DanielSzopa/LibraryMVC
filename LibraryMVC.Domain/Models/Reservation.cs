@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace LibraryMVC.Domain.Models
+namespace LibraryMVC.Domain
 {
     public class Reservation
     {

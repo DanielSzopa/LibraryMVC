@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LibraryMVC.Domain.Models
+namespace LibraryMVC.Domain
 {
     public class Book
     {

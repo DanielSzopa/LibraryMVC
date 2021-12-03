@@ -1,7 +1,4 @@
-﻿using LibraryMVC.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LibraryMVC.Domain;
 
 namespace LibraryMVC.Infrastructure
 {

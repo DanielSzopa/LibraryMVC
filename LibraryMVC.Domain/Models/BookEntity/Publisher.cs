@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-
-namespace LibraryMVC.Domain.Models
-{ 
+﻿namespace LibraryMVC.Domain
+{
     public class Publisher
     {
         public int Id { get; set; }

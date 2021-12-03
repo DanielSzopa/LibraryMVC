@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace LibraryMVC.Domain.Models
+namespace LibraryMVC.Domain
 {
     public class Rental
     {

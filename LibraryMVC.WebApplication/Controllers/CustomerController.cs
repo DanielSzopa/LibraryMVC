@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace LibraryMVC.WebApplication.Controllers
+namespace LibraryMVC.WebApplication
 {
     [Authorize]
     public class CustomerController : Controller

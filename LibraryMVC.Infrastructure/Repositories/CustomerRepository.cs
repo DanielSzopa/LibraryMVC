@@ -1,11 +1,6 @@
-﻿using LibraryMVC.Domain.Interfaces;
-using LibraryMVC.Domain.Models;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
+﻿using LibraryMVC.Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace LibraryMVC.Infrastructure
 {

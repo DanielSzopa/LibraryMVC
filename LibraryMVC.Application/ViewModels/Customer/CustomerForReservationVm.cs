@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using LibraryMVC.Domain.Models;
+using LibraryMVC.Domain;
 
 namespace LibraryMVC.Application
 {

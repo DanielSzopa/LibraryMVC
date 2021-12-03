@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
-using FluentValidation;
-using LibraryMVC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using LibraryMVC.Domain;
 
 namespace LibraryMVC.Application
 {

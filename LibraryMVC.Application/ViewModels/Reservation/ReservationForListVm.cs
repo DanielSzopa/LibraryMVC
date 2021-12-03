@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using LibraryMVC.Domain.Models;
+using LibraryMVC.Domain;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LibraryMVC.Application
 {

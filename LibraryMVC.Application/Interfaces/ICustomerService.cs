@@ -1,9 +1,4 @@
-﻿using LibraryMVC.Domain.Models;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+﻿using System.Linq;
 
 namespace LibraryMVC.Application
 {

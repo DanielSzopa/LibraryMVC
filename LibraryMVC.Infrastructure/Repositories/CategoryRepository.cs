@@ -1,6 +1,4 @@
 ﻿using LibraryMVC.Domain;
-using LibraryMVC.Domain.Interfaces;
-using LibraryMVC.Domain.Models;
 using System.Linq;
 
 namespace LibraryMVC.Infrastructure

@@ -1,12 +1,8 @@
 ﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace LibraryMVC.WebApplication.Controllers
+namespace LibraryMVC.WebApplication
 {
     [Authorize]
     public class RentalController : Controller

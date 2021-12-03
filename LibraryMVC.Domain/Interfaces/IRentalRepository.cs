@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LibraryMVC.Domain.Interfaces
+﻿namespace LibraryMVC.Domain
 {
     public interface IRentalRepository
     {

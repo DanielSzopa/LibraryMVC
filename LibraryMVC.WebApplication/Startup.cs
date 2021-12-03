@@ -1,7 +1,5 @@
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using LibraryMVC.Application;
-using LibraryMVC.Domain.Interfaces;
 using LibraryMVC.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

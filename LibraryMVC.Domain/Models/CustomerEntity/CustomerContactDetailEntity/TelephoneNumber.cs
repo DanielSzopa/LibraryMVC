@@ -1,5 +1,4 @@
-﻿
-namespace LibraryMVC.Domain.Models
+﻿namespace LibraryMVC.Domain
 {
     public class TelephoneNumber
     {

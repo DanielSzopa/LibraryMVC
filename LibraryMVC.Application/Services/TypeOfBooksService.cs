@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using LibraryMVC.Domain.Interfaces;
-using LibraryMVC.Domain.Models;
+using LibraryMVC.Domain;
 using System.Linq;
 
 namespace LibraryMVC.Application
