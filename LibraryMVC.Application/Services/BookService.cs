@@ -70,6 +70,14 @@ namespace LibraryMVC.Application
             return bookDetailVm;
         }
 
+        public BookDetailsForReservationVm GetBookDetailsForReservation(int id)
+        {
+            var book = _bookRepository.GetBookById(id);
+            var bookVm = _mapper.Map<BookDetailsForReservationVm>(book);
+
+            return bookVm;
+        }
+
         public BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, string filter, int filterId)
         {
             var books = default(IQueryable<Book>);
@@ -162,7 +170,6 @@ namespace LibraryMVC.Application
         {
             _bookRepository.ChangeStatusOfBook(id, status);
         }
-
-        
+       
     }
 }

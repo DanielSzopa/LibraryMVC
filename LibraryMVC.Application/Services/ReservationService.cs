@@ -108,7 +108,7 @@ namespace LibraryMVC.Application
 
         public ReservationDetailsVm GetReservationVm(int bookId, string userId)
         {
-            var book = _bookService.GetBookDetails(bookId);
+            var book = _bookService.GetBookDetailsForReservation(bookId);
             var customerVm = _customerService.GetCustomerForReservationByUserId(userId);
 
 
