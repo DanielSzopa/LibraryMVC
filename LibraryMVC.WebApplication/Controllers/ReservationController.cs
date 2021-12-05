@@ -92,10 +92,10 @@ namespace LibraryMVC.WebApplication
         }
 
         [Authorize(Roles = "Admin, Employee")]
-        public IActionResult DeleteReservation(int id)
-        {
+        public IActionResult DeleteReservation(int id, int reservationsByCustomerId, bool isCustomerReservations)
+        {           
             _reservationService.DeleteReservation(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { reservationsByCustomerId = reservationsByCustomerId, isCustomerReservations = isCustomerReservations });
         }
     }
 }
