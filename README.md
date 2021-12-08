@@ -49,19 +49,19 @@ This application is built in Clean Architecture and the Service-Repository patte
 ### Books page
 ![Books page](/LibraryMVC.WebApplication/wwwroot/images/screens/Books.png)
 ### Create Book
-![Create Book](/LibraryMVC.WebApplication/wwwroot/images/screens/Create Book.png)
+![Create Book](/LibraryMVC.WebApplication/wwwroot/images/screens/CreateBook.png)
 ### Register Panel
-![Register Panel](/LibraryMVC.WebApplication/wwwroot/images/screens/Register Panel.png)
+![Register Panel](/LibraryMVC.WebApplication/wwwroot/images/screens/RegisterPanel.png)
 ### Profile Details
-![Profile Details](/LibraryMVC.WebApplication/wwwroot/images/screens/Profile Details.png)
+![Profile Details](/LibraryMVC.WebApplication/wwwroot/images/screens/ProfileDetails.png)
 ### Authors page
 ![Authors page](/LibraryMVC.WebApplication/wwwroot/images/screens/Authors.png)
 ### Create Category
-![Create Category](/LibraryMVC.WebApplication/wwwroot/images/screens/Add Category.png)
+![Create Category](/LibraryMVC.WebApplication/wwwroot/images/screens/AddCategory.png)
 ### Reservations page
 ![Reservations page](/LibraryMVC.WebApplication/wwwroot/images/screens/Reservations.png)
 ### Create Reservation
-![Create Reservation](/LibraryMVC.WebApplication/wwwroot/images/screens/Create Reservation.png)
+![Create Reservation](/LibraryMVC.WebApplication/wwwroot/images/screens/CreateReservation.png)
 
 
 ## Project status
