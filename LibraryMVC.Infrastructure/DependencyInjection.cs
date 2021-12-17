@@ -15,6 +15,7 @@ namespace LibraryMVC.Infrastructure
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IRentalRepository, RentalRepository>();
             services.AddTransient<IReservationRepository, ReservationRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             return services;
         }
