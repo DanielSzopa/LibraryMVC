@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LibraryMVC.Domain;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -9,10 +12,13 @@ namespace LibraryMVC.Application
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<IdentityUser> _userManager;
-        public UserService(IHttpContextAccessor httpContextAccessor, UserManager<IdentityUser> userManager)
+        private readonly IUserRepository _userRepository;
+
+        public UserService(IHttpContextAccessor httpContextAccessor, UserManager<IdentityUser> userManager, IUserRepository userRepository)
         {
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
+            _userRepository = userRepository;
         }
 
        
@@ -31,6 +37,27 @@ namespace LibraryMVC.Application
         public string GetCurrentUserId()
         {
             return _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        public ListOfRoleForListVm GetAllRolesToList()
+        {
+            var roles = _userRepository.GetAllRolesId().ToList();
+            var result = new List<RoleForListVm>();
+            var listVm = new ListOfRoleForListVm();
+
+
+            foreach (var role in roles)
+            {
+                var roleForList = new RoleForListVm();
+                roleForList.RoleId = role;
+                roleForList.CountOfUsers = _userRepository.GetUserNumberByRoleId(role);
+
+                result.Add(roleForList);
+            }
+
+            listVm.ListOfRoles = result;
+
+            return listVm;
         }
     }
 }
