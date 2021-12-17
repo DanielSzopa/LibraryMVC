@@ -74,9 +74,13 @@ namespace LibraryMVC.WebApplication
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddBook(NewBookVm newBookVm)
-        {                  
-                var addedBookId =  _bookService.AddBook(newBookVm);
-                return RedirectToAction("DetailsBook", new { id = addedBookId});           
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            var addedBookId = _bookService.AddBook(newBookVm);
+            return RedirectToAction("DetailsBook", new { id = addedBookId });            
         }
 
         [Authorize(Roles = "Admin, Employee")]
@@ -97,14 +101,18 @@ namespace LibraryMVC.WebApplication
         public IActionResult EditBook(int id)
         {
             var book = _bookService.GetBookForEdit(id);
-                return View(book);
+            return View(book);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Employee")]
         public IActionResult EditBook(NewBookVm model)
-        {            
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
             _bookService.UpdateBook(model);
             return RedirectToAction("DetailsBook", new { model.Id });
         }         

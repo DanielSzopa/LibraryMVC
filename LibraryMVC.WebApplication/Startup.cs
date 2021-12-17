@@ -32,8 +32,11 @@ namespace LibraryMVC.WebApplication
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<Context>();
-            services.AddControllersWithViews().AddFluentValidation();
-            
+            services.AddControllersWithViews().AddFluentValidation(fv =>
+            {
+                fv.ImplicitlyValidateChildProperties = true;
+            });
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = true;

@@ -33,8 +33,6 @@ namespace LibraryMVC.Application
     {
         public NewBookVmValidation()
         {
-            RuleFor(b => b.Id).NotNull();
-            RuleFor(b => b.Authors).NotNull();
             RuleFor(b => b.Title).NotNull().WithMessage("This field can't be null");
             RuleFor(b => b.Title).MinimumLength(2).WithMessage("Title can't be create with less than 2 characters");
             RuleFor(b => b.Description).MaximumLength(250).WithMessage("Description can't be more than 250 characters");
