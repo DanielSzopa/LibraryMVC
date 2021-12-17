@@ -47,7 +47,11 @@ namespace LibraryMVC.WebApplication
         [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddCustomer(NewCustomerVm newCustomerVm)
         {
-           var customerId = _customerService.AddCustomer(newCustomerVm);
+            if(!ModelState.IsValid && (!newCustomerVm.isLocalAccount))
+            {
+                return RedirectToAction("Index");
+            }
+            var customerId = _customerService.AddCustomer(newCustomerVm);
             return RedirectToAction("CustomerDetails", new { id = customerId});
         }   
 

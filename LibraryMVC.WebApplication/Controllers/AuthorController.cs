@@ -31,9 +31,9 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(authors);
         }
 
-        public IActionResult AuthorDetails(int id, bool isAuthorDetailsByBookID)
+        public IActionResult AuthorDetails(int id, bool isAuthorDetailsByBookId)
         {
-            if (isAuthorDetailsByBookID == true)
+            if (isAuthorDetailsByBookId == true)
             {
                 var authorByBookId = _authorService.GetAuthorDetailsByBookId(id);
                 return View(authorByBookId);
@@ -55,8 +55,13 @@ namespace LibraryMVC.WebApplication.Controllers
         [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddAuthor(NewAuthorVm newAuthorVm)
         {
-            var newAuthor = _authorService.AddAuthor(newAuthorVm);
-            return RedirectToAction("Index");
+            if(!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var newAuthorId = _authorService.AddAuthor(newAuthorVm);
+            return RedirectToAction("AuthorDetails", new { id = newAuthorId });
         }
 
         [Authorize(Roles = "Admin, Employee")]

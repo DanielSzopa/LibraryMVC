@@ -22,8 +22,10 @@ namespace LibraryMVC.Application
     {
         public NewAuthorVmValidation()
         {
-            RuleFor(a => a.FirstName).NotNull().WithMessage("Your First Name can not be null"); 
-            RuleFor(a => a.LastName).NotNull().WithMessage("Your Last Name can not be null");           
+            RuleFor(a => a.FirstName).NotNull().WithMessage("Your First Name can not be null");
+            RuleFor(a => a.FirstName).MaximumLength(40).WithMessage("Your First Name can not be over 40 characters");
+            RuleFor(a => a.LastName).NotNull().WithMessage("Your Last Name can not be null");
+            RuleFor(a => a.LastName).MaximumLength(40).WithMessage("Your Last Name can not be over 40 characters");
         }
     }
 

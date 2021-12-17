@@ -43,8 +43,6 @@ namespace LibraryMVC.Application
 
             RuleFor(c => c.Password).NotNull().WithMessage("Password can not be null");
               
-
-
         }
     }
 }
