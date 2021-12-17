@@ -1,0 +1,36 @@
+﻿@model LibraryMVC.Application.ListOfRoleForListVm
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<h1>Roles</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Role
+            </th>
+            <th>
+                Number
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListOfRoles)
+        {
+            <tr>
+                <td>
+                    @item.RoleId
+                </td>
+                <td>
+                    @item.CountOfUsers
+                </td>
+                <td>
+                    <a asp-action="ViewUsers" class="btn btn-primary">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
