@@ -39,9 +39,11 @@ namespace LibraryMVC.Application
                .Length(11).WithMessage("Pasel must have 11 characters");
 
             RuleFor(c => c.CustomerContactDetail.Mail).NotNull().WithMessage("Mail can not be null")
-                .EmailAddress().WithMessage("Wrong e-mail address");
+                .EmailAddress().WithMessage("Wrong e-mail address")
+                .When(c => c.isLocalAccount == false);
 
-            RuleFor(c => c.Password).NotNull().WithMessage("Password can not be null");
+            RuleFor(c => c.Password).NotNull().WithMessage("Password can not be null")
+                 .When(c => c.isLocalAccount == false);
               
         }
     }

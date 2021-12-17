@@ -47,7 +47,7 @@ namespace LibraryMVC.WebApplication
         [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddCustomer(NewCustomerVm newCustomerVm)
         {
-            if(!ModelState.IsValid && (!newCustomerVm.isLocalAccount))
+            if(!ModelState.IsValid)
             {
                 return RedirectToAction("Index");
             }
