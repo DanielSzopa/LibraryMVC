@@ -65,6 +65,6 @@ This application is built in Clean Architecture and the Service-Repository patte
 
 
 ## Project status
-Project has not finished yet, we are able to show features such as rentals CRUD and managment of UsersRoles, 
+Project has not finished yet, we are able to show features such as rentals CRUD and managment of UsersRoles soon, 
 in the future application will be change on front-end side.
 
