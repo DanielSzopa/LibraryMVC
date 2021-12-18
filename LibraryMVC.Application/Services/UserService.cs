@@ -80,7 +80,8 @@ namespace LibraryMVC.Application
                     FullName = customer.FirstName + " " + customer.LastName,
                     Mail = customer.CustomerContactDetail.Mail,
                     Pesel = customer.Pesel,
-                    Role = roleId
+                    Role = roleId,
+                    UserId = customer.UserId
                 };
                 listForUserVm.Add(userVm);
             }    
@@ -102,6 +103,11 @@ namespace LibraryMVC.Application
                 Count = users.Count
             };
             return result;
+        }
+
+        public void UpdateRole(string userId, string roleId)
+        {
+            _userRepository.UpdateRole(userId, roleId);
         }
     }
 }

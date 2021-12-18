@@ -7,5 +7,6 @@ namespace LibraryMVC.Domain
         IQueryable<string> GetAllRolesId();
         int GetUserNumberByRoleId(string roleId);
         IQueryable<string> GetAllUserIdByRole(string roleId);
+        void UpdateRole(string userId, string roleId);
     }
 }

@@ -62,7 +62,7 @@
                     }
                     else
                     {
-                    <a asp-action="" class="btn btn-secondary">@role</a>
+                    <a asp-action="UpdateRole" asp-route-userId="@item.UserId" asp-route-roleId="@role"class="btn btn-secondary">@role</a>
                     }
                 }
             </td>

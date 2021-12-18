@@ -37,5 +37,11 @@ namespace LibraryMVC.WebApplication.Controllers
             var customers = _userService.GetAllForListOfUserForVm(pageNumber, pageSize, searchString, roleId);
             return View(customers);
         }
+
+        public IActionResult UpdateRole(string userId, string roleId)
+        {
+            _userService.UpdateRole(userId, roleId);
+            return RedirectToAction("ViewUsers", new { roleId = roleId});
+        }
     }
 }

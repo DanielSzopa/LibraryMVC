@@ -1,4 +1,5 @@
 ﻿using LibraryMVC.Domain;
+using Microsoft.AspNetCore.Identity;
 using System.Linq;
 
 namespace LibraryMVC.Infrastructure
@@ -35,6 +36,34 @@ namespace LibraryMVC.Infrastructure
                 .Count();
 
             return userNumber;
+        }
+
+        public void UpdateRole(string userId, string roleId)
+        {           
+            var user = _context.Users
+                .FirstOrDefault(u => u.Id == userId);
+
+            if (!(user is null))
+            {
+                var oldUserRole = _context.UserRoles
+               .Where(u => u.UserId == userId)
+               .Select(u => new IdentityUserRole<string>
+               {
+                    UserId = u.UserId,
+                    RoleId = u.RoleId 
+               }).Single();
+                
+                var newUserRole = new IdentityUserRole<string>()
+                {
+                    RoleId = roleId,
+                    UserId = userId
+                };
+
+                _context.UserRoles.Remove(oldUserRole);
+                _context.UserRoles.Add(newUserRole);
+                _context.SaveChanges();
+            }
+            
         }
     }
 }

@@ -11,5 +11,7 @@ namespace LibraryMVC.Application
         public string Mail { get; set; }
         public string Pesel { get; set; }
         public string Role { get; set; }
+        public string UserId { get; set; }
+
     }
 }
