@@ -22,5 +22,20 @@ namespace LibraryMVC.WebApplication.Controllers
             var listOfRoles = _userService.GetAllRolesToList();
             return View(listOfRoles);
         }
+
+        public IActionResult ViewUsers(int pageNumber, string searchString, string roleId)
+        {
+            if (pageNumber == 0)
+            {
+                pageNumber = 1;
+            }
+            if (searchString is null)
+            {
+                searchString = String.Empty;
+            }
+            int pageSize = 2;
+            var customers = _userService.GetAllForListOfUserForVm(pageNumber, pageSize, searchString, roleId);
+            return View(customers);
+        }
     }
 }

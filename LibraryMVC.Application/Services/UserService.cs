@@ -13,12 +13,18 @@ namespace LibraryMVC.Application
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserRepository _userRepository;
+        private readonly IPaginationService _paginationService;
+        private readonly ICustomerRepository _customerRepository;
 
-        public UserService(IHttpContextAccessor httpContextAccessor, UserManager<IdentityUser> userManager, IUserRepository userRepository)
+        public UserService(IHttpContextAccessor httpContextAccessor, UserManager<IdentityUser> userManager,
+            IUserRepository userRepository, IPaginationService paginationService,
+            ICustomerRepository customerRepository)
         {
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
             _userRepository = userRepository;
+            _paginationService = paginationService;
+            _customerRepository = customerRepository;
         }
 
        
@@ -58,6 +64,43 @@ namespace LibraryMVC.Application
             listVm.ListOfRoles = result;
 
             return listVm;
+        }
+
+        public ListOfUserForVm GetAllForListOfUserForVm(int pageNumber, int pageSize, string searchString, string roleId)
+        {
+            var usersId = _userRepository.GetAllUserIdByRole(roleId).ToList();
+            var listForUserVm = new List<UserForListVm>();
+            
+            foreach(var id in usersId)
+            {
+                var customer = _customerRepository.GetCustomerByUserId(id);
+                var userVm = new UserForListVm
+                {
+                    Id = customer.Id,
+                    FullName = customer.FirstName + " " + customer.LastName,
+                    Mail = customer.CustomerContactDetail.Mail,
+                    Pesel = customer.Pesel,
+                    Role = roleId
+                };
+                listForUserVm.Add(userVm);
+            }    
+            
+            var users = listForUserVm
+                .Where(u => u.FullName.Contains(searchString))        
+            .ToList();
+
+            var records = _paginationService.ReturnRecordsToShow<UserForListVm>(pageNumber, pageSize, users);
+
+            var result = new ListOfUserForVm
+            {
+                ListForUserVm = records,
+                RoleId = roleId,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SearchString = searchString,
+                Count = users.Count
+            };
+            return result;
         }
     }
 }

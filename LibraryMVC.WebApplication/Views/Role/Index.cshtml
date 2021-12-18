@@ -28,7 +28,7 @@
                     @item.CountOfUsers
                 </td>
                 <td>
-                    <a asp-action="ViewUsers" class="btn btn-primary">View</a>
+                    <a asp-action="ViewUsers" asp-route-roleId="@item.RoleId" class="btn btn-primary">View</a>
                 </td>
             </tr>
         }

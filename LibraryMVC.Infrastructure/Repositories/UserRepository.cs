@@ -19,6 +19,15 @@ namespace LibraryMVC.Infrastructure
             return roles;
         }
 
+        public IQueryable<string> GetAllUserIdByRole(string roleId)
+        {
+            var usersId = _context.UserRoles
+                .Where(r => r.RoleId == roleId)
+                .Select(u => u.UserId);                        
+
+            return usersId;
+        }
+
         public int GetUserNumberByRoleId(string roleId)
         {
             var userNumber = _context.UserRoles
