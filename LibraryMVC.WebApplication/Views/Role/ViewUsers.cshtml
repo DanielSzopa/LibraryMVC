@@ -53,7 +53,18 @@
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td>
-                <a asp-action=""  class="btn btn-primary">Details</a>
+                <a asp-action="" class="btn btn-primary">Details</a>
+                @foreach (var role in Model.Roles)
+                {
+                    if (Model.RoleId == role)
+                    {
+                      <a asp-action="" class="btn btn-outline-danger disabled">@role</a>
+                    }
+                    else
+                    {
+                    <a asp-action="" class="btn btn-secondary">@role</a>
+                    }
+                }
             </td>
         </tr>
 }

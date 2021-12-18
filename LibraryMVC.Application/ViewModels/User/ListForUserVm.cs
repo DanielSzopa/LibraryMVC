@@ -7,6 +7,7 @@ namespace LibraryMVC.Application
     public class ListOfUserForVm
     {
         public List<UserForListVm> ListForUserVm { get; set; }
+        public List<string> Roles { get; set; }
         public string SearchString { get; set; }
         public string RoleId { get; set; }
         public int PageNumber { get; set; }

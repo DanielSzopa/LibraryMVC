@@ -94,6 +94,7 @@ namespace LibraryMVC.Application
             var result = new ListOfUserForVm
             {
                 ListForUserVm = records,
+                Roles = _userRepository.GetAllRolesId().ToList(),
                 RoleId = roleId,
                 PageNumber = pageNumber,
                 PageSize = pageSize,
