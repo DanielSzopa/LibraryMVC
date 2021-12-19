@@ -28,44 +28,16 @@ namespace LibraryMVC.WebApplication
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"),b=>b.MigrationsAssembly("LibraryMVC.WebApplication")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<Context>();
+            services.AddIdentityOptionsExtension();
+           
             services.AddControllersWithViews().AddFluentValidation(fv =>
             {
                 fv.ImplicitlyValidateChildProperties = true;
             });
-
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredUniqueChars = 1;
-
-                options.SignIn.RequireConfirmedEmail = true;
-                options.User.RequireUniqueEmail = true;
-
-            });
-
-            services.AddAuthentication().AddGoogle(options =>
-            {
-                IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
-                options.ClientId = googleAuthNSection["ClientId"];
-                options.ClientSecret = googleAuthNSection["ClientSecret"];
-            });
-
-            services.AddAuthentication().AddFacebook(options =>
-            {
-                options.AppId = Configuration["Authentication:Facebook:AppId"];
-                options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            });
-
+         
+            services.AddAuthenticationExtenstion(Configuration);
             services.AddApplication();
             services.AddInfrastructure();
-
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddCloudscribePagination();

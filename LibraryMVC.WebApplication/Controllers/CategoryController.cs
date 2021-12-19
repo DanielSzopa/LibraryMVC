@@ -21,7 +21,7 @@ namespace LibraryMVC.WebApplication
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin, Employee")]]
+        [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreateCategory()
         {
             var category = new CategoryVm();
