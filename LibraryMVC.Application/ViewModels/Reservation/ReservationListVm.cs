@@ -10,7 +10,7 @@ namespace LibraryMVC.Application
         public int PageSize { get; set; }
         public int Count { get; set; }
         public int ReservationsByCustomerId { get; set; }
-        public bool IsCustomerReservations { get; set; }
+        public string WhoReservationFilter { get; set; }
 
     }
 }

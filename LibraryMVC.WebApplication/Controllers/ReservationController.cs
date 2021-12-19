@@ -19,32 +19,26 @@ namespace LibraryMVC.WebApplication
             _customerService = customerService;
         }
 
-        public IActionResult Index(int pageNumber, string searchString, int reservationsByCustomerId, bool isCustomerReservations)
+        public IActionResult Index(int pageNumber, string searchString, int reservationsByCustomerId, string whoReservationFilter)
         {
-            int pageSize = 10;
+            int pageSize = 8;
 
             if (pageNumber == 0)
-            {
                 pageNumber = 1;
-            }
+
             if(searchString is null)
-            {
                 searchString = string.Empty;
-            }
-            if(isCustomerReservations)
+
+            if(whoReservationFilter == "my")
             {
                 var userId = _userService.GetCurrentUserId();
                 var customerId = _customerService.GetCustomerIdByUserId(userId);
                 reservationsByCustomerId = customerId;
-            }                    
-            if (!(User.IsInRole("User") && isCustomerReservations == false))
-            {
-                var resevationList = _reservationService.GetAllResevationToList(pageNumber, pageSize, searchString, reservationsByCustomerId, isCustomerReservations);
-                return View(resevationList);
-            }
-            var reservation = new ReservationListVm();
-            reservation.ListOfReservationForListVm = new List<ReservationForListVm>();
-            return View(reservation);
+            }    
+            
+            var resevationList = _reservationService
+                .GetAllResevationToList(pageNumber, pageSize, searchString, reservationsByCustomerId, whoReservationFilter);
+            return View(resevationList);
         }
 
         [HttpGet]
@@ -92,10 +86,10 @@ namespace LibraryMVC.WebApplication
         }
 
         [Authorize(Roles = "Admin, Employee")]
-        public IActionResult DeleteReservation(int id, int reservationsByCustomerId, bool isCustomerReservations)
+        public IActionResult DeleteReservation(int id, int reservationsByCustomerId, string whoReservationFilter)
         {           
             _reservationService.DeleteReservation(id);
-            return RedirectToAction("Index", new { reservationsByCustomerId = reservationsByCustomerId, isCustomerReservations = isCustomerReservations });
+            return RedirectToAction("Index", new { reservationsByCustomerId = reservationsByCustomerId, whoReservationFilter = whoReservationFilter });
         }
     }
 }

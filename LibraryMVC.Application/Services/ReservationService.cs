@@ -71,17 +71,21 @@ namespace LibraryMVC.Application
             return reservationVm;
         }
 
-        public ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString, int customerId, bool isCustomerReservations)
+        public ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString, int customerId, string whoReservationFilter)
         {
             var reservation = default(IQueryable<Reservation>);
-            if(isCustomerReservations)
+            switch(whoReservationFilter)
             {
-                reservation = _reservationRepository.GetAllCustomerReservations(customerId);               
-            }
-            else
-            {
-                reservation = _reservationRepository.GetAllReservation();
-            }
+                case "my":
+                    reservation = _reservationRepository.GetAllCustomerReservations(customerId);
+                    break;
+                case "customer":
+                    reservation = _reservationRepository.GetAllCustomerReservations(customerId);
+                    break;
+                case "all":
+                    reservation = _reservationRepository.GetAllReservation();
+                    break;
+            }          
 
             var reservationsVm = reservation
                 .Where(r => r.Book.Title.Contains(searchString) || (r.Customer.FirstName + " " + r.Customer.LastName).Contains(searchString))
@@ -96,7 +100,7 @@ namespace LibraryMVC.Application
                 Count = reservationsVm.Count,
                 ListOfReservationForListVm = records,
                 ReservationsByCustomerId = customerId,
-                IsCustomerReservations = isCustomerReservations
+                WhoReservationFilter = whoReservationFilter
             };
 
             return result;

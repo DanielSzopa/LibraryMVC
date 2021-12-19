@@ -24,7 +24,7 @@
 <form class="form-inline my-2 my-lg-0" asp-controller="Reservation" asp-action="Index" method="get">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchString" id="searchString" asp-for="SearchString">
     <input type="hidden" asp-for="ReservationsByCustomerId" />
-    <input type="hidden" asp-for="IsCustomerReservations" />
+    <input type="hidden" asp-for="WhoReservationFilter" />
     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
 </form>
 
@@ -73,7 +73,7 @@
                     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                     {
                         <a asp-controller="Reservation" asp-action="DeleteReservation" asp-route-id="@item.Id" 
-                           asp-route-reservationsByCustomerId="@item.CustomerId" asp-route-isCustomerReservations="@Model.IsCustomerReservations" class="btn btn-danger">Delete</a>
+                           asp-route-reservationsByCustomerId="@item.CustomerId" asp-route-whoReservationFilter="@Model.WhoReservationFilter" class="btn btn-danger">Delete</a>
                         
                     }
                 </td>

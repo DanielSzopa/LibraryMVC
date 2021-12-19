@@ -27,7 +27,7 @@ namespace LibraryMVC.WebApplication
             {
                 searchString = String.Empty;
             }
-            int pageSize = 10;
+            int pageSize = 8;
             var customers = _customerService.GetAllCustomerToList(pageNumber, pageSize, searchString);
             return View(customers);
         }

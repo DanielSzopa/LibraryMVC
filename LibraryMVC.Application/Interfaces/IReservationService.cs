@@ -8,7 +8,7 @@
         void DeleteReservation(int id);
         int GetBookIdByReservation(int id);       
         ReservationDetailsVm GetReservationDetails(int id);
-        ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString, int customerId, bool isCustomerReservations);
+        ReservationListVm GetAllResevationToList(int pageNumber, int pageSize, string searchString, int customerId, string whoReservationFilter);
         LocalReservationVm SetParametrsToLocalReservationVm();
 
     }

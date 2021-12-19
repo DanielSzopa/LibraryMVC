@@ -53,19 +53,14 @@
                                     <a class="nav-link  text-white" asp-area="" asp-controller="Customer" asp-action="Index">Customers</a>
                                 </li>
                             }
-                            @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                             {
+                                var filter = default(string);
+                                if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                    filter = "all";
+                                else if (User.IsInRole("User"))
+                                    filter = "my";
                                 <li class="nav-item">
-                                    <a class="nav-link  text-white" asp-controller="Reservation" asp-action="Index">Reservations</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link  text-white" asp-controller="" asp-action="Index">Rentals</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link  text-white" asp-controller="Reservation" asp-action="Index" asp-route-isCustomerReservations=true>Reservations</a>
+                                    <a class="nav-link  text-white" asp-controller="Reservation" asp-action="Index" asp-route-whoReservationFilter="@filter">Reservations</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link  text-white" asp-controller="" asp-action="Index">Rentals</a>
