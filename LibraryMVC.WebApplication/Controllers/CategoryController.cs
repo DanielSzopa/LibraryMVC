@@ -15,8 +15,8 @@ namespace LibraryMVC.WebApplication
 
         public IActionResult Index()
         {
-            ViewBag.Category = _categoryService.GetAllCategoriesToList().CategoriesOfBooks;
-            return View();
+            var categories = _categoryService.GetAllCategoriesToList();
+            return View(categories);
         }
 
         [HttpGet]

@@ -46,10 +46,10 @@ namespace LibraryMVC.WebApplication
         {
             var userId = _userService.GetCurrentUserId();
             var result = _customerService.IsCustomerDetailsAreCorrect(userId);
+
             if(!result)
-            {
                 return PartialView("_ReservationErrorModelPartial");
-            }
+
             var reservationVm = _reservationService.GetReservationVm(bookId,userId);
             return PartialView("_ReservationModelPartial", reservationVm);
         }

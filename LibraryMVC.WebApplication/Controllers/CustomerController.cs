@@ -20,13 +20,11 @@ namespace LibraryMVC.WebApplication
         public IActionResult Index(int pageNumber, string searchString)
         {
             if (pageNumber == 0)
-            {
                 pageNumber = 1;
-            }
+
             if (searchString is null)
-            {
                 searchString = String.Empty;
-            }
+ 
             int pageSize = 8;
             var customers = _customerService.GetAllCustomerToList(pageNumber, pageSize, searchString);
             return View(customers);
@@ -48,9 +46,8 @@ namespace LibraryMVC.WebApplication
         public IActionResult AddCustomer(NewCustomerVm newCustomerVm)
         {
             if(!ModelState.IsValid)
-            {
                 return RedirectToAction("Index");
-            }
+
             var customerId = _customerService.AddCustomer(newCustomerVm);
             return RedirectToAction("CustomerDetails", new { id = customerId});
         }   

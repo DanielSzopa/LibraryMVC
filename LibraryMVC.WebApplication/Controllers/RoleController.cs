@@ -26,14 +26,12 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult ViewUsers(int pageNumber, string searchString, string roleId)
         {
             if (pageNumber == 0)
-            {
                 pageNumber = 1;
-            }
+
             if (searchString is null)
-            {
                 searchString = String.Empty;
-            }
-            int pageSize = 2;
+
+            int pageSize = 8;
             var customers = _userService.GetAllForListOfUserForVm(pageNumber, pageSize, searchString, roleId);
             return View(customers);
         }

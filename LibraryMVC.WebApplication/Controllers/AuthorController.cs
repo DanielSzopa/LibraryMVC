@@ -14,18 +14,15 @@ namespace LibraryMVC.WebApplication.Controllers
         {
             _authorService = authorService;
         }
-
-        
+      
         public IActionResult Index(int pageNumber, string searchString)
         {
             if (pageNumber == 0)
-            {
                 pageNumber = 1;
-            }
+
             if (searchString is null)
-            {
                 searchString = String.Empty;
-            }
+
             int pageSize = 10;
             var authors = _authorService.GetAllAuthorToList(pageNumber, pageSize, searchString);
             return View(authors);
@@ -47,8 +44,7 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult AddAuthor()
         {
             return View(new NewAuthorVm());
-        }
-       
+        }      
         
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -56,9 +52,7 @@ namespace LibraryMVC.WebApplication.Controllers
         public IActionResult AddAuthor(NewAuthorVm newAuthorVm)
         {
             if(!ModelState.IsValid)
-            {
                 return RedirectToAction("Index");
-            }
 
             var newAuthorId = _authorService.AddAuthor(newAuthorVm);
             return RedirectToAction("AuthorDetails", new { id = newAuthorId });

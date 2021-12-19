@@ -30,13 +30,11 @@ namespace LibraryMVC.WebApplication
         public IActionResult Index(int pageNumber, int filterId, string filter, string searchString)
         {        
             if (pageNumber == 0)
-            {
                 pageNumber = 1;
-            }
+
             if(searchString is null)
-            {
                 searchString = String.Empty;
-            }
+
             int pageSize = 8;
             var books = _bookService.GetAllBooksToList(pageNumber, pageSize, searchString, filter, filterId);
 
@@ -76,9 +74,8 @@ namespace LibraryMVC.WebApplication
         public IActionResult AddBook(NewBookVm newBookVm)
         {
             if (!ModelState.IsValid)
-            {
                 return RedirectToAction("Index");
-            }
+
             var addedBookId = _bookService.AddBook(newBookVm);
             return RedirectToAction("DetailsBook", new { id = addedBookId });            
         }
@@ -110,9 +107,8 @@ namespace LibraryMVC.WebApplication
         public IActionResult EditBook(NewBookVm model)
         {
             if (!ModelState.IsValid)
-            {
                 return RedirectToAction("Index");
-            }
+
             _bookService.UpdateBook(model);
             return RedirectToAction("DetailsBook", new { model.Id });
         }         

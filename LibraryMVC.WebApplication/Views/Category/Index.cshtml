@@ -1,4 +1,4 @@
-﻿@model LibraryMVC.Application.CategoryVm
+﻿@model LibraryMVC.Application.CategoryListVm
 @{
     ViewData["Title"] = "Categories";
 }
@@ -37,7 +37,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.Category)
+        @foreach (var item in Model.CategoriesOfBooks)
         {
             <tr>
                 <td>
