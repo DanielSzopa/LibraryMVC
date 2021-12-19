@@ -13,6 +13,7 @@ namespace LibraryMVC.WebApplication
             _categoryService = categoryService;
         }
 
+        [Route("category/all")]
         public IActionResult Index()
         {
             var categories = _categoryService.GetAllCategoriesToList();
@@ -20,7 +21,7 @@ namespace LibraryMVC.WebApplication
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Admin, Employee")]]
         public IActionResult CreateCategory()
         {
             var category = new CategoryVm();

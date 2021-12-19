@@ -19,6 +19,7 @@ namespace LibraryMVC.WebApplication
             _customerService = customerService;
         }
 
+        [Route("reservation/all")]
         public IActionResult Index(int pageNumber, string searchString, int reservationsByCustomerId, string whoReservationFilter)
         {
             int pageSize = 8;
@@ -79,6 +80,7 @@ namespace LibraryMVC.WebApplication
             return RedirectToAction("ReservationDetails", new { id = reservationId });
         }
 
+        [Route("reservation/details/{id}")]
         public IActionResult ReservationDetails(int id)
         {
             var reservationVm = _reservationService.GetReservationDetails(id);

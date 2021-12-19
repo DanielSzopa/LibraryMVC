@@ -13,6 +13,7 @@ namespace LibraryMVC.WebApplication
             _publisherService = publisherService;
         }
 
+        [Route("publisher/all")]
         public IActionResult Index()
         {
             var publishers = _publisherService.GetAllPublishersToList();

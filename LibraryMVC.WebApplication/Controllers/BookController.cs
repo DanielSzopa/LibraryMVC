@@ -25,8 +25,9 @@ namespace LibraryMVC.WebApplication
             _publisherService = publisherService;
             _typeOfBookService = typeOfBookService;
             _authorService = authorService;
-        }  
-        
+        }
+
+        [Route("book/all")]
         public IActionResult Index(int pageNumber, int filterId, string filter, string searchString)
         {        
             if (pageNumber == 0)
@@ -60,6 +61,7 @@ namespace LibraryMVC.WebApplication
         
         [HttpGet]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("book/new")]
         public IActionResult AddBook()
         {
             var model = new NewBookVm();
@@ -87,6 +89,7 @@ namespace LibraryMVC.WebApplication
             return RedirectToAction("Index");
         }
 
+        [Route("book/details/{id}")]
         public IActionResult DetailsBook(int id)
         {
             var book = _bookService.GetBookDetails(id);
@@ -95,6 +98,7 @@ namespace LibraryMVC.WebApplication
       
         [HttpGet]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("book/edit/{id}")]
         public IActionResult EditBook(int id)
         {
             var book = _bookService.GetBookForEdit(id);

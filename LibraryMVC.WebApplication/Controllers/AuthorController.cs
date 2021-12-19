@@ -8,13 +8,14 @@ namespace LibraryMVC.WebApplication.Controllers
     [Authorize]
     public class AuthorController : Controller
     {
-        private readonly IAuthorService _authorService;   
-        
+        private readonly IAuthorService _authorService;
+
         public AuthorController(IAuthorService authorService)
         {
             _authorService = authorService;
         }
-      
+
+        [Route("author/all")]
         public IActionResult Index(int pageNumber, string searchString)
         {
             if (pageNumber == 0)
@@ -28,6 +29,7 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(authors);
         }
 
+        [Route("author/details/{id}/{isAuthorDetailsByBookId}")]
         public IActionResult AuthorDetails(int id, bool isAuthorDetailsByBookId)
         {
             if (isAuthorDetailsByBookId == true)
@@ -41,6 +43,7 @@ namespace LibraryMVC.WebApplication.Controllers
     
         [HttpGet]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("author/new")]
         public IActionResult AddAuthor()
         {
             return View(new NewAuthorVm());
@@ -71,6 +74,7 @@ namespace LibraryMVC.WebApplication.Controllers
        
         [HttpGet]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("author/edit")]
         public IActionResult EditAuthor(int id)
         {
             var author = _authorService.GetAuthorForEdit(id);

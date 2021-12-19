@@ -12,6 +12,7 @@ namespace LibraryMVC.WebApplication
         {
             _rentalService = rentalService;
         }
+        [Route("rental/all")]
         public IActionResult Index()
         {
             return View();

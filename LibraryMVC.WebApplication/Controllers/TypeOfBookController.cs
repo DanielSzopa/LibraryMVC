@@ -13,6 +13,7 @@ namespace LibraryMVC.WebApplication
             _typeOfBookService = typeOfBookService;
         }
 
+        [Route("type/all")]
         public IActionResult Index()
         {
             var typeOfBooks = _typeOfBookService.GetAllTypeOfBooksToList();

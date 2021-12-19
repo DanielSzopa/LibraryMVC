@@ -17,12 +17,14 @@ namespace LibraryMVC.WebApplication.Controllers
             _userService = userService;
         }
 
+        [Route("role/all")]
         public IActionResult Index()
         {
             var listOfRoles = _userService.GetAllRolesToList();
             return View(listOfRoles);
         }
 
+        [Route("role/{roleId}")]
         public IActionResult ViewUsers(int pageNumber, string searchString, string roleId)
         {
             if (pageNumber == 0)

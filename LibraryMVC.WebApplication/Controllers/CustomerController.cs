@@ -17,6 +17,7 @@ namespace LibraryMVC.WebApplication
         }
 
         [Authorize(Roles = "Admin, Employee")]
+        [Route("customer/all")]
         public IActionResult Index(int pageNumber, string searchString)
         {
             if (pageNumber == 0)
@@ -32,6 +33,7 @@ namespace LibraryMVC.WebApplication
 
         [HttpGet]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("customer/new")]
         public IActionResult AddCustomer(bool isLocalAccount)
         {
             var customer = new NewCustomerVm();
@@ -50,9 +52,11 @@ namespace LibraryMVC.WebApplication
 
             var customerId = _customerService.AddCustomer(newCustomerVm);
             return RedirectToAction("CustomerDetails", new { id = customerId});
-        }   
+        }
 
+        
         [HttpGet]
+        [Route("customer/profil")]
         public IActionResult ViewCustomerProfil()
         {
             var currentUserId = _userService.GetCurrentUserId();
@@ -61,6 +65,7 @@ namespace LibraryMVC.WebApplication
         }
 
         [Authorize(Roles = "Admin, Employee")]
+        [Route("customer/details/{id}")]
         public IActionResult CustomerDetails(int id)
         {
             var customerVm = _customerService.GetCustomerDetailsByCustomerId(id);
@@ -68,6 +73,7 @@ namespace LibraryMVC.WebApplication
         }
 
         [HttpGet]
+        [Route("customer/edit/profil/{id}")]
         public IActionResult EditProfile(int id)
         {
             var customer = _customerService.GetCustomerForEdit(id);
@@ -89,6 +95,7 @@ namespace LibraryMVC.WebApplication
 
         [HttpGet]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("customer/edit/{id}")]
         public IActionResult EditCustomer(int id)
         {
             var customer = _customerService.GetCustomerForEdit(id);
