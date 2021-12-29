@@ -1,0 +1,85 @@
+﻿@model LibraryMVC.Application.RentalListVm
+
+@{
+    ViewData["Title"] = "Rentals";
+    ViewData["Controller"] = "Rental";
+    ViewData["Action"] = "Index";
+}
+
+<h1>Rentals</h1>
+
+<div id="PlaceHolderHere"></div>
+
+
+@if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+{
+<p>
+    <button class="btn btn-primary" data-toggle="ajax-modal" data-target="#createLocalRental"
+            data-url="@Url.Action("CreateLocalRental")">
+        Create Rental
+    </button>
+</p>
+}
+
+<form class="form-inline my-2 my-lg-0" asp-controller="Rental" asp-action="Index" method="get">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchString" id="searchString" asp-for="SearchString">
+    <input type="hidden" asp-for="RentalByCustomerId" />
+    <input type="hidden" asp-for="WhoRentalFilter" />
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Customer
+            </th>
+            <th>
+                Book
+            </th>
+            <th>
+                From
+            </th>
+            <th>
+                To
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListOfRentalForListVm)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td>
+                    <a asp-controller="Rental" asp-action="" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                    {
+                        <a asp-controller="Rental" asp-action="" asp-route-id="@item.Id" 
+                           asp-route-rentalByCustomerId="@item.CustomerId" asp-route-whoRentalFilter="@Model.WhoRentalFilter" class="btn btn-danger">Delete</a>
+                        
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<partial name="_PaginationPartial" view-data="ViewData" model="Model" />

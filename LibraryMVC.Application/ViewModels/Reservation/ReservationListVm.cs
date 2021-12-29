@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 namespace LibraryMVC.Application
 {
     public class ReservationListVm

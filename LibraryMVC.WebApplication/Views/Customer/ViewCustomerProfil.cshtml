@@ -83,7 +83,7 @@
 </div>
 <div>
     <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Back</a>
-    <a class="btn btn-primary" asp-action="">Rentals</a>
+    <a class="btn btn-primary" asp-controller="Rental" asp-action="Index" asp-route-whoRentalFilter="my">Rentals</a>
     <a class="btn btn-primary" asp-controller="Reservation" asp-action="Index" asp-route-whoReservationFilter="my">Reservations</a>
     <a class="btn btn-secondary" asp-action="EditProfile" asp-route-id="@Model.Id">Edit</a>
 </div>
