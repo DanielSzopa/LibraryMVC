@@ -10,7 +10,7 @@ namespace LibraryMVC.Application
         void UpdateBook(NewBookVm model);                  
         NewBookVm GetBookForEdit(int id);
         BookDetailsVm GetBookDetails(int bookId);
-        BookDetailsForReservationVm GetBookDetailsForReservation(int id);
+        BookDetailsForReservationOrRentalVm GetBookDetailsForReservationOrRental(int id);
         BookListVm GetAllBooksToList(int pageNumber, int pageSize, string searchString, string filter, int filterId);
         IQueryable<BookForListVm> GetAllActiveBooks();
         IQueryable<BookFullNameVm> GetAllActiveBooksFullName();

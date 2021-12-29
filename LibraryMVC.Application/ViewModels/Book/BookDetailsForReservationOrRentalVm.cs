@@ -3,7 +3,7 @@ using LibraryMVC.Domain;
 
 namespace LibraryMVC.Application
 {
-    public class BookDetailsForReservationVm : IMapFrom<Book>
+    public class BookDetailsForReservationOrRentalVm : IMapFrom<Book>
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -11,7 +11,7 @@ namespace LibraryMVC.Application
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Book, BookDetailsForReservationVm>()
+            profile.CreateMap<Book, BookDetailsForReservationOrRentalVm>()
                 .ForMember(b => b.Author, opt => opt.MapFrom(b => b.Author.FirstName + " " + b.Author.LastName));
         }
     }

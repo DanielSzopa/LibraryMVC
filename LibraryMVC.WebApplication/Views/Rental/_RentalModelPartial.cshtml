@@ -1,0 +1,59 @@
+﻿@model LibraryMVC.Application.RentalDetailsVm
+
+
+<div class="modal fade" id="createRental">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="createRental">Rental</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>x</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Rental/CreateRentalByReservation" method="post">                   
+                    <input type="hidden" asp-for="Id" class="form-control" />
+                    <input type="hidden" asp-for="BookId" class="form-control" />
+                    <input type="hidden" asp-for="CustomerId" class="form-control" />
+                    <input type="hidden" asp-for="ReservationId" class="form-control" />
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Author"></label>
+                        <input asp-for="Author" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerFirstName">First Name</label>
+                        <input asp-for="CustomerFirstName" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerLastName">Last Name</label>
+                        <input asp-for="CustomerLastName" class="form-control" readonly="readonly" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerEmail">Email</label>
+                        <input asp-for="CustomerEmail" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerPesel">Pesel</label>
+                        <input asp-for="CustomerPesel" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="From">Rental From</label>
+                        <input asp-for="From" class="form-control" readonly="readonly"/>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="To">Rental To</label>
+                        <input asp-for="To" class="form-control" readonly="readonly"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-save="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -72,9 +72,14 @@
                     <a asp-controller="Reservation" asp-action="ReservationDetails" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
                     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                     {
-                        <a asp-controller="Reservation" asp-action="DeleteReservation" asp-route-id="@item.Id" 
+                        <a asp-controller="Reservation" asp-action="DeleteReservation" asp-route-id="@item.Id"
                            asp-route-reservationsByCustomerId="@item.CustomerId" asp-route-whoReservationFilter="@Model.WhoReservationFilter" class="btn btn-danger">Delete</a>
-                        
+
+                        <button class="btn btn-secondary" data-toggle="ajax-modal" data-target="#createRental"
+                                data-url="@Url.Action("CreateRentalByReservation","Rental",new { bookId = item.BookId,customerId = item.CustomerId, reservationId = item.Id })">
+                            Rental
+                        </button>
+
                     }
                 </td>
             </tr>

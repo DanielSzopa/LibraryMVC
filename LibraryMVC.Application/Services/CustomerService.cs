@@ -92,11 +92,18 @@ namespace LibraryMVC.Application
             return customerVm;
         }
 
-        public CustomerForReservationVm GetCustomerForReservationByUserId(string userId)
+        public CustomerForReservationOrRentalVm GetCustomerForReservationByUserId(string userId)
         {
             var customer = _customerRepository.GetCustomerByUserId(userId);
-            var customerForReservationVm = _mapper.Map<CustomerForReservationVm>(customer);
+            var customerForReservationVm = _mapper.Map<CustomerForReservationOrRentalVm>(customer);
             return customerForReservationVm;
+        }
+
+        public CustomerForReservationOrRentalVm GetCustomerForRentalByCustomerId(int customerId)
+        {
+            var customer = _customerRepository.GetCustomerByCustomerId(customerId);
+            var customerForRentalVm = _mapper.Map<CustomerForReservationOrRentalVm>(customer);
+            return customerForRentalVm;
         }
 
         public CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId)

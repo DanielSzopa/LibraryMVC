@@ -66,10 +66,10 @@ namespace LibraryMVC.Application
             return bookDetailVm;
         }
 
-        public BookDetailsForReservationVm GetBookDetailsForReservation(int id)
+        public BookDetailsForReservationOrRentalVm GetBookDetailsForReservationOrRental(int id)
         {
             var book = _bookRepository.GetBookById(id);
-            var bookVm = _mapper.Map<BookDetailsForReservationVm>(book);
+            var bookVm = _mapper.Map<BookDetailsForReservationOrRentalVm>(book);
 
             return bookVm;
         }

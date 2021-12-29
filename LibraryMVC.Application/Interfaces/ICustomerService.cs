@@ -10,7 +10,8 @@ namespace LibraryMVC.Application
         bool IsCustomerDetailsAreCorrect(string userId);
         int GetCustomerIdByUserId(string userId);
         NewCustomerVm GetCustomerForEdit(int id);
-        CustomerForReservationVm GetCustomerForReservationByUserId(string userId);
+        CustomerForReservationOrRentalVm GetCustomerForReservationByUserId(string userId);
+        CustomerForReservationOrRentalVm GetCustomerForRentalByCustomerId(int customerId);
         CustomerDetailsVm GetCustomerDetailsByCustomerId(int customerId);
         CustomerDetailsVm GetCustomerDetailsByUserId(string userId);
         CustomerListVm GetAllCustomerToList(int pageNumber, int pageSize, string searchString);

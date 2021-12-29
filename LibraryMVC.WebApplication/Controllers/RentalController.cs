@@ -39,5 +39,21 @@ namespace LibraryMVC.WebApplication
                 .GetAllRentalsToList(pageNumber, pageSize, searchString, rentalsByCustomerId, whoRentalFilter);
             return View(rentalList);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
+        public IActionResult CreateRentalByReservation(int bookId, int customerId, int reservationId)
+        {
+            var rentalValues = _rentalService.GetRentalVm(bookId, customerId, reservationId);
+            return PartialView("_RentalModelPartial", rentalValues);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
+        public IActionResult CreateRentalByReservation(RentalDetailsVm rentalVm)
+        {
+            var rentalId = _rentalService.AddRental(rentalVm);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -13,20 +13,64 @@ namespace LibraryMVC.Application
         private readonly ICustomerService _customerService;
         private readonly IBookService _bookService;
         private readonly IPaginationService _pagerService;
+        private readonly IReservationRepository _reservationRepository;
         private readonly IMapper _mapper;
         public RentalService(IRentalRepository rentalRepository, ICustomerService customerService
-            ,IBookService bookService,IPaginationService paginationService,IMapper mapper)
+            ,IBookService bookService,IPaginationService paginationService,IMapper mapper,
+            IReservationRepository reservationRepository)
         {
             _rentalRepository = rentalRepository;
             _customerService = customerService;
             _bookService = bookService;
             _pagerService = paginationService;
             _mapper = mapper;
+            _reservationRepository = reservationRepository;
+        }
+
+        public int AddRental(RentalDetailsVm rentalVm)
+        {
+            var rental = new Rental
+            {
+                BookId = rentalVm.BookId,
+                CustomerId = rentalVm.CustomerId,
+                From = rentalVm.From,
+                To = rentalVm.To
+            };
+
+            _reservationRepository.DeleteReservation(rentalVm.ReservationId);
+
+            var status = Status.Rental;
+            _bookService.ChangeStatusOfBook(rentalVm.BookId, status);
+
+            var rentalId = _rentalRepository.AddRental(rental);
+            return rentalId;
         }
 
         public int CreateLocalReservation()
         {
             throw new System.NotImplementedException();
+        }
+        public RentalDetailsVm GetRentalVm(int bookId, int customerId, int reservationId)
+        {
+            var book = _bookService.GetBookDetailsForReservationOrRental(bookId);
+            var customerVm = _customerService.GetCustomerForRentalByCustomerId(customerId);
+
+            var rentalVm = new RentalDetailsVm
+            {
+                BookId = bookId,
+                CustomerId = customerVm.Id,
+                ReservationId = reservationId,
+                Title = book.Title,
+                Author = book.Author,
+                CustomerFirstName = customerVm.FirstName,
+                CustomerLastName = customerVm.LastName,
+                CustomerEmail = customerVm.Mail,
+                CustomerPesel = customerVm.Pesel,
+                From = DateTime.Now,
+                To = DateTime.Now.AddMonths(3)
+            };
+
+            return rentalVm;
         }
 
         public RentalListVm GetAllRentalsToList(int pageNumber, int pageSize, string searchString, int customerId, string whoRentalFilter)
@@ -70,6 +114,7 @@ namespace LibraryMVC.Application
             return result;
         }
 
+
         public LocalRentalVm SetParametrsToLocalReservationVm()
         {
             var customersFullNames = _customerService.GetAllCustomersFullName()
@@ -87,5 +132,6 @@ namespace LibraryMVC.Application
             };
             return localRental;
         }
+
     }
 }

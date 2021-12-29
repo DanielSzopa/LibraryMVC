@@ -11,6 +11,13 @@ namespace LibraryMVC.Infrastructure
             _context = context;
         }
 
+        public int AddRental(Rental rental)
+        {
+            _context.Rentals.Add(rental);
+            _context.SaveChanges();
+            return rental.Id;
+        }
+
         public IQueryable<Rental> GetAllRentals()
         {
             var rentals = _context.Rentals;
