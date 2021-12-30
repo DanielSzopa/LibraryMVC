@@ -18,6 +18,28 @@ namespace LibraryMVC.Infrastructure
             return rental.Id;
         }
 
+        public void DeleteRental(int rentalId)
+        {
+            var rental = _context.Rentals
+                .Find(rentalId);
+
+            if(!(rental is null))
+            {
+                _context.Rentals.Remove(rental);
+                _context.SaveChanges();
+            }
+
+        }
+
+        public int GetBookIdByRental(int rentalId)
+        {
+            var rental = _context.Rentals
+                .Find(rentalId);
+            var bookId = rental.BookId;
+
+            return bookId;               
+        }
+
         public IQueryable<Rental> GetAllRentals()
         {
             var rentals = _context.Rentals;
@@ -31,6 +53,5 @@ namespace LibraryMVC.Infrastructure
 
             return rentals;
         }
-
     }
 }

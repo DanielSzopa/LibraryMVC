@@ -72,7 +72,7 @@
                     <a asp-controller="Rental" asp-action="" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
                     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                     {
-                        <a asp-controller="Rental" asp-action="" asp-route-id="@item.Id" 
+                        <a asp-controller="Rental" asp-action="DeleteRental" asp-route-rentalId="@item.Id" 
                            asp-route-rentalByCustomerId="@item.CustomerId" asp-route-whoRentalFilter="@Model.WhoRentalFilter" class="btn btn-danger">Delete</a>
                         
                     }

@@ -54,6 +54,16 @@ namespace LibraryMVC.Application
 
             return rentalId;
         }
+
+        public void DeleteRental(int rentalId)
+        {
+            var bookId = _rentalRepository.GetBookIdByRental(rentalId);
+            var status = Status.Active;
+            _bookService.ChangeStatusOfBook(bookId, status);
+
+            _rentalRepository.DeleteRental(rentalId);
+        }
+
         public RentalDetailsVm GetRentalVm(int bookId, int customerId, int reservationId)
         {
             var book = _bookService.GetBookDetailsForReservationOrRental(bookId);
@@ -136,6 +146,5 @@ namespace LibraryMVC.Application
             };
             return localRental;
         }
-
     }
 }

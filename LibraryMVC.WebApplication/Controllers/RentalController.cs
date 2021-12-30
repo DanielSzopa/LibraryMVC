@@ -71,5 +71,12 @@ namespace LibraryMVC.WebApplication
             var rentalId = _rentalService.AddLocalRental(localRentalVm);
             return RedirectToAction("Index");
         }
+
+        [Authorize(Roles = "Admin, Employee")]
+        public IActionResult DeleteRental(int rentalId, int rentalByCustomerId, string whoRentalFilter)
+        {
+            _rentalService.DeleteRental(rentalId);
+            return RedirectToAction("Index", new { rentalByCustomerId = rentalByCustomerId, whoRentalFilter = whoRentalFilter });
+        }
     }
 }
