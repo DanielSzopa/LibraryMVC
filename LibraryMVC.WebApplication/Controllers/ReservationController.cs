@@ -1,4 +1,5 @@
 ﻿using LibraryMVC.Application;
+using LibraryMVC.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -45,6 +46,10 @@ namespace LibraryMVC.WebApplication
         [HttpGet]
         public IActionResult CreateReservation(int bookId)
         {
+            var checkStatus = _reservationService.CheckStatusBeforeReserve(bookId, Status.Active);
+            if (!checkStatus)
+                return RedirectToAction("Index", new { whoReservationFilter = "my" });
+
             var userId = _userService.GetCurrentUserId();
             var result = _customerService.IsCustomerDetailsAreCorrect(userId);
 
@@ -58,6 +63,10 @@ namespace LibraryMVC.WebApplication
         [HttpPost]
         public IActionResult CreateReservation(ReservationDetailsVm reservationVm)
         {
+            var checkStatus = _reservationService.CheckStatusBeforeReserve(reservationVm.BookId, Status.Active);
+            if (!checkStatus)
+                return RedirectToAction("Index", new { whoReservationFilter = "my" });
+
             var reservationId = _reservationService.AddReservation(reservationVm);
             return RedirectToAction("ReservationDetails", new { id = reservationId });
         }
@@ -76,6 +85,10 @@ namespace LibraryMVC.WebApplication
         [Authorize(Roles = "Admin, Employee")]
         public IActionResult CreateLocalReservation(LocalReservationVm localReservationVm)
         {
+            var checkStatus = _reservationService.CheckStatusBeforeReserve(localReservationVm.BookId, Status.Active);
+            if (!checkStatus)
+                return RedirectToAction("Index", new { whoReservationFilter = "all" });
+
             var reservationId = _reservationService.AddLocalReservation(localReservationVm);
             return RedirectToAction("ReservationDetails", new { id = reservationId });
         }

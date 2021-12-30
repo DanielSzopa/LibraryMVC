@@ -65,7 +65,7 @@
                             <a asp-controller="Author" asp-action="EditAuthor" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
                         }
                     }
-                    <a asp-controller="Author" asp-action="AuthorDetails" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    <a asp-controller="Author" asp-action="AuthorDetails" asp-route-id="@item.Id" asp-route-isAuthorDetailsByBookId=false class="btn btn-primary">Details</a>
                     @if (item.Id != 1)
                     {
                         @if (User.IsInRole("Admin") || User.IsInRole("Employee"))

@@ -92,10 +92,17 @@
                     {
                         <a asp-controller="Book" asp-action="DeleteBook" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                     }
-                    <button class="btn btn-success" data-toggle="ajax-modal" data-target="#createReservation"
-                            data-url="@Url.Action("CreateReservation","Reservation",new {bookId = item.Id })">
-                        Reserve
-                    </button>
+                    @{
+                        string button;
+                        string disabled;
+                        if (item.Status == "Active")
+                        { button = "btn btn-success"; disabled = null; }
+                        else { button = "btn btn-outline-success"; disabled = "disabled"; ; }
+                        <button class="@button" @disabled data-toggle="ajax-modal" data-target="#createReservation"
+                                data-url="@Url.Action("CreateReservation","Reservation",new {bookId = item.Id })">
+                            Reserve
+                        </button>
+                    }
                 </td>
             </tr>
         }

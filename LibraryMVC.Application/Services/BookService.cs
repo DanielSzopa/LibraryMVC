@@ -48,7 +48,13 @@ namespace LibraryMVC.Application
         {
             var book = _mapper.Map<Book>(model);
             _bookRepository.UpdateBook(book);
-        }    
+        }
+
+        public bool IsBookHaveThisStatus(int bookId, Status status)
+        {
+            var checkBookStatus = _bookRepository.IsBookHaveThisStatus(bookId, status);
+            return checkBookStatus;
+        }
 
         public NewBookVm GetBookForEdit(int id)
         {
@@ -166,6 +172,6 @@ namespace LibraryMVC.Application
         {
             _bookRepository.ChangeStatusOfBook(id, status);
         }
-       
+
     }
 }

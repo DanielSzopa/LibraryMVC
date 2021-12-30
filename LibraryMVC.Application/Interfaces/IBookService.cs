@@ -7,7 +7,8 @@ namespace LibraryMVC.Application
     {
         int AddBook(NewBookVm model);
         void DeleteBook(int id);
-        void UpdateBook(NewBookVm model);                  
+        void UpdateBook(NewBookVm model);
+        bool IsBookHaveThisStatus(int bookId, Status status);
         NewBookVm GetBookForEdit(int id);
         BookDetailsVm GetBookDetails(int bookId);
         BookDetailsForReservationOrRentalVm GetBookDetailsForReservationOrRental(int id);

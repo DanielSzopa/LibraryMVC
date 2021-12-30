@@ -58,6 +58,12 @@ namespace LibraryMVC.Application
             _reservationRepository.DeleteReservation(id);
         }
 
+        public bool CheckStatusBeforeReserve(int bookId, Status status)
+        {
+            var result = _bookService.IsBookHaveThisStatus(bookId, status);
+            return result;
+        }
+
         public int GetBookIdByReservation(int id)
         {
             var bookId =  _reservationRepository.GetBookIdByReservation(id);
@@ -153,6 +159,6 @@ namespace LibraryMVC.Application
                 To = DateTime.Now.AddDays(7)
             };
             return localReservation;
-        }       
+        }
     }
 }

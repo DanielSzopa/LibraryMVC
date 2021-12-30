@@ -72,5 +72,15 @@ namespace LibraryMVC.Infrastructure
             _context.SaveChanges();
         }
 
+        public bool IsBookHaveThisStatus(int bookId, Status status)
+        {
+            var book = _context.Books
+                .FirstOrDefault(b => b.Id == bookId);
+
+            if (book.Status == status)
+                return true;
+
+            return false;
+        }
     }
 }
