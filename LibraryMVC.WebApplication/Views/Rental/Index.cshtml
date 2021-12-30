@@ -69,7 +69,7 @@
                     @Html.DisplayFor(modelItem => item.To)
                 </td>
                 <td>
-                    <a asp-controller="Rental" asp-action="" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    <a asp-controller="Rental" asp-action="RentalDetails" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
                     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                     {
                         <a asp-controller="Rental" asp-action="DeleteRental" asp-route-rentalId="@item.Id" 

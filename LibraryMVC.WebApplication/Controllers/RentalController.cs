@@ -78,5 +78,12 @@ namespace LibraryMVC.WebApplication
             _rentalService.DeleteRental(rentalId);
             return RedirectToAction("Index", new { rentalByCustomerId = rentalByCustomerId, whoRentalFilter = whoRentalFilter });
         }
+
+        [Route("rental/details/{id}")]
+        public IActionResult RentalDetails(int id)
+        {
+            var rentalDetailsVm = _rentalService.GetRentalDetails(id);
+            return View(rentalDetailsVm);
+        }
     }
 }

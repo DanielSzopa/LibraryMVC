@@ -1,4 +1,5 @@
 ﻿using LibraryMVC.Domain;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace LibraryMVC.Infrastructure
@@ -31,6 +32,18 @@ namespace LibraryMVC.Infrastructure
 
         }
 
+        public Rental GetRentalDetails(int rentalId)
+        {
+            var rental = _context.Rentals
+                .Include(r => r.Customer)
+                .ThenInclude(c => c.CustomerContactDetail)
+                .Include(r => r.Book)
+                .ThenInclude(b =>b.Author)
+                 .FirstOrDefault(r => r.Id == rentalId);
+
+            return rental;
+        }
+
         public int GetBookIdByRental(int rentalId)
         {
             var rental = _context.Rentals
@@ -53,5 +66,6 @@ namespace LibraryMVC.Infrastructure
 
             return rentals;
         }
+
     }
 }

@@ -1,0 +1,77 @@
+﻿@model LibraryMVC.Application.RentalDetailsVm
+
+@{
+    ViewData["Title"] = $"Rental {Model.Title}";
+}
+
+<h1>Rental @Model.Title</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerFirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustomerFirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerLastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustomerLastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerEmail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustomerEmail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerPesel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustomerPesel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.From)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.To)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.To)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-secondary" asp-action="Index">Back</a>
+    <a class="btn btn-primary" asp-controller="Customer" asp-action="CustomerDetails" asp-route-id="@Model.CustomerId">Customer</a>
+    <a class="btn btn-primary" asp-controller="Book" asp-action="DetailsBook" asp-route-id="@Model.BookId">Book</a>
+    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
+        <a class="btn btn-danger" asp-action="DeleteRental"asp-route-rentalId="@Model.Id" 
+           asp-route-rentalByCustomerId="@Model.CustomerId" asp-route-whoRentalFilter="all">Delete Rental</a>
+    }
+</div>

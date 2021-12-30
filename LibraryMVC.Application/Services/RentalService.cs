@@ -64,6 +64,13 @@ namespace LibraryMVC.Application
             _rentalRepository.DeleteRental(rentalId);
         }
 
+        public RentalDetailsVm GetRentalDetails(int rentalId)
+        {
+            var rental = _rentalRepository.GetRentalDetails(rentalId);
+            var rentalDetailsVm = _mapper.Map<RentalDetailsVm>(rental);
+            return rentalDetailsVm;
+        }
+
         public RentalDetailsVm GetRentalVm(int bookId, int customerId, int reservationId)
         {
             var book = _bookService.GetBookDetailsForReservationOrRental(bookId);
@@ -146,5 +153,6 @@ namespace LibraryMVC.Application
             };
             return localRental;
         }
+       
     }
 }
