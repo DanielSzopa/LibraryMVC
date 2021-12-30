@@ -53,7 +53,7 @@ namespace LibraryMVC.WebApplication
         public IActionResult CreateRentalByReservation(RentalDetailsVm rentalVm)
         {
             var rentalId = _rentalService.AddRental(rentalVm);
-            return RedirectToAction("Index");
+            return RedirectToAction("RentalDetails", new { id = rentalId });
         }
 
         [HttpGet]
@@ -69,7 +69,7 @@ namespace LibraryMVC.WebApplication
         public IActionResult CreateLocalRental(LocalRentalVm localRentalVm)
         {
             var rentalId = _rentalService.AddLocalRental(localRentalVm);
-            return RedirectToAction("Index");
+            return RedirectToAction("RentalDetails", new { id = rentalId });
         }
 
         [Authorize(Roles = "Admin, Employee")]

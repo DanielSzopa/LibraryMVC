@@ -73,7 +73,7 @@ namespace LibraryMVC.WebApplication
         }
 
         [HttpGet]
-        [Route("customer/edit/profil/{id}")]
+        [Route("customer/edit/profile{id}")]
         public IActionResult EditProfile(int id)
         {
             var customer = _customerService.GetCustomerForEdit(id);
@@ -86,6 +86,7 @@ namespace LibraryMVC.WebApplication
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("customer/edit/profile{id}")]
         public IActionResult EditProfile(NewCustomerVm newCustomerVm)
         {
             var customerId = _customerService.UpdateCustomer(newCustomerVm);
@@ -108,6 +109,7 @@ namespace LibraryMVC.WebApplication
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("customer/edit/{id}")]
         public IActionResult EditCustomer(NewCustomerVm newCustomerVm)
         {
             var customerId = _customerService.UpdateCustomer(newCustomerVm);

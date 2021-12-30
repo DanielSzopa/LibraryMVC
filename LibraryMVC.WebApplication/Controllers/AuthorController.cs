@@ -74,7 +74,7 @@ namespace LibraryMVC.WebApplication.Controllers
        
         [HttpGet]
         [Authorize(Roles = "Admin, Employee")]
-        [Route("author/edit")]
+        [Route("author/edit{id}")]
         public IActionResult EditAuthor(int id)
         {
             var author = _authorService.GetAuthorForEdit(id);
@@ -84,6 +84,7 @@ namespace LibraryMVC.WebApplication.Controllers
       
         [HttpPost]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("author/edit{id}")]
         public IActionResult EditAuthor(AuthorDetailsVm model)
         {
            var authorId =  _authorService.EditAuthor(model);
