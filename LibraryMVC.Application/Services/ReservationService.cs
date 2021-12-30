@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using LibraryMVC.Domain;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LibraryMVC.Application
@@ -85,7 +86,13 @@ namespace LibraryMVC.Application
                 case "all":
                     reservation = _reservationRepository.GetAllReservation();
                     break;
-            }          
+            }
+
+            if (reservation is null)
+            {
+                var defaultReservations = new List<Reservation>();
+                reservation = defaultReservations.AsQueryable<Reservation>();
+            }
 
             var reservationsVm = reservation
                 .Where(r => r.Book.Title.Contains(searchString) || (r.Customer.FirstName + " " + r.Customer.LastName).Contains(searchString))

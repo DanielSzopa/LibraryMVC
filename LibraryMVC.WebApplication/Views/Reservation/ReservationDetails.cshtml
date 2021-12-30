@@ -66,7 +66,7 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-secondary" asp-action="Index">Back</a>
+    <a class="btn btn-secondary" asp-action="Index" asp-route-whoReservationFilter="all">Back</a>
     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
     {
         <a class="btn btn-primary" asp-controller="Customer" asp-action="CustomerDetails" asp-route-id="@Model.CustomerId">Customer</a>
