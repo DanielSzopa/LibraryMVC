@@ -37,6 +37,7 @@ namespace LibraryMVC.Application
                 To = rentalVm.To
             };
 
+            if(!(rentalVm.ReservationId == 0))
             _reservationRepository.DeleteReservation(rentalVm.ReservationId);
 
             var status = Status.Rental;
@@ -46,9 +47,12 @@ namespace LibraryMVC.Application
             return rentalId;
         }
 
-        public int CreateLocalReservation()
+        public int AddLocalRental(LocalRentalVm rentalVm)
         {
-            throw new System.NotImplementedException();
+            var rentalDetailsVm = _mapper.Map<RentalDetailsVm>(rentalVm);
+            var rentalId = AddRental(rentalDetailsVm);
+
+            return rentalId;
         }
         public RentalDetailsVm GetRentalVm(int bookId, int customerId, int reservationId)
         {

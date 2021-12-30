@@ -55,5 +55,21 @@ namespace LibraryMVC.WebApplication
             var rentalId = _rentalService.AddRental(rentalVm);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, Employee")]
+        public IActionResult CreateLocalRental()
+        {
+            var rentalValues = _rentalService.SetParametrsToLocalReservationVm();
+            return PartialView("_LocalRentalModelPartial", rentalValues);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Employee")]
+        public IActionResult CreateLocalRental(LocalRentalVm localRentalVm)
+        {
+            var rentalId = _rentalService.AddLocalRental(localRentalVm);
+            return RedirectToAction("Index");
+        }
     }
 }
