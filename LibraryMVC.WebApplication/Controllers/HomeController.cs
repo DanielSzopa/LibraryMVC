@@ -15,7 +15,7 @@ namespace LibraryMVC.WebApplication
         }
 
         public IActionResult Index()
-        {         
+        {
             return View();
         }    
 
