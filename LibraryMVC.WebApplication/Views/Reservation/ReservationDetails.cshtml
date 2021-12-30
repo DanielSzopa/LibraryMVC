@@ -67,7 +67,14 @@
 </div>
 <div>
     <a class="btn btn-secondary" asp-action="Index">Back</a>
-    <a class="btn btn-primary" asp-controller="Customer" asp-action="CustomerDetails" asp-route-id="@Model.CustomerId">Customer</a>
+    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+    {
+        <a class="btn btn-primary" asp-controller="Customer" asp-action="CustomerDetails" asp-route-id="@Model.CustomerId">Customer</a>
+    }
+    else
+    {
+        <a class="btn btn-primary" asp-controller="Customer" asp-action="ViewCustomerProfil">Customer</a>
+    }
     <a class="btn btn-primary" asp-controller="Book" asp-action="DetailsBook" asp-route-id="@Model.BookId">Book</a>
     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
     {
