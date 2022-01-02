@@ -1,6 +1,7 @@
 ﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 
 
@@ -14,17 +15,20 @@ namespace LibraryMVC.WebApplication
         private readonly IPublisherService _publisherService;
         private readonly ITypeOfBookService _typeOfBookService;
         private readonly IAuthorService _authorService;
+        private readonly ILogger<BookController> _logger;
 
         public BookController(IBookService bookService, ICategoryService categoryService, 
             IPublisherService publisherService, 
             ITypeOfBookService typeOfBookService, 
-            IAuthorService authorService)
+            IAuthorService authorService,
+            ILogger<BookController> logger)
         {
             _bookService = bookService;
             _categoryService = categoryService;
             _publisherService = publisherService;
             _typeOfBookService = typeOfBookService;
             _authorService = authorService;
+            _logger = logger;
         }
 
         [Route("book/all")]
@@ -86,6 +90,7 @@ namespace LibraryMVC.WebApplication
         public IActionResult DeleteBook(int id)
         {
             _bookService.DeleteBook(id);
+            _logger.LogInformation($"Book with id:{id} has been deleted");
             return RedirectToAction("Index");
         }
 

@@ -1,6 +1,7 @@
 ﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace LibraryMVC.WebApplication
 {
@@ -8,9 +9,11 @@ namespace LibraryMVC.WebApplication
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private readonly ILogger<CategoryController> _logger;
+        public CategoryController(ICategoryService categoryService, ILogger<CategoryController> logger)
         {
             _categoryService = categoryService;
+            _logger = logger;
         }
 
         [Route("category/all")]
@@ -58,8 +61,10 @@ namespace LibraryMVC.WebApplication
             if (id != 1)
             {
                 _categoryService.DeleteCategory(id);
+                _logger.LogInformation($"Category with id:{id} has been deleted");
                 return RedirectToAction("Index");
             }
+            _logger.LogInformation($"Category with id:{id} can not be deleted");
             return RedirectToAction("Index");
         }      
     }

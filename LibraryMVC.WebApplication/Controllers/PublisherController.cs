@@ -1,6 +1,7 @@
 ﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace LibraryMVC.WebApplication
 {
@@ -8,9 +9,11 @@ namespace LibraryMVC.WebApplication
     public class PublisherController : Controller
     {
         private readonly IPublisherService _publisherService;
-        public PublisherController(IPublisherService publisherService)
+        private readonly ILogger<PublisherController> _logger;
+        public PublisherController(IPublisherService publisherService, ILogger<PublisherController> logger)
         {
             _publisherService = publisherService;
+            _logger = logger;
         }
 
         [Route("publisher/all")]
@@ -57,9 +60,11 @@ namespace LibraryMVC.WebApplication
         {
             if(id != 1)
             {
-            _publisherService.DeletePublisher(id);
-            return RedirectToAction("Index");
+                _publisherService.DeletePublisher(id);
+                _logger.LogInformation($"Publisher with id:{id} has been deleted");
+                return RedirectToAction("Index");
             }
+            _logger.LogInformation($"Publisher with id:{id} can not be deleted");
             return RedirectToAction("Index");
         }
     }

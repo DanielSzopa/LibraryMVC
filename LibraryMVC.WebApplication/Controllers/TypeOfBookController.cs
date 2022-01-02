@@ -1,6 +1,7 @@
 ﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace LibraryMVC.WebApplication
 {
@@ -8,9 +9,12 @@ namespace LibraryMVC.WebApplication
     public class TypeOfBookController : Controller
     {
         private readonly ITypeOfBookService _typeOfBookService;
-        public TypeOfBookController(ITypeOfBookService typeOfBookService)
+        private readonly ILogger<TypeOfBookController> _logger;
+
+        public TypeOfBookController(ITypeOfBookService typeOfBookService, ILogger<TypeOfBookController> logger)
         {
             _typeOfBookService = typeOfBookService;
+            _logger = logger;
         }
 
         [Route("type/all")]
@@ -58,8 +62,10 @@ namespace LibraryMVC.WebApplication
             if (id != 1)
             {
                 _typeOfBookService.DeleteTypeOfBook(id);
+                _logger.LogInformation($"TypeOfBook with id:{id} has been deleted");
                 return RedirectToAction("Index");
             }
+            _logger.LogInformation($"TypeOfBook with id:{id} can not be deleted");
             return RedirectToAction("Index");
         }
     }

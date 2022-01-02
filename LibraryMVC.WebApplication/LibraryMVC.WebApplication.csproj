@@ -31,4 +31,8 @@
     <ProjectReference Include="..\LibraryMVC.Infrastructure\LibraryMVC.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\AllLogs\" />
+  </ItemGroup>
+
 </Project>

@@ -1,10 +1,8 @@
 ﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LibraryMVC.WebApplication.Controllers
 {
@@ -12,9 +10,11 @@ namespace LibraryMVC.WebApplication.Controllers
     public class RoleController : Controller
     {
         private readonly IUserService _userService;
-        public RoleController(IUserService userService)
+        private readonly ILogger<RoleController> _logger;
+        public RoleController(IUserService userService, ILogger<RoleController> logger)
         {
             _userService = userService;
+            _logger = logger;
         }
 
         [Route("role/all")]
@@ -38,9 +38,12 @@ namespace LibraryMVC.WebApplication.Controllers
             return View(customers);
         }
 
+        [Route("role/Update/{roleId}/{userId}")]
         public IActionResult UpdateRole(string userId, string roleId)
         {
             _userService.UpdateRole(userId, roleId);
+            _logger.LogInformation($"Role for {userId} has been changed to {roleId}");
+
             return RedirectToAction("ViewUsers", new { roleId = roleId});
         }
     }

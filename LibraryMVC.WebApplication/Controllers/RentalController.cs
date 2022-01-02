@@ -1,6 +1,7 @@
 ﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace LibraryMVC.WebApplication
 {
@@ -10,11 +11,14 @@ namespace LibraryMVC.WebApplication
         private readonly IRentalService _rentalService;
         private readonly IUserService _userService;
         private readonly ICustomerService _customerService;
-        public RentalController(IRentalService rentalService,IUserService userService, ICustomerService customerService)
+        private readonly ILogger<RentalController> _logger;
+        public RentalController(IRentalService rentalService,IUserService userService,
+            ICustomerService customerService, ILogger<RentalController> logger)
         {
             _rentalService = rentalService;
             _userService = userService;
             _customerService = customerService;
+            _logger = logger;
         }
 
         [Route("rental/all")]
@@ -76,6 +80,8 @@ namespace LibraryMVC.WebApplication
         public IActionResult DeleteRental(int rentalId, int rentalByCustomerId, string whoRentalFilter)
         {
             _rentalService.DeleteRental(rentalId);
+            _logger.LogInformation($"Rental with id:{rentalId} has been deleted");
+
             return RedirectToAction("Index", new { rentalByCustomerId = rentalByCustomerId, whoRentalFilter = whoRentalFilter });
         }
 

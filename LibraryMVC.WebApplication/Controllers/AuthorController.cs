@@ -1,6 +1,7 @@
 ﻿using LibraryMVC.Application;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace LibraryMVC.WebApplication.Controllers
@@ -9,10 +10,12 @@ namespace LibraryMVC.WebApplication.Controllers
     public class AuthorController : Controller
     {
         private readonly IAuthorService _authorService;
+        private readonly ILogger<AuthorController> _logger;
 
-        public AuthorController(IAuthorService authorService)
+        public AuthorController(IAuthorService authorService, ILogger<AuthorController> logger)
         {
             _authorService = authorService;
+            _logger = logger;
         }
 
         [Route("author/all")]
@@ -54,7 +57,7 @@ namespace LibraryMVC.WebApplication.Controllers
         [Authorize(Roles = "Admin, Employee")]
         public IActionResult AddAuthor(NewAuthorVm newAuthorVm)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return RedirectToAction("Index");
 
             var newAuthorId = _authorService.AddAuthor(newAuthorVm);
@@ -67,8 +70,10 @@ namespace LibraryMVC.WebApplication.Controllers
             if (id != 1)
             {
                 _authorService.DeleteAuthor(id);
+                _logger.LogInformation($"Author with id:{id} has been deleted");
                 return RedirectToAction("Index");
             }
+            _logger.LogInformation($"Author with id:{id} can not be deleted");
             return RedirectToAction("Index");
         }
        

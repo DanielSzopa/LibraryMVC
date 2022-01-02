@@ -2,6 +2,7 @@
 using LibraryMVC.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace LibraryMVC.WebApplication
@@ -13,11 +14,14 @@ namespace LibraryMVC.WebApplication
         private readonly IReservationService _reservationService;
         private readonly IUserService _userService;
         private readonly ICustomerService _customerService;
-        public ReservationController(IReservationService reservationService, IUserService userService, ICustomerService customerService)
+        private readonly ILogger<ReservationController> _logger;
+        public ReservationController(IReservationService reservationService, IUserService userService,
+            ICustomerService customerService, ILogger<ReservationController> logger)
         {
             _reservationService = reservationService;
             _userService = userService;
             _customerService = customerService;
+            _logger = logger;
         }
 
         [Route("reservation/all")]
@@ -104,6 +108,8 @@ namespace LibraryMVC.WebApplication
         public IActionResult DeleteReservation(int id, int reservationsByCustomerId, string whoReservationFilter)
         {           
             _reservationService.DeleteReservation(id);
+            _logger.LogInformation($"Reservation with id:{id} has been deleted");
+
             return RedirectToAction("Index", new { reservationsByCustomerId = reservationsByCustomerId, whoReservationFilter = whoReservationFilter });
         }
     }
