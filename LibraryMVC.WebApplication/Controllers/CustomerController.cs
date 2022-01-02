@@ -45,6 +45,7 @@ namespace LibraryMVC.WebApplication
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("customer/new")]
         public IActionResult AddCustomer(NewCustomerVm newCustomerVm)
         {
             if(!ModelState.IsValid)

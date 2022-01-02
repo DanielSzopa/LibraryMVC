@@ -77,6 +77,7 @@ namespace LibraryMVC.WebApplication
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("book/new")]
         public IActionResult AddBook(NewBookVm newBookVm)
         {
             if (!ModelState.IsValid)

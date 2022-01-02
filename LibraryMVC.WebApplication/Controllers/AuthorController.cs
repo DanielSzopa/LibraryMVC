@@ -55,13 +55,14 @@ namespace LibraryMVC.WebApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Employee")]
+        [Route("author/new")]
         public IActionResult AddAuthor(NewAuthorVm newAuthorVm)
         {
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
 
             var newAuthorId = _authorService.AddAuthor(newAuthorVm);
-            return RedirectToAction("AuthorDetails", new { id = newAuthorId });
+            return RedirectToAction("AuthorDetails", new { id = newAuthorId, isAuthorDetailsByBookId = false });
         }
 
         [Authorize(Roles = "Admin, Employee")]
