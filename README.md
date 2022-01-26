@@ -72,5 +72,6 @@ This application is built in Clean Architecture and the Service-Repository patte
 ![Role Management](/LibraryMVC.WebApplication/wwwroot/images/screens/Role.png)
 
 ## Project status
-The project is now finished, in the future we will be able to see changes of design app.
+The project is finished, 
+we will be able to see changes of design app in the future
 
