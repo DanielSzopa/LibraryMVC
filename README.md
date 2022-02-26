@@ -27,6 +27,7 @@ This application is built in Clean Architecture and the Service-Repository patte
 * LINQ
 * HTML5
 * CSS3
+* NLog 4.14.0
 * Fluent Validation 10.3.0
 * AutoMapper 10.1.1
 * Cloudscribe.Web.Pagination 3.1.0
