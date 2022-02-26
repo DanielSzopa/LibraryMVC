@@ -18,12 +18,15 @@ This application is built in Clean Architecture and the Service-Repository patte
 
 ## Technologies
 * .NET Core 5.0
-* ASP.NET Core, HTML5, CSS3
-* MVC
-* MSSQL
-* Depedency Injection
+* ASP.NET Core MVC
 * Entity Framework Core 5.0.9
+* Clean Architecture
+* Repository Pattern
+* Depedency Injection
+* MSSQL
 * LINQ
+* HTML5
+* CSS3
 * Fluent Validation 10.3.0
 * AutoMapper 10.1.1
 * Cloudscribe.Web.Pagination 3.1.0
